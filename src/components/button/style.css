@@ -1,0 +1,22 @@
+.button {
+    border-radius: 15px;
+    padding: 5px 15px;
+    border:none;
+    cursor: pointer;
+    color: #ffff;
+    transition: .2s;
+}
+
+.button.primary {
+    background: blue;
+}
+.button.primary:hover{
+    background: rgb(39, 39, 212);
+}
+.button.secundary {
+    background: transparent;
+
+}
+.button.secundary:hover{
+    background: rgba(217, 217, 217 .2)
+}
