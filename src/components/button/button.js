@@ -2,11 +2,11 @@ import React from 'react';
 // import { useState } from 'react';
 import './style.css'; 
 
-const Button = ({variant, children}) => {
+const Button = ({variant, children, onClick}) => {
     const classes = `button ${variant}`;
 
     return (
-        <button className = {classes} >
+        <button className = {classes} onClick={onClick} >
             {children}
         </button>
     )

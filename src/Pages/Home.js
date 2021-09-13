@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import button from "../components/button/button";
+import Button from "../components/button/button";
 
 const Home = () => {
   const history = useHistory();
@@ -12,8 +12,8 @@ const Home = () => {
 
   return (
     <div>
-      <button onClick={Login}>Login</button>
-      <button onClick={Register}>Cadastro</button>
+      <Button onClick={Login}>Login</Button>
+      <Button onClick={Register}>Cadastro</Button>
     </div>
 
   );
