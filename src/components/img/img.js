@@ -1,8 +1,8 @@
-// const Img = (props) => {
+const Img = (props) => {
     
-//     return (
-//         <img src={props.linkImg} />   
-//     )
-// }
+    return (
+        <img src={props.linkImg} alt=""/>   
+    )
+}
 
-// export default Img;
+export default Img;
