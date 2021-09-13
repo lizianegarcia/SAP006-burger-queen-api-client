@@ -1,8 +1,10 @@
-const Img = (props) => {
+import logo from "../../assets/images/logo.png"
+
+const LogoImg = () => {
     
     return (
-        <img src={props.linkImg} alt=""/>   
+        <img src={logo} alt="logo"/>   
     )
 }
 
-export default Img;
+export default LogoImg;

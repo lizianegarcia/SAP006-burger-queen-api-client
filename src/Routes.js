@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, 
   // Link
  } from 'react-router-dom';
-import Home from './Pages/Home'
+import Home from './Pages/Home/Home'
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 
