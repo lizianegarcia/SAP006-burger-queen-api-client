@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import Button from "../../components/button/button";
 import LogoImg from "../../components/img/img";
-import "../../Styles/home.scss";
+import "../../Styles/home.css";
 
 const Home = () => {
   const history = useHistory();

@@ -1,7 +1,7 @@
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
 import LogoImg from "../../components/img/img";
-import "../../Styles/login.scss"
+import "../../Styles/login.css"
 
 const Login = () => {
   const textEmail = 'E-mail*'
