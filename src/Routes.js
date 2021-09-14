@@ -1,28 +1,46 @@
-import { BrowserRouter as Router, Route, Switch, 
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
   // Link
- } from 'react-router-dom';
-import Home from './Pages/Home/Home'
-import Login from './Pages/Login';
-import Register from './Pages/Register';
+} from 'react-router-dom'
+import Home from "./Pages/Home/Home"
+import Login from "./Pages/Login/Login"
+import Register from "./Pages/Register"
+import Hall from "./Pages/Hall/Hall"
+import Kitchen from "./Pages/Kitchen/Kitchen"
+import NotFound from "./Pages/NotFound/NotFound"
+import { isAuthenticated } from "./Auth"
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+      )
+    }
+  />
+)
 
 function App() {
   return (
     <Router>
-      <div className="App">
-      
-      </div>
-      {/* <Link to="/"> Home </Link>
-      <Link to="/Login"> Login </Link>
-      <Link to="/Register"> Cadastro </Link> */}
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/Login" component={Login} />
+        <Route path="/Register" component={Register} />
+        <Route path="*" component={NotFound} />
 
-      <Switch> 
-        <Route path="/" exact component={Home}/>
-        <Route path="/Login" component={Login}/>
-        <Route path="/Register" component={Register}/>
+        <PrivateRoute path="/Hall" component={Hall}/>
+        <PrivateRoute path="/Kitchen" component={Kitchen}/>
+
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
