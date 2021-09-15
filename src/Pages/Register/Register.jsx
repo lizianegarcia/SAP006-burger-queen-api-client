@@ -86,7 +86,7 @@ const Register = () => {
           inputValue={values.name}
           handleChange={handleChange}
         />
-        {errors?.name && <p>{errors.name}</p>} 
+        {errors.name && <p>{errors.name}</p>} 
   
         <Input 
           name='email'
