@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
-import Register from "./Pages/Register";
+import Register from "./Pages/Register/Register";
 import Hall from "./Pages/Hall/Hall";
 import Kitchen from "./Pages/Kitchen/Kitchen";
 import NotFound from "./Pages/NotFound/NotFound";

@@ -1,12 +1,15 @@
 import React from "react";
 // import Img from "../img";
 
-const Input = (props) => {
+const Input = ({name, placeholder, type, inputValue, handleChange}) => {
     
     return (
-        <div>
-            <input placeholder={props.placeholder} type= {props.type} />   
-        </div>  
+            <input 
+            name = {name}
+            placeholder={placeholder} 
+            type={type} 
+            value ={inputValue} 
+            onChange={handleChange} />   
     )
 }
 
