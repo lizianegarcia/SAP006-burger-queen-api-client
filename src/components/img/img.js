@@ -1,8 +1,10 @@
-// const Img = (props) => {
-    
-//     return (
-//         <img src={props.linkImg} />   
-//     )
-// }
+import React from "react";
+import logo from "../../assets/images/logo.png"
 
-// export default Img;
+const LogoImg = () => {  
+return (
+    <img src={logo} alt="logo"/>   
+)
+}
+
+export default LogoImg;

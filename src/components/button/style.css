@@ -3,8 +3,11 @@
     padding: 5px 15px;
     border:none;
     cursor: pointer;
-    color: #ffff;
+    color: #1e1e1e;
     transition: .2s;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 .button.primary {
@@ -14,9 +17,9 @@
     background: rgb(39, 39, 212);
 }
 .button.secundary {
-    background: transparent;
+    background: #D5C06B;
 
 }
 .button.secundary:hover{
-    background: rgba(217, 217, 217 .2)
+    background: #EFDB88;
 }
