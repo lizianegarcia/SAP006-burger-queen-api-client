@@ -1,3 +1,4 @@
+import React from "react";
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
 import LogoImg from "../../components/img/img";
