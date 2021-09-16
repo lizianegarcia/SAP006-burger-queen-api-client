@@ -1,5 +1,4 @@
 import React from "react";
-// import { useState } from 'react';
 import './style.css'; 
 
 const Button = ({variant, children, onClick, type}) => {
@@ -13,11 +12,3 @@ const Button = ({variant, children, onClick, type}) => {
 }
 
 export default Button;
-// const pesssoa ={
-//         nome: 'gabriel',
-//         sobrenome: 'ramos',
-// }
-
-// const { nome } = pessoa;
-// console.log (nome); rsp gabriel
-// const nome completo = ${nome} ${sobrenome}`

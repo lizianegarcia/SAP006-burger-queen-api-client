@@ -1,14 +1,15 @@
 import React from "react";
-// import Img from "../img";
 
-const Input = ({name, placeholder, type, inputValue, handleChange}) => {
+
+const Input = ({name, id, placeholder, type, value, handleChange}) => {
     
     return (
             <input 
-            name = {name}
+            name={name}
+            id={id}
             placeholder={placeholder} 
             type={type} 
-            value ={inputValue} 
+            value ={value} 
             onChange={handleChange} />   
     )
 }
