@@ -1,5 +1,9 @@
 @import url('./global.css');
 
 body {
-  background-color: #262424;
+  background-color: red;
+}
+
+.form-inputs p {
+  color: red;
 }
