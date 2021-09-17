@@ -1,15 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
 import LogoImg from "../../components/img/img";
+// import Kitchen from "../Kitchen/Kitchen";
 import "../../Styles/login.css";
 
 const Login = () => {
   const textEmail = 'E-mail*'
   const textPassword = 'Senha*'
-  const typeInputEmail = 'email'
+  const typeInputEmail = 'text'
   const typeInputPassword = 'password'
 
   const [values, setValues] = useState({
@@ -24,16 +25,22 @@ const Login = () => {
 
   const validation = () => {
     let errors = {}
+    errors.isFormValid = true
+
     if (!values.email) {
       errors.email = "Por favor preencha o email";
+      errors.isFormValid = false;
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-       errors.email = "Preencha seu e-mail corretamente";
+      errors.email = "Preencha seu e-mail corretamente";
+      errors.isFormValid = false;
     } 
   
     if (!values.password) {
       errors.password = "Preencha sua senha corretamente";
+      errors.isFormValid = false;
     }  else if (values.password.length < 6) {
-    errors.password = "Sua senha contém no mínimo 6 caracteres"
+      errors.password = "Sua senha contém no mínimo 6 caracteres"
+      errors.isFormValid = false;
     }
 
     return errors;
@@ -41,16 +48,25 @@ const Login = () => {
 
   const handleChange = e => {
     const { name, value } = e.target
+    console.log(e.target.value)
     setValues({
       ...values,
       [name]: value
     })
   }
 
+  const history = useHistory();
+  const Kitchen = () => {
+    history.push('/Kitchen')
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     const valid = validation()
     setError(valid)
+    if (valid.isFormValid){
+      Kitchen();
+    }
   }
 
   return (
@@ -66,7 +82,7 @@ const Login = () => {
             name="email"
             placeholder={textEmail} 
             type={typeInputEmail}
-            value ={values.email} 
+            defaultValue={values.email} 
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>} 
@@ -79,13 +95,13 @@ const Login = () => {
             name="password"
             placeholder={textPassword} 
             type={typeInputPassword} 
-            value={values.password}
+            defaultValue={values.password}
             onChange={handleChange}
           />
           {errors.password && <p>{errors.password}</p>} 
         </div>
         <Button variant="secundary" className="form-input-btn" type="submit" 
-        // onClick={Cozinha/Salão}
+        // onClick={Kitchen}
         > 
         Login 
         </Button>
