@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Input from "../components/input/input";
 import Button from "../components/button/button";
+import Data from '../Api/api';
 
 
 
@@ -17,19 +18,22 @@ const Register = () => {
     name: '',
     email:'',
     password:'',
-    occupation: '',
+    role: '',
+    restaurant: 'Burguer Queen',
   }, console.log('entrou'));
-
+ 
   const [errors, setError] = useState({
     name:'',
     email:'',
     password:'',
-    occupation: '',
+    role: '',
+    restaurant: '',
   });
 
   const validation = () => { 
     let error = {}
     error.isFormValid = true
+
     if (!values.name){
       error.name = 'Preencha seu nome corretamente';
       error.isFormValid = false
@@ -53,8 +57,8 @@ const Register = () => {
       error.isFormValid = false
     }
 
-    if((values.occupation !== "atendente" && values.occupation !== "cozinha")) {
-      error.occupation = "Selecione uma função"
+    if((values.role !== "atendente" && values.role !== "cozinha")) {
+      error.role = "Selecione uma função"
       error.isFormValid = false
     }
     
@@ -67,10 +71,13 @@ const Register = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const valid = validation()
+    const valid = validation() 
+    console.log(values)
+    
     setError(valid)
     if (valid.isFormValid){
       Login();
+      Data(values)
     }
     
   }
@@ -83,19 +90,13 @@ const Register = () => {
         ...values,
         [name]: value,
     })
+  
   }
 
   useEffect(() => {
-    console.log('caiu aqui')
-  }, [])
-  useEffect(() => {
-  console.log(values, errors)
-  }, [values, errors] ) 
-  // useEffect( async () => {
-  //   const response = await fetch('https://lab-api-bq.herokuapp.com/users')
-  //   const data = await response.json();
-  // }, []) jasonStringfi
-
+    console.log(values)
+  }, [values] )
+  
   return (
     <div>
       <form onSubmit={handleSubmit} >
@@ -103,8 +104,8 @@ const Register = () => {
           name='name'
           placeholder={textName} 
           type={typeInput}
-          alue={values.name}
-          handleChange={handleChange}
+          value={values.name}
+          onChange={handleChange}
         />
         {errors.name && <p>{errors.name}</p>} 
   
@@ -113,7 +114,7 @@ const Register = () => {
           placeholder={textEmail} 
           type={typeInput}
           value={values.email}
-          handleChange={handleChange}
+          onChange={handleChange}
         />
          {errors.email && <p>{errors.email}</p>} 
 
@@ -122,29 +123,29 @@ const Register = () => {
           placeholder={textPassword} 
           type={typeInputPassword}
           value={values.password}
-          handleChange={handleChange}
+          onChange={handleChange}
           
         />
         {errors.password && <p>{errors.password}</p>} 
         <section  >
           <Input
-            name='occupation'
+            name='role'
             id='hall'
             type={typeInputRadio} 
             value ='atendente'
-            handleChange={handleChange}
+            onChange={handleChange}
           />
           <Input 
-            name='occupation'
+            name='role'
             id= 'kitchen'
             type={typeInputRadio}
             value='cozinha'
-            handleChange={handleChange}
+            onChange={handleChange}
             
             
           />
         </section>
-        {errors.occupation && <p>{errors.occupation}</p>}
+        {errors.role && <p>{errors.role}</p>}
 
         <Button variant='primary' type='submit' >
           Entrar e Logar

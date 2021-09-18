@@ -5,13 +5,13 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import Register from "./Pages/Register";
-import Hall from "./Pages/Hall/Hall";
-import Kitchen from "./Pages/Kitchen/Kitchen";
-import NotFound from "./Pages/NotFound/NotFound";
-import { isAuthenticated } from "./Auth";
+import Home from "../Pages/Home/Home";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register";
+import Hall from "../Pages/Hall/Hall";
+import Kitchen from "../Pages/Kitchen/Kitchen";
+import NotFound from "../Pages/NotFound/NotFound";
+import { isAuthenticated } from "../Auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -43,4 +43,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
