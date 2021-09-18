@@ -11,13 +11,13 @@ import Register from "./Pages/Register/Register";
 import Hall from "./Pages/Hall/Hall";
 import Kitchen from "./Pages/Kitchen/Kitchen";
 import NotFound from "./Pages/NotFound/NotFound";
-import { isAuthenticated } from "./Auth";
+import { authUser } from "./Auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isAuthenticated() ? (
+      authUser() ? (
         <Component {...props} />
       ) : (
         <Redirect to={{ pathname: '/', state: { from: props.location } }} />

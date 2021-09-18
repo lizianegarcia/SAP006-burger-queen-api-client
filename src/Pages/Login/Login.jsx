@@ -6,6 +6,7 @@ import Button from "../../components/button/button";
 import LogoImg from "../../components/img/img";
 // import Kitchen from "../Kitchen/Kitchen";
 import "../../Styles/login.css";
+import { loginEmailAndPassword } from "./Validation";
 
 const Login = () => {
   const textEmail = 'E-mail*'
@@ -60,14 +61,35 @@ const Login = () => {
     history.push('/Kitchen')
   }
 
+  const Hall = () => {
+    history.push('/Hall')
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     const valid = validation()
     setError(valid)
     if (valid.isFormValid){
-      Kitchen();
+      loginEmailAndPassword(values.email, values.password)
+      .then(res => res.json())
+      .then((json) => {
+        const { token } = json
+        const { id } = json
+        const tokenUser = localStorage.setItem('token', token);
+        const idUser = localStorage.setItem('id', id);
+
+        if (tokenUser !== null && idUser !== null &&  json.role === 'atendente') {
+          Hall()
+        } else if (tokenUser !== null && idUser !== null &&  json.role === 'cozinha') {
+          Kitchen()
+        } else {
+          alert('Não cadastrado!')
+        }
+      })
     }
   }
+  
+
 
   return (
     <div className="form-content-right">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
+import { registerUser } from './Validation';
 
 
 
@@ -17,14 +18,14 @@ const Register = () => {
     name: '',
     email:'',
     password:'',
-    occupation: '',
-  }, console.log('entrou'));
+    role: '',
+  });
 
   const [errors, setError] = useState({
     name:'',
     email:'',
     password:'',
-    occupation: '',
+    role: '',
   });
 
   const validation = () => { 
@@ -53,8 +54,8 @@ const Register = () => {
       error.isFormValid = false
     }
 
-    if((values.occupation !== "atendente" && values.occupation !== "cozinha")) {
-      error.occupation = "Selecione uma função"
+    if((values.role !== "atendente" && values.role !== "cozinha")) {
+      error.role = "Selecione uma função"
       error.isFormValid = false
     }
     
@@ -69,10 +70,19 @@ const Register = () => {
     e.preventDefault();
     const valid = validation()
     setError(valid)
-    if (valid.isFormValid){
-      Login();
-    }
     
+    if (valid.isFormValid){
+      registerUser(values.name, values.email, values.password, values.role)
+      .then(res => res.json( console.log(res)))
+     
+      .then((json) => {
+        if (json.id === undefined) {
+          console.log('ERRO SUA BURRA')
+        } else {
+          Login();
+        }
+      });
+    }
   }
 
 
@@ -88,9 +98,9 @@ const Register = () => {
   useEffect(() => {
     console.log('caiu aqui')
   }, [])
-  useEffect(() => {
-  console.log(values, errors)
-  }, [values, errors] ) 
+  // useEffect(() => {
+  // console.log(values, errors)
+  // }, [values, errors] ) 
   // useEffect( async () => {
   //   const response = await fetch('https://lab-api-bq.herokuapp.com/users')
   //   const data = await response.json();
@@ -103,8 +113,8 @@ const Register = () => {
           name='name'
           placeholder={textName} 
           type={typeInput}
-          value={values.name}
-          handleChange={handleChange}
+          defaultValue={values.name}
+          onChange={handleChange}
         />
         {errors.name && <p>{errors.name}</p>} 
   
@@ -112,8 +122,8 @@ const Register = () => {
           name='email'
           placeholder={textEmail} 
           type={typeInput}
-          value={values.email}
-          handleChange={handleChange}
+          defaultValue={values.email}
+          onChange={handleChange}
         />
          {errors.email && <p>{errors.email}</p>} 
 
@@ -121,30 +131,30 @@ const Register = () => {
           name='password'
           placeholder={textPassword} 
           type={typeInputPassword}
-          value={values.password}
-          handleChange={handleChange}
+          defaultValue={values.password}
+          onChange={handleChange}
           
         />
         {errors.password && <p>{errors.password}</p>} 
         <section  >
           <Input
-            name='occupation'
+            name='role'
             id='hall'
             type={typeInputRadio} 
-            value ='atendente'
-            handleChange={handleChange}
+            defaultValue ={values.role}
+            onChange={handleChange}
           />
           <Input 
-            name='occupation'
+            name='role'
             id= 'kitchen'
             type={typeInputRadio}
-            value='cozinha'
-            handleChange={handleChange}
+            defaultValue={values.role}
+            onChange={handleChange}
             
             
           />
         </section>
-        {errors.occupation && <p>{errors.occupation}</p>}
+        {errors.role && <p>{errors.role}</p>}
 
         <Button variant='primary' type='submit' >
           Entrar e Logar
