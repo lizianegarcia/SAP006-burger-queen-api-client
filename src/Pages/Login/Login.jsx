@@ -9,8 +9,8 @@ import "../../Styles/login.css";
 import { loginEmailAndPassword } from "./Validation";
 
 const Login = () => {
-  const textEmail = 'E-mail*'
-  const textPassword = 'Senha*'
+  const textEmail = 'Digite seu e-mail'
+  const textPassword = 'Digite sua senha'
   const typeInputEmail = 'text'
   const typeInputPassword = 'password'
 
@@ -92,46 +92,51 @@ const Login = () => {
 
 
   return (
-    <div className="form-content-right">
-      <LogoImg className="logo" />
-      <form className="form" onSubmit={handleSubmit}>
-        <h1> LOGIN </h1>
-        <div className="form-inputs">
-          <label htmlFor="email" className="label-form">
-           E-mail
-          </label>
-          <Input className="form-input"
+    <div className="login">
+      <LogoImg />
+      <main className="login-page-main">
+        <h1>Login</h1>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-group input">
+            <label htmlFor="email" className="label-form">
+            E-mail
+            </label>
+            <Input
             name="email"
             placeholder={textEmail} 
             type={typeInputEmail}
             defaultValue={values.email} 
             onChange={handleChange}
-          />
-          {errors.email && <p>{errors.email}</p>} 
+            />
+           <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
         </div>
-        <div className="form-inputs">
+        <div className="form-group input">
           <label htmlFor="password" className="label-form">
             Senha
           </label>
-          <Input className="form-input"
+          <Input
             name="password"
             placeholder={textPassword} 
             type={typeInputPassword} 
             defaultValue={values.password}
             onChange={handleChange}
           />
-          {errors.password && <p>{errors.password}</p>} 
+           <div className="hidden">{errors.password && <p>{errors.password}</p>}</div>
         </div>
-        <Button variant="secundary" className="form-input-btn" type="submit" 
+        <span className="register">
+          Ainda não tem uma conta? 
+        </span>
+          <Link className="toregister" to="/Register"> Cadastre-se </Link>
+       
+
+        <Button variant="primary"  type="submit" 
         // onClick={Kitchen}
         > 
         Login 
         </Button>
-        <span className="form-input-login">
-          Ainda não tem uma conta? 
-          <Link to="/Register">Cadastre-se</Link>
-        </span>
+
       </form>
+      </main>
     </div>
   )
 }

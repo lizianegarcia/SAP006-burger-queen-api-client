@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import Input from "../components/input/input";
-import Button from "../components/button/button";
-import Data from '../Api/api';
+import Input from "../../components/input/input";
+import Button from "../../components/button/button";
+import LogoImg from '../../components/img/img';
+import { KitchenIcon, HallIcon } from "../../components/img/img";
+import Data from '../../Api/api';
 
 
 
@@ -98,17 +100,28 @@ const Register = () => {
   }, [values] )
   
   return (
-    <div>
-      <form onSubmit={handleSubmit} >
-        <Input
-          name='name'
-          placeholder={textName} 
-          type={typeInput}
-          value={values.name}
-          onChange={handleChange}
-        />
-        {errors.name && <p>{errors.name}</p>} 
-  
+    <div className="login">
+      <LogoImg />
+      <main className="login-page-main">
+        <h1>Login</h1>
+        <form className="login-form" onSubmit={handleSubmit} >
+        <div className="form-group input">
+            <label htmlFor="email" className="label-form">
+            Nome Completo
+            </label>
+              <Input
+                name='name'
+                placeholder={textName} 
+                type={typeInput}
+                value={values.name}
+                onChange={handleChange}
+              />
+            <div className="hidden">  {errors.name && <p>{errors.name}</p>} </div>
+        </div>
+        <div className="form-group input">
+            <label htmlFor="email" className="label-form">
+            E-mail
+            </label>
         <Input 
           name='email'
           placeholder={textEmail} 
@@ -116,8 +129,12 @@ const Register = () => {
           value={values.email}
           onChange={handleChange}
         />
-         {errors.email && <p>{errors.email}</p>} 
-
+         <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
+         </div>
+         <div className="form-group input">
+          <label htmlFor="password" className="label-form">
+            Senha
+          </label>
         <Input 
           name='password'
           placeholder={textPassword} 
@@ -126,8 +143,13 @@ const Register = () => {
           onChange={handleChange}
           
         />
-        {errors.password && <p>{errors.password}</p>} 
+        <div className="hidden">{errors.password && <p>{errors.password}</p>} </div>
+        </div>
         <section  >
+        <label htmlFor="hall" className="label-form">
+            Salão
+        </label>
+        <KitchenIcon />
           <Input
             name='role'
             id='hall'
@@ -145,12 +167,13 @@ const Register = () => {
             
           />
         </section>
-        {errors.role && <p>{errors.role}</p>}
+        <div className="hidden">{errors.role && <p>{errors.role}</p>}</div>
 
         <Button variant='primary' type='submit' >
           Entrar e Logar
         </Button>
       </form>
+      </main>
     </div>
   )
   

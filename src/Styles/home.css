@@ -1,6 +1,19 @@
 @import url('./global.css');
 
-body {
-  background-color: #262424;
+.home {
+  background: var(--raisin-black);
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.home .home-page-main {
+  background: var(--raisin-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 

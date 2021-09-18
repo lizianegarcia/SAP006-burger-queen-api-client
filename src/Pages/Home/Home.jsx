@@ -15,10 +15,12 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className="home">
       <LogoImg />
-      <Button variant='secundary' onClick={Login}>Login</Button>
-      <Button variant='secundary' onClick={Register}>Cadastro</Button>
+      <main className="home-page-main">
+        <Button variant='secundary' onClick={Login}>Login</Button>
+        <Button variant='secundary' onClick={Register}>Cadastro</Button>
+      </main>
     </div>
 
   );

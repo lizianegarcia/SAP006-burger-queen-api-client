@@ -1,9 +1,88 @@
 @import url('./global.css');
 
-body {
-  background-color: #262424;
+.login {
+    background: var(--raisin-black);
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
 }
 
-.form-inputs p {
-  color: red;
+.login .login-page-main {
+    background: var(--raisin-black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login .login-page-main h1 {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color:var(--vegas-gold);
+}
+
+.login .login-page-main .login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login .login-page-main .form-group {
+    display: grid;
+    margin-bottom: 2em;
+}
+
+.login .login-page-main .form-group label {
+    align-self: center;
+    color:var(--black);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.login .login-page-main .form-group input {
+    width: 25em;
+    height: 2.5rem;
+    padding: 0.1rem 0.3rem;
+    background:var(--vegas-gold);
+    border-radius: 1rem;
+    font-family: inherit;
+}
+
+.login .login-page-main .form-group input::placeholder {
+    color:var(--jet);
+    font-size: 0.8rem;
+    font-weight:600;
+
+}
+
+.login .login-page-main .form-group p {
+    font-size: 0.9rem;
+    color: var(--rosso-corsa);
+    min-height: 1.2rem;
+    position: relative;
+}
+
+.login .login-page-main .error-message {
+    min-height: 1.2rem;
+}
+
+
+.login .login-page-main .register {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.login .login-page-main .toregister {
+    color: var(--black);
+    font-size: 1rem;
+    transition: 0.3s ease-out;
+}
+
+.login .login-page-main .toregister:hover {
+    color: var(--vegas-gold);
+
 }
