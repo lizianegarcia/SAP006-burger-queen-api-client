@@ -5,6 +5,7 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
+<<<<<<< HEAD:src/Routes.jsx
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
@@ -12,6 +13,15 @@ import Hall from "./Pages/Hall/Hall";
 import Kitchen from "./Pages/Kitchen/Kitchen";
 import NotFound from "./Pages/NotFound/NotFound";
 import { authUser } from "./Auth";
+=======
+import Home from "../Pages/Home/Home";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register";
+import Hall from "../Pages/Hall/Hall";
+import Kitchen from "../Pages/Kitchen/Kitchen";
+import NotFound from "../Pages/NotFound/NotFound";
+import { isAuthenticated } from "../Auth";
+>>>>>>> 33898287d5de26f4d11fc7346796e253e9681f72:src/Routes/Routes.jsx
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -43,4 +53,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

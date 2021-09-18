@@ -5,6 +5,7 @@ import LogoImg from "../../components/img/img";
 import "../../Styles/home.css";
 
 const Home = () => {
+  
   const history = useHistory();
   const Login = () => {
     history.push('/Login')
