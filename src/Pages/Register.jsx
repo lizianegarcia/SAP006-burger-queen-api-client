@@ -77,7 +77,7 @@ const Register = () => {
     setError(valid)
     if (valid.isFormValid){
       Login();
-      Data(values)
+      Data(values, "users", "POST")
     }
     
   }

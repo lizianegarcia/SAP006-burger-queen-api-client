@@ -1,8 +1,13 @@
 
-const Data = (values) => {
-    const url = `https://lab-api-bq.herokuapp.com/users`
+const Data = (values, endpoint, verb) => {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    const url = `https://lab-api-bq.herokuapp.com/` + endpoint;
     fetch(url, {
-        method: "POST",
+        method: verb,
+        headers: headers,
         body: JSON.stringify(values)
     })
     .then(response => response.json())
