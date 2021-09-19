@@ -1,8 +1,13 @@
 import React from "react";
+import "../../Styles/hall.css";
 
 function Hall() {
   return (
-    <p>Salão</p>
+    <div className="hall">
+      <main className="hall-page-main">
+        <p>Salão</p>
+      </main>
+    </div>
   )
 }
 

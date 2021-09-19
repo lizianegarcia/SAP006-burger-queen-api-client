@@ -6,7 +6,7 @@ import Logo from "../../components/img/Logo";
 import HallIcon from '../../components/img/HallIcon';
 import KitchenIcon from '../../components/img/KitchenIcon';
 import Data from '../../Api/api';
-import "../../Styles/login-register.css";
+import "../../Styles/register.css";
 
 const Register = () => {
   const textName = 'Nome Completo';
@@ -100,61 +100,61 @@ const Register = () => {
   }, [values] )
   
   return (
-    <div className="login">
+    <div className="register">
       <Logo />
-      <main className="login-page-main">
+      <main className="register-page-main">
         <h1>Cadastro</h1>
-        <form className="login-form" onSubmit={handleSubmit} >
-        <div className="form-group input">
-              <Input
-                name='name'
-                placeholder={textName} 
+        <form className="register-form" onSubmit={handleSubmit} >
+          <div className="form-group input">
+             <Input
+               name='name'
+               placeholder={textName} 
+               type={typeInput}
+               value={values.name}
+               onChange={handleChange}
+              />
+              <div className="hidden">  {errors.name && <p>{errors.name}</p>} </div>
+          </div>
+          <div className="form-group input">
+              <Input 
+                name='email'
+                placeholder={textEmail} 
                 type={typeInput}
-                value={values.name}
+                value={values.email}
                 onChange={handleChange}
               />
-            <div className="hidden">  {errors.name && <p>{errors.name}</p>} </div>
-        </div>
-        <div className="form-group input">
-        <Input 
-          name='email'
-          placeholder={textEmail} 
-          type={typeInput}
-          value={values.email}
-          onChange={handleChange}
-        />
-         <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
+              <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
          </div>
          <div className="form-group input">
-        <Input 
-          name='password'
-          placeholder={textPassword} 
-          type={typeInputPassword}
-          value={values.password}
-          onChange={handleChange}
-          
-        />
-        <div className="hidden">{errors.password && <p>{errors.password}</p>} </div>
-        </div>
-        <div className="bloco">
-            <Input 
-              name='role'
-              id='hall'
-              type={typeInputRadio} 
-              value ='atendente'
-              onChange={handleChange}
-            />
-            <HallIcon className="icon" />
-          
               <Input 
-                    name='role'
-                    id= 'kitchen'
-                    type={typeInputRadio}
-                    value='cozinha'
-                    onChange={handleChange}
-                  />
-              <KitchenIcon className="icon" />
-          </div>
+                name='password'
+                placeholder={textPassword} 
+                type={typeInputPassword}
+                value={values.password}
+                onChange={handleChange}
+                
+              />
+              <div className="hidden">{errors.password && <p>{errors.password}</p>} </div>
+        </div>
+
+        <div className="icons-role">
+          <Input 
+            name='role'
+            id='hall'
+            type={typeInputRadio} 
+            value ='atendente'
+            onChange={handleChange}
+          />
+          <HallIcon />
+          <Input 
+            name='role'
+            id= 'kitchen'
+            type={typeInputRadio}
+            value='cozinha'
+            onChange={handleChange}
+          />
+          <KitchenIcon />
+        </div>
         <div className="hidden">{errors.role && <p>{errors.role}</p>}</div>
 
         <Button variant='primary' type='submit' >

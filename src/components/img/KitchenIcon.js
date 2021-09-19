@@ -1,5 +1,5 @@
 import React from "react";
-import iconcoz from "../../assets/icons/iconcoz.png";
+import Cozinha from "../../assets/icons/Cozinha.png";
 import "./styles.css";
 
 
@@ -8,7 +8,7 @@ const KitchenIcon = () => {
       <div>
           <img 
           className="icon" 
-          src={iconcoz} 
+          src={Cozinha} 
           alt="Ícone cozinha" 
           />
       </div>

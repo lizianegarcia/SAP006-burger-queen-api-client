@@ -1,0 +1,6 @@
+@import url(../Styles/global.css);
+
+body {
+  background-color: var(--eerie-black);
+  color: aliceblue;
+}

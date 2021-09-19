@@ -63,8 +63,7 @@
     min-height: 1.2rem;
 }
 
-
-.login .login-page-main .register {
+.login .login-page-main .new-user-register {
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -81,12 +80,9 @@
 
 }
 
-.bloco {
-    display:flex;
-    text-align: center;
-    flex-direction: row;
-    margin-top: 2rem;
-}
+
+
+
 
 
 

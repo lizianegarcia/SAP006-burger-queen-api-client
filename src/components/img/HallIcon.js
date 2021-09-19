@@ -1,5 +1,5 @@
 import React from "react";
-import iconsal from "../../assets/icons/iconsal.png";
+import Salao from "../../assets/icons/Salao.png";
 import "./styles.css";
 
 
@@ -8,7 +8,7 @@ const HallIcon = () => {
   <div>
       <img 
             className="icon" 
-            src={iconsal} 
+            src={Salao} 
             alt="Ícone garçom" 
         />
   </div>

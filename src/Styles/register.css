@@ -1,0 +1,75 @@
+@import url(../Styles/global.css);
+
+.register {
+  background: var(--raisin-black);
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.register .register-page-main {
+  background: var(--raisin-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register .register-page-main h1 {
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color:var(--vegas-gold);
+}
+
+.register .register-page-main .register-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.register .register-page-main .form-group {
+  display: grid;
+  margin-bottom: 0.6rem;
+}
+
+.register .register-page-main .form-group input {
+  width: 25em;
+  height: 2.5rem;
+  padding: 0.1rem 0.3rem;
+  background:var(--vegas-gold);
+  border-radius: 1rem;
+  font-family: inherit;
+}
+
+.register .register-page-main .form-group input::placeholder {
+  color:var(--jet);
+  font-size: 1rem;
+  font-weight:700;
+
+}
+
+.register .register-page-main .form-group p {
+  font-size: 0.9rem;
+  color: var(--rosso-corsa);
+  min-height: 1.2rem;
+  position: relative;
+}
+
+.register .register-page-main .error-message {
+  min-height: 1.2rem;
+}
+
+.icons-role {
+  display:flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.button {
+  margin-bottom: 2rem;
+}

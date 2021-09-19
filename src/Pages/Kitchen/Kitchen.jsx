@@ -1,8 +1,13 @@
 import React from "react";
+import "../../Styles/kitchen.css";
 
 function Kitchen() {
   return (
-    <p>Cozinha</p>
+    <div className="kitchen">
+      <main className="kitchen-page-main">
+        <p>Cozinha</p>
+      </main>
+    </div>
   )
 }
 

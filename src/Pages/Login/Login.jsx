@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
 import Logo from "../../components/img/Logo";
-import "../../Styles/login-register.css";
+import "../../Styles/login.css";
 import { loginEmailAndPassword } from "./Validation";
 
 const Login = () => {
@@ -116,7 +116,7 @@ const Login = () => {
           />
            <div className="hidden">{errors.password && <p>{errors.password}</p>}</div>
         </div>
-        <span className="register">
+        <span className="new-user-register">
           Ainda não tem uma conta? 
         </span>
           <Link className="toregister" to="/Register"> Cadastre-se </Link>
