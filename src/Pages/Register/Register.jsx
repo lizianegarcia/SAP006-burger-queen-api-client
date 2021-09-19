@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
-import LogoImg from '../../components/img/img';
-import { KitchenIcon, HallIcon } from "../../components/img/img";
+import Logo from "../../components/img/Logo";
+import HallIcon from '../../components/img/HallIcon';
+import KitchenIcon from '../../components/img/KitchenIcon';
 import Data from '../../Api/api';
-
-
+import "../../Styles/login-register.css";
 
 const Register = () => {
-  const textName = 'Nome Completo*';
-  const textEmail = 'E-mail*';
-  const textPassword = 'Senha*';
+  const textName = 'Nome Completo';
+  const textEmail = 'E-mail';
+  const textPassword = 'Senha';
   const typeInput = 'text';
   const typeInputPassword = 'password';
   const typeInputRadio = 'radio';
@@ -101,14 +101,11 @@ const Register = () => {
   
   return (
     <div className="login">
-      <LogoImg />
+      <Logo />
       <main className="login-page-main">
-        <h1>Login</h1>
+        <h1>Cadastro</h1>
         <form className="login-form" onSubmit={handleSubmit} >
         <div className="form-group input">
-            <label htmlFor="email" className="label-form">
-            Nome Completo
-            </label>
               <Input
                 name='name'
                 placeholder={textName} 
@@ -119,9 +116,6 @@ const Register = () => {
             <div className="hidden">  {errors.name && <p>{errors.name}</p>} </div>
         </div>
         <div className="form-group input">
-            <label htmlFor="email" className="label-form">
-            E-mail
-            </label>
         <Input 
           name='email'
           placeholder={textEmail} 
@@ -132,9 +126,6 @@ const Register = () => {
          <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
          </div>
          <div className="form-group input">
-          <label htmlFor="password" className="label-form">
-            Senha
-          </label>
         <Input 
           name='password'
           placeholder={textPassword} 
@@ -145,32 +136,29 @@ const Register = () => {
         />
         <div className="hidden">{errors.password && <p>{errors.password}</p>} </div>
         </div>
-        <section  >
-        <label htmlFor="hall" className="label-form">
-            Salão
-        </label>
-        <KitchenIcon />
-          <Input
-            name='role'
-            id='hall'
-            type={typeInputRadio} 
-            value ='atendente'
-            onChange={handleChange}
-          />
-          <Input 
-            name='role'
-            id= 'kitchen'
-            type={typeInputRadio}
-            value='cozinha'
-            onChange={handleChange}
-            
-            
-          />
-        </section>
+        <div className="bloco">
+            <Input 
+              name='role'
+              id='hall'
+              type={typeInputRadio} 
+              value ='atendente'
+              onChange={handleChange}
+            />
+            <HallIcon className="icon" />
+          
+              <Input 
+                    name='role'
+                    id= 'kitchen'
+                    type={typeInputRadio}
+                    value='cozinha'
+                    onChange={handleChange}
+                  />
+              <KitchenIcon className="icon" />
+          </div>
         <div className="hidden">{errors.role && <p>{errors.role}</p>}</div>
 
         <Button variant='primary' type='submit' >
-          Entrar e Logar
+          Cadastrar e Logar
         </Button>
       </form>
       </main>

@@ -3,14 +3,13 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Input from "../../components/input/input";
 import Button from "../../components/button/button";
-import LogoImg from "../../components/img/img";
-// import Kitchen from "../Kitchen/Kitchen";
-import "../../Styles/login.css";
+import Logo from "../../components/img/Logo";
+import "../../Styles/login-register.css";
 import { loginEmailAndPassword } from "./Validation";
 
 const Login = () => {
-  const textEmail = 'Digite seu e-mail'
-  const textPassword = 'Digite sua senha'
+  const textEmail = 'E-mail'
+  const textPassword = 'Senha'
   const typeInputEmail = 'text'
   const typeInputPassword = 'password'
 
@@ -93,14 +92,11 @@ const Login = () => {
 
   return (
     <div className="login">
-      <LogoImg />
+      <Logo />
       <main className="login-page-main">
         <h1>Login</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group input">
-            <label htmlFor="email" className="label-form">
-            E-mail
-            </label>
             <Input
             name="email"
             placeholder={textEmail} 
@@ -111,9 +107,6 @@ const Login = () => {
            <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
         </div>
         <div className="form-group input">
-          <label htmlFor="password" className="label-form">
-            Senha
-          </label>
           <Input
             name="password"
             placeholder={textPassword} 
@@ -127,8 +120,7 @@ const Login = () => {
           Ainda não tem uma conta? 
         </span>
           <Link className="toregister" to="/Register"> Cadastre-se </Link>
-       
-
+          
         <Button variant="primary"  type="submit" 
         // onClick={Kitchen}
         > 

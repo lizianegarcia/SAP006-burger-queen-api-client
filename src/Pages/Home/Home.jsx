@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/button/button";
-import LogoImg from "../../components/img/img";
+import Logo from "../../components/img/Logo";
 import "../../Styles/home.css";
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <LogoImg />
+      <Logo />
       <main className="home-page-main">
         <Button variant='secundary' onClick={Login}>Login</Button>
         <Button variant='secundary' onClick={Register}>Cadastro</Button>

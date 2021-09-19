@@ -5,6 +5,7 @@
     display: flex;
     align-items: stretch;
     flex-direction: column;
+    height: 100vh;
 }
 
 .login .login-page-main {
@@ -17,8 +18,8 @@
 
 .login .login-page-main h1 {
     text-transform: uppercase;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    margin-bottom: 1.8rem;
     font-weight: 700;
     color:var(--vegas-gold);
 }
@@ -32,14 +33,7 @@
 
 .login .login-page-main .form-group {
     display: grid;
-    margin-bottom: 2em;
-}
-
-.login .login-page-main .form-group label {
-    align-self: center;
-    color:var(--black);
-    font-weight: 700;
-    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
 }
 
 .login .login-page-main .form-group input {
@@ -53,8 +47,8 @@
 
 .login .login-page-main .form-group input::placeholder {
     color:var(--jet);
-    font-size: 0.8rem;
-    font-weight:600;
+    font-size: 1rem;
+    font-weight:700;
 
 }
 
@@ -86,3 +80,13 @@
     color: var(--vegas-gold);
 
 }
+
+.bloco {
+    display:flex;
+    text-align: center;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+
+

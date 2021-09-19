@@ -1,5 +1,5 @@
 .header {
-    height: 60vh;
+    height: 50vh;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -13,4 +13,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.icon {
+    margin-right: 1.5rem;
+    max-width: 80%;
+    max-height: 80%;
 }
