@@ -26,7 +26,6 @@ const Login = () => {
   const validation = () => {
     let errors = {}
     errors.isFormValid = true
-
     if (!values.email) {
       errors.email = "Por favor preencha o email";
       errors.isFormValid = false;
@@ -34,7 +33,6 @@ const Login = () => {
       errors.email = "Preencha seu e-mail corretamente";
       errors.isFormValid = false;
     } 
-  
     if (!values.password) {
       errors.password = "Preencha sua senha corretamente";
       errors.isFormValid = false;
@@ -42,7 +40,6 @@ const Login = () => {
       errors.password = "Sua senha contém no mínimo 6 caracteres"
       errors.isFormValid = false;
     }
-
     return errors;
   }
 
@@ -59,7 +56,6 @@ const Login = () => {
   const Kitchen = () => {
     history.push('/Kitchen')
   }
-
   const Hall = () => {
     history.push('/Hall')
   }
@@ -88,13 +84,10 @@ const Login = () => {
     }
   }
   
-
-
   return (
     <div className="login">
       <Logo />
       <main className="login-page-main">
-        <h1>Login</h1>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group input">
             <Input
@@ -117,13 +110,11 @@ const Login = () => {
            <div className="hidden">{errors.password && <p>{errors.password}</p>}</div>
         </div>
         <span className="new-user-register">
-          Ainda não tem uma conta? 
+          Ainda não tem conta? 
         </span>
           <Link className="toregister" to="/Register"> Cadastre-se </Link>
           
-        <Button variant="primary"  type="submit" 
-        // onClick={Kitchen}
-        > 
+        <Button variant="primary"  type="submit"> 
         Login 
         </Button>
 

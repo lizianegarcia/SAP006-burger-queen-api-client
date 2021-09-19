@@ -103,7 +103,6 @@ const Register = () => {
     <div className="register">
       <Logo />
       <main className="register-page-main">
-        <h1>Cadastro</h1>
         <form className="register-form" onSubmit={handleSubmit} >
           <div className="form-group input">
              <Input

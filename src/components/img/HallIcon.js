@@ -5,13 +5,11 @@ import "./styles.css";
 
 const HallIcon = () => {
   return(
-  <div>
       <img 
             className="icon" 
             src={Salao} 
             alt="Ícone garçom" 
         />
-  </div>
   )
 }
 

@@ -1,0 +1,47 @@
+@import url(../../Styles/global.css);
+
+.buttons-menu {
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	background-color: var(--raisin-black);
+	border-radius: 9px;
+	width: 47%;
+	margin-left: 23px;
+}
+
+.btn-menu {
+	border: none;
+	margin: 17px;
+	margin-top: 23px;
+	height: 76px;
+	width: 76px;
+	background-color: var(--jet);
+	border-radius: 9px;
+}
+
+.img-menu {
+	height: 66px;
+}
+
+.btn-menu:hover {
+  background-color: var(--fire-opal);
+}
+
+.btn-menu-order {
+	border: none;
+	margin: 17px;
+	margin-top: 15px;
+	height: 90px;
+	width: 90px;
+	background-color: var(--jet);
+	border-radius: 9px;
+}
+
+.btn-menu-order:hover {
+  background-color: var(--cinnabar);
+}
+
+.img-menu-order {
+	height: 80px;
+}

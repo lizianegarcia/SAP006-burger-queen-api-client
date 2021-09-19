@@ -18,8 +18,10 @@ const Home = () => {
     <div className="home">
       <Logo />
       <main className="home-page-main">
-        <Button variant='secundary' onClick={Login}>Login</Button>
-        <Button variant='secundary' onClick={Register}>Cadastro</Button>
+        <div className="home-buttons">
+          <Button variant='secundary' onClick={Login}>Login</Button>
+          <Button variant='secundary' onClick={Register}>Cadastro</Button>
+        </div>
       </main>
     </div>
 

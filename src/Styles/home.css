@@ -15,7 +15,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 30vh;
 }
 
+.home .home-page-main .home-buttons {
+  top: 2rem;
+}
 
-
+.header .center {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

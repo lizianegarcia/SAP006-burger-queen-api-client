@@ -5,13 +5,11 @@ import "./styles.css";
 
 const KitchenIcon = () => {
   return (
-      <div>
           <img 
           className="icon" 
           src={Cozinha} 
           alt="Ícone cozinha" 
           />
-      </div>
   )
 }
 
