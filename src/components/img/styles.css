@@ -1,0 +1,24 @@
+.header {
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.header .responsive {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.header .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.icon {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    max-width: 70%;
+    max-height: 70%;
+}

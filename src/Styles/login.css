@@ -1,0 +1,94 @@
+@import url('./global.css');
+
+.login {
+    background: var(--raisin-black);
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.login .login-page-main {
+    margin-top: 3rem;
+    background: var(--raisin-black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .login .login-page-main h1 {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color:var(--vegas-gold);
+} */
+
+.login .login-page-main .login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login .login-page-main .form-group {
+    display: grid;
+    margin-bottom: 0.5rem;
+}
+
+.login .login-page-main .form-group input {
+    width: 20rem;
+    height: 2.5rem;
+    padding: 0.1rem 0.3rem;
+    background:var(--vegas-gold);
+    border-radius: 1rem;
+    font-family: inherit;
+}
+
+.login .login-page-main .form-group input::placeholder {
+    color:var(--jet);
+    font-size: 1.1rem;
+    font-weight:700;
+
+}
+
+.login .login-page-main .form-group p {
+    font-size: 0.9rem;
+    color: var(--rosso-corsa);
+    min-height: 1.2rem;
+    position: relative;
+}
+
+.login .login-page-main .error-message {
+    min-height: 1.2rem;
+}
+
+.login .login-page-main .new-user-register {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    color:var(--champagne-pink);
+}
+
+.login .login-page-main .toregister {
+    color: var(--jet);
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: bold;
+    color:var(--champagne-pink);
+
+}
+
+.login .login-page-main .toregister:hover {
+    color: var(--vegas-gold);
+
+}
+
+
+
+
+
+
+

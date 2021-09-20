@@ -1,0 +1,21 @@
+@import url(../../Styles/global.css);
+
+.footer { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 10vh;
+  background: var(--raisin-black);
+  color: white;
+}
+
+.footer-links {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+.footer-links:hover {
+  border-bottom: 2px solid white;
+}
