@@ -10,7 +10,7 @@ import { loginEmailAndPassword } from "./Validation";
 const Login = () => {
   const textEmail = 'E-mail'
   const textPassword = 'Senha'
-  const typeInputEmail = 'text'
+  const typeInputEmail = 'email'
   const typeInputPassword = 'password'
 
   const [values, setValues] = useState({
@@ -96,6 +96,7 @@ const Login = () => {
             type={typeInputEmail}
             defaultValue={values.email} 
             onChange={handleChange}
+            id="teste-email"
             />
            <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
         </div>
@@ -106,6 +107,7 @@ const Login = () => {
             type={typeInputPassword} 
             defaultValue={values.password}
             onChange={handleChange}
+            id="teste-password"
           />
            <div className="hidden">{errors.password && <p>{errors.password}</p>}</div>
         </div>
