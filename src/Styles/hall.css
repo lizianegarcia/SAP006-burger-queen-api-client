@@ -4,3 +4,13 @@ body {
   background-color: var(--eerie-black);
   color:blanchedalmond;
 }
+
+.hall-page-main {
+  display: flex;
+  flex-direction: row;
+	background-color: var(--raisin-black);
+	border-radius: 9px;
+	width: 60vw;
+  height: 25vh;
+	margin-left: 23px;
+}

@@ -1,5 +1,5 @@
 
-const Data = (values, endpoint, verb) => {
+ const Data = (values, endpoint, verb) => {
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -15,4 +15,5 @@ const Data = (values, endpoint, verb) => {
     .catch((e) => console.log(e))
      
 }
-export default Data; 
+
+export default Data;

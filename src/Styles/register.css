@@ -61,3 +61,24 @@
   align-items: center;
   flex-direction: row;
 }
+
+.register .register-page-main .user-login {
+  color: var(--jet);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  color:var(--champagne-pink);
+}
+
+.register .register-page-main .tologin {
+  color: var(--jet);
+  font-size: 1.1rem;
+  text-decoration: none;
+  font-weight: bold;
+  color:var(--champagne-pink);
+
+}
+
+.register .register-page-main .tologin:hover {
+  color: var(--vegas-gold);
+}
