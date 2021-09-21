@@ -45,7 +45,7 @@ const Login = () => {
 
   const handleChange = e => {
     const { name, value } = e.target
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setValues({
       ...values,
       [name]: value
@@ -96,7 +96,6 @@ const Login = () => {
             type={typeInputEmail}
             defaultValue={values.email} 
             onChange={handleChange}
-            id="teste-email"
             />
            <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
         </div>
@@ -107,7 +106,6 @@ const Login = () => {
             type={typeInputPassword} 
             defaultValue={values.password}
             onChange={handleChange}
-            id="teste-password"
           />
            <div className="hidden">{errors.password && <p>{errors.password}</p>}</div>
         </div>
