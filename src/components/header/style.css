@@ -1,14 +1,13 @@
 @import url(../../Styles/global.css);
 
-.buttons-menu {
+/* .buttons-menu {
 	display: flex;
 	justify-content: center;
-	position: fixed;
 	background-color: var(--raisin-black);
 	border-radius: 9px;
 	width: 47%;
 	margin-left: 23px;
-}
+} */
 
 .btn-menu {
 	border: none;

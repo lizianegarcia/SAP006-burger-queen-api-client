@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import Input from '../../components/input/input'
-import Button from '../../components/button/button'
-import Logo from '../../components/img/Logo'
-import HallIcon from '../../components/img/HallIcon'
-import KitchenIcon from '../../components/img/KitchenIcon'
-import Data from '../../Api/api'
-import '../../Styles/register.css'
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import Input from "../../components/input/input";
+import Button from "../../components/button/button";
+import Logo from "../../components/img/Logo";
+import HallIcon from '../../components/img/HallIcon';
+import KitchenIcon from '../../components/img/KitchenIcon';
+import Data from '../../Api/api';
+import "../../Styles/register.css";
+
 
 const Register = () => {
-  const textName = 'Nome Completo'
-  const textEmail = 'E-mail'
-  const textPassword = 'Senha'
-  const typeInput = 'text'
-  const typeInputPassword = 'password'
-  const typeInputRadio = 'radio'
+  const textName = 'Nome Completo';
+  const textEmail = 'E-mail';
+  const textPassword = 'Senha';
+  const textPasswordRepeat = 'Repita sua senha';
+  const typeInput = 'text';
+  const typeInputPassword = 'password';
+  const typeInputRadio = 'radio';
 
-  const [values, setValues] = useState(
-    {
-      name: '',
-      email: '',
-      password: '',
-      role: '',
-      restaurant: 'Burguer Queen'
-    },
-    console.log('entrou')
-  )
-
-  const [errors, setError] = useState({
+  const [values, setValues] = useState({
     name: '',
-    email: '',
-    password: '',
+    email:'',
+    password:'',
+    repeatPassword: '',
+    role: '',
+    restaurant: 'Burguer Queen',
+  }, console.log('entrou'));
+ 
+  const [errors, setError] = useState({
+    name:'',
+    email:'',
+    password:'',
+    repeatPassword: '',
     role: '',
     restaurant: ''
   })
@@ -52,16 +53,24 @@ const Register = () => {
       error.isFormValid = false
     }
 
-    if (!values.password) {
-      error.password = 'Preencha sua senha corretamente'
+    if (!values.password || !values.repeatPassword) {
+      error.password = 'Preencha sua senha corretamente';
       error.isFormValid = false
-    } else if (values.password.length < 6) {
-      error.password = 'Insira no mínimo 6 caracteres'
+    }
+    else if(values.password !== values.repeatPassword) {
+      error.repeatPassword = 'As senhas devem ser iguais';
+      error.isFormValid = false
+    }
+    
+    else if (values.password.length < 6 || values.repeatPassword.length < 6) {
+      error.password = 'Insira no mínimo 6 caracteres';
+      error.repeatPassword = 'Insira no mínimo 6 caracteres';
       error.isFormValid = false
     }
 
-    if (values.role !== 'atendente' && values.role !== 'cozinha') {
-      error.role = 'Selecione uma função'
+
+    if((values.role !== "atendente" && values.role !== "cozinha")) {
+      error.role = "Selecione uma função"
       error.isFormValid = false
     }
 
@@ -112,59 +121,71 @@ const Register = () => {
               onChange={handleChange}
             />
             <div className="hidden">
-              {' '}
-              {errors.name && <p>{errors.name}</p>}{' '}
+              {errors.name && <p>{errors.name}</p>}
             </div>
           </div>
           <div className="form-group input">
-            <Input
-              name="email"
-              placeholder={textEmail}
-              type={typeInput}
-              value={values.email}
-              onChange={handleChange}
-            />
-            <div className="hidden">
-              {errors.email && <p>{errors.email}</p>}{' '}
-            </div>
-          </div>
-          <div className="form-group input">
-            <Input
-              name="password"
-              placeholder={textPassword}
-              type={typeInputPassword}
-              value={values.password}
-              onChange={handleChange}
-            />
-            <div className="hidden">
-              {errors.password && <p>{errors.password}</p>}{' '}
-            </div>
-          </div>
+              <Input 
+                name='email'
+                placeholder={textEmail} 
+                type={typeInput}
+                value={values.email}
+                onChange={handleChange}
+              />
+              <div className="hidden">{errors.email && <p>{errors.email}</p>} </div>
+         </div>
+         <div className="form-group input">
+              <Input 
+                name='password'
+                placeholder={textPassword} 
+                type={typeInputPassword}
+                value={values.password}
+                onChange={handleChange}
+                
+              />
+              <div className="hidden">{errors.password && <p>{errors.password}</p>} </div>
+        </div>
+        <div className="form-group input">
+              <Input 
+                name='repeatPassword'
+                placeholder={textPasswordRepeat} 
+                type={typeInputPassword}
+                value={values.repeatPassword}
+                onChange={handleChange}
+                
+              />
+              <div className="hidden">{errors.repeatPassword && <p>{errors.repeatPassword}</p>} </div>
+        </div>
 
-          <div className="icons-role">
-            <Input
-              name="role"
-              id="hall"
-              type={typeInputRadio}
-              value="atendente"
-              onChange={handleChange}
-            />
-            <HallIcon />
-            <Input
-              name="role"
-              id="kitchen"
-              type={typeInputRadio}
-              value="cozinha"
-              onChange={handleChange}
-            />
-            <KitchenIcon />
-          </div>
-          <div className="hidden">{errors.role && <p>{errors.role}</p>}</div>
+        <div className="icons-role">
+          <Input 
+            name='role'
+            id='hall'
+            type={typeInputRadio} 
+            value ='atendente'
+            onChange={handleChange}
+          />
+          <HallIcon />
+          <Input 
+            name='role'
+            id= 'kitchen'
+            type={typeInputRadio}
+            value='cozinha'
+            onChange={handleChange}
+          />
+          <KitchenIcon />
+        </div>
+        <div className="hidden">{errors.role && <p>{errors.role}</p>}</div>
 
-          <Button variant="primary" type="submit">
-            Cadastrar e Logar
-          </Button>
-        </form>
+        <Button variant='primary' type='submit' >
+          Cadastrar e Logar
+        </Button>
+        <span className="user-login">
+          Já tem uma conta? 
+        </span>
+          <Link className="tologin" to="/Login">Entre</Link>
+        
+      </form>
       </main>
     </div>
   )
