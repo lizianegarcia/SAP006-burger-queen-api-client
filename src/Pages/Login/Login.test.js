@@ -23,7 +23,7 @@ describe("SignIn", () => {
         fireEvent.click(getByRole("button"))
       })
 
-      expect(mockOnSubmit).toHaveBeenCalled()
+      expect(mockOnSubmit).toHaveBeenCalledTimes(0)
     })
   })
 
