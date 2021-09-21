@@ -1,5 +1,5 @@
 export const loginEmailAndPassword = (email, password) => {
-  console.log(email, password)
+  // console.log(email, password)
   return fetch("https://lab-api-bq.herokuapp.com/auth", {
     method: "POST",
     headers: {

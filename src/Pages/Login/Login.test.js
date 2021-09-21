@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-// import Router from 'react-router';
-// import '@testing-library/jest-dom';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Login from "./Login";
 
@@ -50,14 +48,15 @@ describe("SignIn", () => {
 
 })
 
-// test('allows the user to login successfully', () => {
-//   render(<Router><Login /></Router>)
+test('allows the user to login successfully', () => {
+  render(<Router><Login /></Router>)
 
-//   fireEvent.change(screen.getByRole("teste-email"), {
-//     target: {value: 'email@teste.com'},
-//   })
-//   fireEvent.change(screen.getByRole("teste-password"), {
-//     target: {value: 'banana'},
-//   })
-//   fireEvent.click(screen.getByText("Login"))
-// })
+  fireEvent.change(screen.getByPlaceholderText("E-mail"), {
+    target: {value: 'email@teste.com'},
+  })
+  fireEvent.change(screen.getByPlaceholderText("Senha"), {
+    target: {value: 'banana'},
+  })
+  fireEvent.click(screen.getByRole("button"))
+
+})
