@@ -55,6 +55,7 @@ const Register = () => {
 
     if (!values.password || !values.repeatPassword) {
       error.password = 'Preencha sua senha corretamente';
+      error.repeatPassword = 'Preencha sua senha corretamente';
       error.isFormValid = false
     }
     else if(values.password !== values.repeatPassword) {

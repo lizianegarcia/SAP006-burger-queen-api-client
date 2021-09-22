@@ -1,25 +1,29 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "../../Styles/hall.css";
-import HeaderIcons from "../../components/header/HeaderHallIcons";
-import HeaderHall from "../../components/header/HeaderHall";
-// import  Auth  from "../../Api/getProducts";
 import cafe from "../../assets/icons/cafe.png";
-import hamburguer from "../../assets/icons/hamburguer.png";
+import lanche from "../../assets/icons/lanche.png"
 import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
-import Menu from "./Menu";
+// import HeaderMenu from "../../components/menu/headerBreakfest";
 
 
 function Hall() {
-  useEffect(() => {
-    Auth();
-  }, []);
+  
+  const [menu, setMenu] = useState([]);
+  const [hamburguer, setHamburguer] = useState([]);
+  const [side, setSide] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  // const [client, setClient] = useState('');
+  // const [table, setTable] = useState('');
+  const [breakfast, setBreakfast] = useState([]);
+  const token = localStorage.getItem("token");
+  const [quantity, setQuantity] = useState([]);
+  const [total, 
+    // setTotal
+  ] = useState(0);
 
-  // const menu = [breakfast, setBreakfast] = useState('')
-  const token = localStorage.getItem('token');
-  const Auth = () => {
-    
+  useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/products', {
         headers: {
             accept: 'application/json',
@@ -29,23 +33,90 @@ function Hall() {
     })
     .then(response => response.json())
     .then((json) => {
-        const breakfast = json.filter((item) => item.type === "breakfast");
-        console.log(breakfast)
+      const breakfast = json.filter(item => item.type === 'breakfast')
+      const hamburguer = json.filter(item => item.sub_type === 'hamburguer')
+      const drinks = json.filter(item => item.sub_type === 'drinks')
+      const side = json.filter(item => item.sub_type === 'side')
+      setMenu(breakfast)
+      setBreakfast(breakfast)
+      setHamburguer(hamburguer)
+      setDrinks(drinks)
+      setSide(side)
+       
       });
+  }, [token])
+
+  function quantityProducts(item) {
+    const elementoExiste = quantity.find(element => element === item)
+    if (elementoExiste) {
+      elementoExiste.qtd += 1
+      setQuantity(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === elementoExiste.id ? elementoExiste : prevElem))
+    } else {
+      item.qtd = 1;
+      item.subtotal = item.price;
+      setQuantity([...quantity, item]);
+    }
   }
-  
+
+
   return (
     <div className="hall">
-      <form >
-        <HeaderHall />
-        <main className="hall-page-main">
-          <HeaderIcons img={cafe} />
+      <form className="menu-forms" >
+        <main className="hall-page-main">  
+        <div className="menu-btn">
+          <button className="btn-menu" onClick={((e) => {
+            e.preventDefault();
+            setBreakfast(menu)
+          })}><img src={cafe} alt="" className='img-menu' /></button>
 
-          <HeaderIcons img={hamburguer} />
-          <HeaderIcons img={extras} />
-          <HeaderIcons img={bebidas} />
-          <HeaderIcons img={cifrao} />
+          <button className="btn-menu" onClick={((e) => {
+            e.preventDefault();
+            setBreakfast(hamburguer)
+          })}><img src={lanche} alt="" className='img-menu' /></button>
+          
+          <button className="btn-menu" onClick={((e) => {
+            e.preventDefault();
+            setBreakfast(side);
+          })}><img src={extras} alt="" className='img-menu' /></button>
+          
+          <button className="btn-menu" onClick={((e) => {
+            e.preventDefault();
+            setBreakfast(drinks)
+          })}><img src={bebidas} alt="" className='img-menu' /></button>
 
+          <button className="btn-menu" onClick={((e) => {
+            e.preventDefault();
+            setBreakfast(total)
+          })}><img src={cifrao} alt="" className='img-menu' /></button>
+        </div>
+          <section className='restaurant-menu'>
+           <div className='menu-itens'> {
+             breakfast.map((items) => {
+
+              return (
+
+                <div className="products">
+                  <div key={items.id}>
+                    <div className="all-day">
+                      <div className='name-products'>
+                        <ul>{items.name}</ul>
+                      </div>
+                      <div className="options">
+                        <ul>{items.flavor}</ul>
+                        <ul>{items.complement}</ul>
+                      </div>
+                      <ul > R$ {items.price},00</ul>
+                      <button className="add-btn" onClick={() => quantityProducts(items)}>+</button>
+                  
+                    </div>
+                  </div>
+                </div>
+              )
+
+            })
+          } </div>
+
+        </section>
           
         </main>
      
