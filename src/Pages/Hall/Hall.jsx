@@ -6,20 +6,22 @@ import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
 import Input from "../../components/input/input"
+import ButtonMenu from "../../components/button/buttonIconsMenu";
 // import HeaderMenu from "../../components/menu/headerBreakfest";
 
 
 function Hall() {
   const token = localStorage.getItem("token");
-  const [menu, setMenu] = useState([]); // menu 
-  const [breakfast, setBreakfast] = useState([]); // menu cafe da manha
-  const [hamburguer, setHamburguer] = useState([]); //menu de hamburguers
-  const [side, setSide] = useState([]); // menu de extras
-  const [drinks, setDrinks] = useState([]); // menu de drinks
+  const [menu, setMenu] = useState({}) // menu 
+  // const [breakfast, setBreakfast] = useState([]); // menu cafe da manha
+  // const [hamburguer, setHamburguer] = useState([]); //menu de hamburguers
+  // const [side, setSide] = useState([]); // menu de extras
+  // const [drinks, setDrinks] = useState([]); // menu de drinks
   const [client, setClient] = useState(''); // nome do cliente
   const [table, setTable] = useState(''); // numero da mesa
-  const [quantity, setQuantity] = useState([]); //quantidade de um determinado item
-  const [total, setTotal] = useState(0); //total do valor do pedido
+  const [summary, setSummary] = useState([]); //quantidade de um determinado item
+  const [tab, setTab] = useState('breakfast');
+  const [loading, setLoading] = useState(true);
 
   useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/products', {
@@ -35,100 +37,117 @@ function Hall() {
       const hamburguer = json.filter(item => item.sub_type === 'hamburguer')
       const drinks = json.filter(item => item.sub_type === 'drinks')
       const side = json.filter(item => item.sub_type === 'side')
-      setMenu(breakfast)
-      setBreakfast(breakfast)
-      setHamburguer(hamburguer)
-      setDrinks(drinks)
-      setSide(side)
+      setMenu({
+        breakfast,
+        hamburguer, 
+        drinks, 
+        side
+      })
+      setLoading(false)
+      // setBreakfast(breakfast)
+      // setHamburguer(hamburguer)
+      // setDrinks(drinks)
+      // setSide(side)
        
       });
   }, [token])
 
-  function quantityProducts(e, item) {
+  
+
+  const addItem = (e, item) => {
     e.preventDefault()
-    const quantityElement = quantity.find(element => element === item)
+    const quantityElement = summary.find(element => element === item)
     if (quantityElement) {
       quantityElement.qtd += 1
-      setQuantity(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === quantityElement.id ? quantityElement : prevElem))
+      setSummary(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === quantityElement.id ? quantityElement : prevElem))
     } else {
       item.qtd = 1;
       item.subtotal = item.price;
-      setQuantity([...quantity, item]);
+      setSummary([...summary, item]);
     }
   }
 
-  function addItem(e, item) {
+  const removeItem = (e, item) => {
     e.preventDefault();
-    const quantityElement = quantity.find(elemento => elemento === item)
-    if (quantityElement.qtd != 0) {
+    const quantityElement = summary.find(elemento => elemento === item)
+    if (quantityElement.qtd !== 0) {
       quantityElement.qtd -= 1
-      setQuantity(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
+      setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
     } else {
       
     }
   }
 
-  function removeItem (e, item) {
+  const deleteItem = (e, item) => {
     e.preventDefault()
     item.remove()
   }
 
   useEffect(() => {
-    console.log(quantity)
-  }, [quantity])
+    console.log(summary)
+  }, [summary])
 
-  useEffect(() => {
-    
-    setTotal(() => {
-      const totalPrice = quantity.reduce((accumulator, array) => {
-        const { qtd, price } = array;
-        accumulator = Number(qtd * price + accumulator)
-        return accumulator
-      }, 0)
-      console.log(quantity)
-      return totalPrice;
-    })
-  }, [quantity]
-  )
- 
+  
+ const calculateTotal = (items) => {
+   
+  const totalPrice = items.reduce((accumulator, array) => {
+    const { qtd, price } = array;
+    accumulator = Number(qtd * price + accumulator)
+    return accumulator
+  }, 0)
+
+  return totalPrice;
+ }
+
+ const total = calculateTotal(summary)
+
+ const showSummary = tab === 'summary';
+ const showMenuTab = !showSummary && !loading;
   
   return (
     <div className="hall">
       <form className="menu-forms" >
         <main className="hall-page-main"> 
-        <div className="menu-btn">
-          <button className="btn-menu" onClick={((e) => {
-            e.preventDefault();
-            setBreakfast(menu)
-          })}><img src={cafe} alt="" className='img-menu' /></button>
+         <div className="menu-btn">
 
-          <button className="btn-menu" onClick={((e) => {
-            e.preventDefault();
-            setBreakfast(hamburguer)
-          })}><img src={lanche} alt="" className='img-menu' /></button>
-          
-          <button className="btn-menu" onClick={((e) => {
-            e.preventDefault();
-            setBreakfast(side);
-          })}><img src={extras} alt="" className='img-menu' /></button>
-          
-          <button className="btn-menu" onClick={((e) => {
-            e.preventDefault();
-            setBreakfast(drinks)
-          })}><img src={bebidas} alt="" className='img-menu' /></button>
+          <ButtonMenu 
+            onClick={((e) => {
+              e.preventDefault();
+              setTab('breakfast')
+            })} src={cafe} 
+          />
 
-          <button className="btn-menu" onClick={((e) => {
+          <ButtonMenu
+            onClick={((e) => {
+              e.preventDefault();
+              setTab('hamburguer')
+            })} src={lanche} 
+          />
+          
+          <ButtonMenu 
+            onClick={((e) => {
+              e.preventDefault();
+              setTab('side')
+            })} src={extras}  
+          />
+          
+          <ButtonMenu  
+            onClick={((e) => {
+              e.preventDefault();
+              setTab('drinks')
+            })} src={bebidas} 
+          />
+
+          <ButtonMenu onClick={((e) => {
             e.preventDefault();
-            setBreakfast(quantity)
-          })}><img src={cifrao} alt="" className='img-menu' /></button>
+              setTab('summary')
+            })} src={cifrao} 
+          />
         </div>
         
           <section className='restaurant-menu'>
-            <div className='menu-itens'> {
-              breakfast.map((items) => {
-
-                return (
-                      
+            <div className='menu-itens'> 
+              { showMenuTab && menu[tab].map((items) => (       
                   <div className="products">
                     <div key={items.id}>
                       <div className="all-day">
@@ -140,62 +159,63 @@ function Hall() {
                           <ul>{items.complement}</ul>
                         </div>
                         <ul > R$ {items.price},00</ul>
-                        <button className="add-btn" onClick={(e) => quantityProducts(e, items)}>+</button>
-                        <button className="add-btn" onClick={(e) =>addItem(e, items)}>-</button>  
+                        <button className="add-btn" onClick={(e) => addItem(e, items)}>+</button>
+                        <button className="add-btn" onClick={(e) =>removeItem(e, items)}>-</button>  
                       </div>
                     </div>
                   </div>
-                )
-              })
-            } </div>
+                ))
+              } 
+              {
+                showSummary && <section className='order'>
+            <h1>Resumo</h1>   
+            <Input
+              name="client" 
+              placeholder="Digite o nome do cliente"
+              type="text" 
+              value={client} 
+              onChange={(event) =>
+              setClient(event.target.value)} 
+            />
+
+            <Input
+              name="number"   
+              placeholder="Mesa"
+              type="number"
+              min='0' 
+              max='20' 
+              value={table} 
+              onChange={(event) =>
+              setTable(event.target.value)} 
+            /> 
+
+              {summary.map(item =>
+                <article>
+                  <span className="Map">
+                    <ol className="ComplementItem" key={item.id}>
+                    <p className='orderProducts'>{item.name}</p>
+                    <p className='complement'>{item.flavor}</p>
+                    <p className='complement'>{item.complement}</p>
+                    </ol>
+                    <p className='price'>R$:{item.price},00</p>
+                    <p className='complementQtd'> {item.qtd}</p>
+                    <button className="btn-delete" onClick={() => deleteItem(item.id)}>X</button>               
+                  </span>
+                </article>
+              
+              )}
+              <p className="total">Total: R$:{total},00</p>
+           
+          </section>
+              }
+            </div>
           
          </section>
         
 
-        <section className='order' > {
-          quantity.map((item => {
-            return (
-              <div>
-                <h1>Resumo</h1>   
-                <Input
-                  name="client" 
-                  placeholder="Digite o nome do cliente"
-                  type="text" 
-                  value={client} 
-                  onChange={(event) =>
-                  setClient(event.target.value)} 
-                />
-
-                <Input
-                  name="number"   
-                  placeholder="Mesa"
-                  type="number"
-                  min='0' 
-                  max='20' 
-                  value={table} 
-                  onChange={(event) =>
-                  setTable(event.target.value)} 
-                /> 
- 
-                <article>
-                  <span className="Map">
-                    <ol className="ComplementItem" key={item.id}>
-                      <p className='orderProducts'>{item.name}</p>
-                      <p className='complement'>{item.flavor}</p>
-                      <p className='complement'>{item.complement}</p>
-                    </ol>
-                    <p className='price'>R$:{item.price},00</p>
-                    <p className='complementQtd'> {item.qtd}</p>
-                    <button className="btn-delete" onClick={() => removeItem(item.id)}>X</button>               
-                  </span>
-                </article>
-              
-                <p className="total">Total: R$:{total},00</p>
-              </div>
-            )
-          })
-        )}
-        </section>
+        
+          
+        )
         </main>  
       </form>  
     </div>
