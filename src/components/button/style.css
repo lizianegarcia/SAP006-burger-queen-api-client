@@ -35,3 +35,14 @@
 .button.secundary:hover{
     background: var(--buff);
 }
+
+.button.tertiary {
+    background: var(--rosso-corsa);
+    width: 18rem;
+    height: 2.2rem;
+    margin-left: 6rem;
+}
+
+.button.tertiary:hover{
+    background: var(--cinnabar);
+}

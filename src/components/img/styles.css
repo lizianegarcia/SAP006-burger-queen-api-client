@@ -4,8 +4,9 @@
     justify-content: center;
     position: relative;
 }
+
 .header .responsive {
-    max-width: 100%;
+    max-width: 100%; 
     max-height: 100%;
 }
 
@@ -15,6 +16,26 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.header-back {
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header-back .responsive {
+    max-width: 100%; 
+    max-height: 100%;
+}
+
+.header-back .center {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 .icon {
     margin-left: 1rem;

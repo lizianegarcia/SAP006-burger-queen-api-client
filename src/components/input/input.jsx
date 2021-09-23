@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Input = ({name, id, placeholder, type, value, onChange, min, max}) => {
+const Input = ({name, id, placeholder, type, value, onChange}) => {
     
     return (
         <input 
@@ -11,8 +11,7 @@ const Input = ({name, id, placeholder, type, value, onChange, min, max}) => {
             type={type} 
             value ={value} 
             onChange={onChange}
-            min={min}
-            max={max}
+            
         />   
             
     )

@@ -57,7 +57,7 @@ function Hall() {
     }
   }
 
-  function clickLess(e, item) {
+  function addItem(e, item) {
     e.preventDefault();
     const quantityElement = quantity.find(elemento => elemento === item)
     if (quantityElement.qtd != 0) {
@@ -67,6 +67,7 @@ function Hall() {
       
     }
   }
+
   function removeItem (e, item) {
     e.preventDefault()
     item.remove()
@@ -95,9 +96,7 @@ function Hall() {
     <div className="hall">
       <form className="menu-forms" >
         <main className="hall-page-main"> 
-
-          
-
+        <div className="menu-btn">
           <button className="btn-menu" onClick={((e) => {
             e.preventDefault();
             setBreakfast(menu)
@@ -122,69 +121,68 @@ function Hall() {
             e.preventDefault();
             setBreakfast(quantity)
           })}><img src={cifrao} alt="" className='img-menu' /></button>
-  
-          <section className='Menu'>
-            <div className='menuItens'> {
+        </div>
+        
+          <section className='restaurant-menu'>
+            <div className='menu-itens'> {
               breakfast.map((items) => {
 
                 return (
-
-                  <div className="Produtos">
+                      
+                  <div className="products">
                     <div key={items.id}>
-                      <div className="Allday">
-                        <div className='nameProducts'>
+                      <div className="all-day">
+                        <div className='name-products'>
                           <ul>{items.name}</ul>
                         </div>
-                        <div className='sabor'>
+                        <div className="options">
                           <ul>{items.flavor}</ul>
-                          <div>
-                            <ul>{items.complement}</ul>
-                          </div>
+                          <ul>{items.complement}</ul>
                         </div>
-                        <ul >R$:{items.price},00</ul>
-                        <button className="btnQtd" onClick={(e) => quantityProducts(e, items)}>+</button>
-                        <button className="btnQtd" onClick={(e) =>clickLess(e, items)}>-</button>  
+                        <ul > R$ {items.price},00</ul>
+                        <button className="add-btn" onClick={(e) => quantityProducts(e, items)}>+</button>
+                        <button className="add-btn" onClick={(e) =>addItem(e, items)}>-</button>  
                       </div>
                     </div>
                   </div>
                 )
-
               })
             } </div>
-
+          
          </section>
         
 
-        
-          <section className='order'>
-            <h1>Resumo</h1>   
-            <Input
-              name="client" 
-              placeholder="Digite o nome do cliente"
-              type="text" 
-              value={client} 
-              onChange={(event) =>
-              setClient(event.target.value)} 
-            />
+        <section className='order' > {
+          quantity.map((item => {
+            return (
+              <div>
+                <h1>Resumo</h1>   
+                <Input
+                  name="client" 
+                  placeholder="Digite o nome do cliente"
+                  type="text" 
+                  value={client} 
+                  onChange={(event) =>
+                  setClient(event.target.value)} 
+                />
 
-            <Input
-              name="number"   
-              placeholder="Mesa"
-              type="number"
-              min='0' 
-              max='20' 
-              value={table} 
-              onChange={(event) =>
-              setTable(event.target.value)} 
-            /> 
-
-              {quantity.map(item =>
+                <Input
+                  name="number"   
+                  placeholder="Mesa"
+                  type="number"
+                  min='0' 
+                  max='20' 
+                  value={table} 
+                  onChange={(event) =>
+                  setTable(event.target.value)} 
+                /> 
+ 
                 <article>
                   <span className="Map">
                     <ol className="ComplementItem" key={item.id}>
-                    <p className='orderProducts'>{item.name}</p>
-                    <p className='complement'>{item.flavor}</p>
-                    <p className='complement'>{item.complement}</p>
+                      <p className='orderProducts'>{item.name}</p>
+                      <p className='complement'>{item.flavor}</p>
+                      <p className='complement'>{item.complement}</p>
                     </ol>
                     <p className='price'>R$:{item.price},00</p>
                     <p className='complementQtd'> {item.qtd}</p>
@@ -192,11 +190,12 @@ function Hall() {
                   </span>
                 </article>
               
-              )}
-              <p className="total">Total: R$:{total},00</p>
-           
-          </section>
-        )
+                <p className="total">Total: R$:{total},00</p>
+              </div>
+            )
+          })
+        )}
+        </section>
         </main>  
       </form>  
     </div>

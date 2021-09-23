@@ -33,25 +33,25 @@ const Register = () => {
     password:'',
     repeatPassword: '',
     role: '',
-    restaurant: '',
-  });
+    restaurant: ''
+  })
 
-  const validation = () => { 
+  const validation = () => {
     let error = {}
     error.isFormValid = true
 
-    if (!values.name){
-      error.name = 'Preencha seu nome corretamente';
+    if (!values.name) {
+      error.name = 'Preencha seu nome corretamente'
       error.isFormValid = false
     }
 
     if (!values.email) {
-      error.email = "Por favor preencha o email";
+      error.email = 'Por favor preencha o email'
       error.isFormValid = false
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      error.email = 'Preencha seu e-mail corretamente';
+      error.email = 'Preencha seu e-mail corretamente'
       error.isFormValid = false
-    } 
+    }
 
     if (!values.password || !values.repeatPassword) {
       error.password = 'Preencha sua senha corretamente';
@@ -74,56 +74,56 @@ const Register = () => {
       error.role = "Selecione uma função"
       error.isFormValid = false
     }
-    
-    return error;
+
+    return error
   }
-  const history = useHistory();
+  const history = useHistory()
   const Login = () => {
     history.push('/Login')
   }
 
   const handleSubmit = e => {
-    e.preventDefault();
-    const valid = validation() 
+    e.preventDefault()
+    const valid = validation()
     console.log(values)
-    
+
     setError(valid)
-    
-    if (valid.isFormValid){
-      Login();
-      Data(values, "users", "POST")
+
+    if (valid.isFormValid) {
+      Login()
+      Data(values, 'users', 'POST')
     }
   }
 
-
-  const handleChange = e => {  
-    const { name, value } = e.target;
+  const handleChange = e => {
+    const { name, value } = e.target
     console.log(e.target.value)
     setValues({
-        ...values,
-        [name]: value,
+      ...values,
+      [name]: value
     })
-  
   }
 
   useEffect(() => {
     console.log(values)
-  }, [values] )
-  
+  }, [values])
+
   return (
     <div className="register">
       <Logo />
       <main className="register-page-main">
-        <form className="register-form" onSubmit={handleSubmit} >
+        <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group input">
-             <Input
-               name='name'
-               placeholder={textName} 
-               type={typeInput}
-               value={values.name}
-               onChange={handleChange}
-              />
-              <div className="hidden">  {errors.name && <p>{errors.name}</p>} </div>
+            <Input
+              name="name"
+              placeholder={textName}
+              type={typeInput}
+              value={values.name}
+              onChange={handleChange}
+            />
+            <div className="hidden">
+              {errors.name && <p>{errors.name}</p>}
+            </div>
           </div>
           <div className="form-group input">
               <Input 
@@ -190,7 +190,6 @@ const Register = () => {
       </main>
     </div>
   )
-  
 }
 
-export default Register; 
+export default Register

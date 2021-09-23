@@ -5,7 +5,8 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh;
+  width: 100vw; */
 }
 
 .register .register-page-main {
@@ -76,9 +77,10 @@
   text-decoration: none;
   font-weight: bold;
   color:var(--champagne-pink);
-
+  margin-bottom: 2rem;
 }
 
 .register .register-page-main .tologin:hover {
   color: var(--vegas-gold);
 }
+
