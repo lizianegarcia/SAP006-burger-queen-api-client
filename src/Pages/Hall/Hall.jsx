@@ -5,21 +5,21 @@ import lanche from "../../assets/icons/lanche.png"
 import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
+import Input from "../../components/input/input"
 // import HeaderMenu from "../../components/menu/headerBreakfest";
 
 
 function Hall() {
-  
-  const [menu, setMenu] = useState([]);
-  const [hamburguer, setHamburguer] = useState([]);
-  const [side, setSide] = useState([]);
-  const [drinks, setDrinks] = useState([]);
-  // const [client, setClient] = useState('');
-  // const [table, setTable] = useState('');
-  const [breakfast, setBreakfast] = useState([]);
   const token = localStorage.getItem("token");
-  const [quantity, setQuantity] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [menu, setMenu] = useState([]); // menu 
+  const [breakfast, setBreakfast] = useState([]); // menu cafe da manha
+  const [hamburguer, setHamburguer] = useState([]); //menu de hamburguers
+  const [side, setSide] = useState([]); // menu de extras
+  const [drinks, setDrinks] = useState([]); // menu de drinks
+  const [client, setClient] = useState(''); // nome do cliente
+  const [table, setTable] = useState(''); // numero da mesa
+  const [quantity, setQuantity] = useState([]); //quantidade de um determinado item
+  const [total, setTotal] = useState(0); //total do valor do pedido
 
   useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/products', {
@@ -44,11 +44,12 @@ function Hall() {
       });
   }, [token])
 
-  function quantityProducts(item) {
-    const elementoExiste = quantity.find(element => element === item)
-    if (elementoExiste) {
-      elementoExiste.qtd += 1
-      setQuantity(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === elementoExiste.id ? elementoExiste : prevElem))
+  function quantityProducts(e, item) {
+    e.preventDefault()
+    const quantityElement = quantity.find(element => element === item)
+    if (quantityElement) {
+      quantityElement.qtd += 1
+      setQuantity(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === quantityElement.id ? quantityElement : prevElem))
     } else {
       item.qtd = 1;
       item.subtotal = item.price;
@@ -56,12 +57,47 @@ function Hall() {
     }
   }
 
+  function clickLess(e, item) {
+    e.preventDefault();
+    const quantityElement = quantity.find(elemento => elemento === item)
+    if (quantityElement.qtd != 0) {
+      quantityElement.qtd -= 1
+      setQuantity(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
+    } else {
+      
+    }
+  }
+  function removeItem (e, item) {
+    e.preventDefault()
+    item.remove()
+  }
+
+  useEffect(() => {
+    console.log(quantity)
+  }, [quantity])
+
+  useEffect(() => {
+    
+    setTotal(() => {
+      const totalPrice = quantity.reduce((accumulator, array) => {
+        const { qtd, price } = array;
+        accumulator = Number(qtd * price + accumulator)
+        return accumulator
+      }, 0)
+      console.log(quantity)
+      return totalPrice;
+    })
+  }, [quantity]
+  )
  
   
   return (
     <div className="hall">
       <form className="menu-forms" >
-        <main className="hall-page-main">  
+        <main className="hall-page-main"> 
+
+          
+
           <button className="btn-menu" onClick={((e) => {
             e.preventDefault();
             setBreakfast(menu)
@@ -84,43 +120,84 @@ function Hall() {
 
           <button className="btn-menu" onClick={((e) => {
             e.preventDefault();
-            setBreakfast(total)
+            setBreakfast(quantity)
           })}><img src={cifrao} alt="" className='img-menu' /></button>
   
           <section className='Menu'>
-           <div className='menuItens'> {
-             breakfast.map((items) => {
+            <div className='menuItens'> {
+              breakfast.map((items) => {
 
-              return (
+                return (
 
-                <div className="Produtos">
-                  <div key={items.id}>
-                    <div className="Allday">
-                      <div className='nameProducts'>
-                        <ul>{items.name}</ul>
-                      </div>
-                      <div className='sabor'>
-                        <ul>{items.flavor}</ul>
-                        <div>
-                          <ul>{items.complement}</ul>
+                  <div className="Produtos">
+                    <div key={items.id}>
+                      <div className="Allday">
+                        <div className='nameProducts'>
+                          <ul>{items.name}</ul>
                         </div>
+                        <div className='sabor'>
+                          <ul>{items.flavor}</ul>
+                          <div>
+                            <ul>{items.complement}</ul>
+                          </div>
+                        </div>
+                        <ul >R$:{items.price},00</ul>
+                        <button className="btnQtd" onClick={(e) => quantityProducts(e, items)}>+</button>
+                        <button className="btnQtd" onClick={(e) =>clickLess(e, items)}>-</button>  
                       </div>
-                      <ul >R$:{items.price},00</ul>
-                      <button className="btnQtd" onClick={() => quantityProducts(items)}>+</button>
-                  
                     </div>
                   </div>
-                </div>
-              )
+                )
 
-            })
-          } </div>
+              })
+            } </div>
 
-        </section>
-          
-        </main>
-     
+         </section>
         
+
+        
+          <section className='order'>
+            <h1>Resumo</h1>   
+            <Input
+              name="client" 
+              placeholder="Digite o nome do cliente"
+              type="text" 
+              value={client} 
+              onChange={(event) =>
+              setClient(event.target.value)} 
+            />
+
+            <Input
+              name="number"   
+              placeholder="Mesa"
+              type="number"
+              min='0' 
+              max='20' 
+              value={table} 
+              onChange={(event) =>
+              setTable(event.target.value)} 
+            /> 
+
+              {quantity.map(item =>
+                <article>
+                  <span className="Map">
+                    <ol className="ComplementItem" key={item.id}>
+                    <p className='orderProducts'>{item.name}</p>
+                    <p className='complement'>{item.flavor}</p>
+                    <p className='complement'>{item.complement}</p>
+                    </ol>
+                    <p className='price'>R$:{item.price},00</p>
+                    <p className='complementQtd'> {item.qtd}</p>
+                    <button className="btn-delete" onClick={() => removeItem(item.id)}>X</button>               
+                  </span>
+                </article>
+              
+              )}
+              <p className="total">Total: R$:{total},00</p>
+           
+          </section>
+        )
+        </main>  
       </form>  
     </div>
   )
