@@ -13,10 +13,6 @@ import ButtonMenu from "../../components/button/buttonIconsMenu";
 function Hall() {
   const token = localStorage.getItem("token");
   const [menu, setMenu] = useState({}) // menu 
-  // const [breakfast, setBreakfast] = useState([]); // menu cafe da manha
-  // const [hamburguer, setHamburguer] = useState([]); //menu de hamburguers
-  // const [side, setSide] = useState([]); // menu de extras
-  // const [drinks, setDrinks] = useState([]); // menu de drinks
   const [client, setClient] = useState(''); // nome do cliente
   const [table, setTable] = useState(''); // numero da mesa
   const [summary, setSummary] = useState([]); //quantidade de um determinado item
@@ -43,12 +39,7 @@ function Hall() {
         drinks, 
         side
       })
-      setLoading(false)
-      // setBreakfast(breakfast)
-      // setHamburguer(hamburguer)
-      // setDrinks(drinks)
-      // setSide(side)
-       
+      setLoading(false)   
       });
   }, [token])
 
@@ -113,6 +104,7 @@ function Hall() {
           <ButtonMenu 
             onClick={((e) => {
               e.preventDefault();
+              // setBreakfast(menu)
               setTab('breakfast')
             })} src={cafe} 
           />
@@ -120,6 +112,7 @@ function Hall() {
           <ButtonMenu
             onClick={((e) => {
               e.preventDefault();
+              // setBreakfast(hamburguer)
               setTab('hamburguer')
             })} src={lanche} 
           />
@@ -127,6 +120,7 @@ function Hall() {
           <ButtonMenu 
             onClick={((e) => {
               e.preventDefault();
+              // setBreakfast(side);
               setTab('side')
             })} src={extras}  
           />
@@ -134,15 +128,16 @@ function Hall() {
           <ButtonMenu  
             onClick={((e) => {
               e.preventDefault();
+              // setBreakfast(drinks)
               setTab('drinks')
             })} src={bebidas} 
           />
 
-          <ButtonMenu onClick={((e) => {
+          <button className="btn-menu" onClick={((e) => {
             e.preventDefault();
-              setTab('summary')
-            })} src={cifrao} 
-          />
+            // setBreakfast(quantity)
+            setTab('summary')
+          })}><img src={cifrao} alt="" className='img-menu' /></button>
         </div>
         
           <section className='restaurant-menu'>
