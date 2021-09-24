@@ -2,15 +2,15 @@ import React from "react";
 import "./style.css";
 
 
-const HallInput = ({name, id, placeholder, type, value}) => {
+const HallInput = ({name, placeholder, type, value, onChange}) => {
     
     return (
-            <input 
+            <input className="hall-input"
             name={name}
-            id={id}
             placeholder={placeholder} 
             type={type} 
-            value ={value} />
+            value ={value}
+            onChange={onChange} />
     )
 }
 
