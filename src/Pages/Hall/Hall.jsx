@@ -5,9 +5,9 @@ import lanche from "../../assets/icons/lanche.png"
 import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
-import Input from "../../components/input/input"
 import ButtonMenu from "../../components/button/buttonIconsMenu";
 // import HeaderMenu from "../../components/menu/headerBreakfest";
+import HallInput from "../../components/input/HallIput";
 
 
 function Hall() {
@@ -100,7 +100,6 @@ function Hall() {
       <form className="menu-forms" >
         <main className="hall-page-main"> 
          <div className="menu-btn">
-
           <ButtonMenu 
             onClick={((e) => {
               e.preventDefault();
@@ -139,9 +138,7 @@ function Hall() {
             setTab('summary')
           })}><img src={cifrao} alt="" className='img-menu' /></button>
         </div>
-        
           <section className='restaurant-menu'>
-            <div className='menu-itens'> 
               { showMenuTab && menu[tab].map((items) => (       
                   <div className="products">
                     <div key={items.id}>
@@ -154,8 +151,10 @@ function Hall() {
                           <ul>{items.complement}</ul>
                         </div>
                         <ul > R$ {items.price},00</ul>
-                        <button className="add-btn" onClick={(e) => addItem(e, items)}>+</button>
-                        <button className="add-btn" onClick={(e) =>removeItem(e, items)}>-</button>  
+                        <div>
+                          <button className="btn-add" onClick={(e) => addItem(e, items)}>+</button>
+                          <button className="btn-less" onClick={(e) =>removeItem(e, items)}>-</button>  
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -163,47 +162,53 @@ function Hall() {
               } 
               {
                 showSummary && <section className='order'>
-            <h1>Resumo</h1>   
-            <Input
-              name="client" 
-              placeholder="Digite o nome do cliente"
-              type="text" 
-              value={client} 
-              onChange={(event) =>
-              setClient(event.target.value)} 
-            />
-
-            <Input
-              name="number"   
-              placeholder="Mesa"
-              type="number"
-              min='0' 
-              max='20' 
-              value={table} 
-              onChange={(event) =>
-              setTable(event.target.value)} 
-            /> 
-
+                  <h1>Resumo do Pedido</h1> 
+                  <div className="inputs">
+                    <HallInput
+                      name="client" 
+                      placeholder="Digite o nome do cliente"
+                      type="text" 
+                      value={client} 
+                      onChange={(event) =>
+                      setClient(event.target.value)}  
+                    />  
+                    
+                    <HallInput
+                      name="number"   
+                      placeholder="Mesa"
+                      type="number"
+                      min='0' 
+                      max='20' 
+                      value={table} 
+                      onChange={(event) =>
+                      setTable(event.target.value)} 
+                    /> 
+                  </div>
+              <div className='summary-items'>
+                <p>Item</p>
+                <p>Preço</p>
+                <p>Quantidade</p>
+              </div>
               {summary.map(item =>
                 <article>
-                  <span className="Map">
-                    <ol className="ComplementItem" key={item.id}>
-                    <p className='orderProducts'>{item.name}</p>
-                    <p className='complement'>{item.flavor}</p>
-                    <p className='complement'>{item.complement}</p>
+                  <span className="summary-order">
+                    <ol key={item.id}>
+                    <p>{item.name}</p>
+                    <p>{item.flavor}</p>
+                    <p>{item.complement}</p>
                     </ol>
-                    <p className='price'>R$:{item.price},00</p>
-                    <p className='complementQtd'> {item.qtd}</p>
-                    <button className="btn-delete" onClick={() => deleteItem(item.id)}>X</button>               
+                    <p>R$ {item.price},00</p>
+                    <p>{item.qtd}</p>
+                    <button className="trash-btn" onClick={() => deleteItem(item.id)}>
+                    x
+                    </button>               
                   </span>
                 </article>
-              
               )}
-              <p className="total">Total: R$:{total},00</p>
-           
+              <p className="total">Total: R$ {total},00</p>
           </section>
               }
-            </div>
+          
           
          </section>
         

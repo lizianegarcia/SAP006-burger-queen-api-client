@@ -30,7 +30,7 @@
   left:8%;
 }
 
-.menu-itens {
+.menu-items {
 	width: 100%;
 	margin: 0.3rem;
 }
@@ -64,7 +64,7 @@ ul {
 	font-weight: 600;
 }
 
-.add-btn {
+.btn-add, .btn-less {
 	border: none;
 	margin: 1.25rem;
 	align-items: center;
@@ -74,14 +74,85 @@ ul {
 	background-color: var(--buff);
 	font-size: 2.18rem;
 	border-radius: 2.6rem;
-	outline: none;
 }
 
-.add-btn:hover {
+.btn-add:hover {
 	background-color: var(--vegas-gold);
   color: var(--spanish-green);
 }
 
+.btn-less:hover, .trash-btn:hover {
+	background-color: var(--vegas-gold);
+  color: var(--rosso-corsa);
+}
+
 .name-products {
 	width: 11rem;
+}
+
+.order {
+	display:inline-block;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	text-transform: uppercase;
+	width: 98%;
+	font-weight: 800;
+}
+
+.summary-items {
+	display: flex;
+	justify-content: space-around; 
+	margin-right: 10rem;
+}
+
+.total {
+	margin: 2rem;
+	display: flex;
+	justify-content: center;
+	font-weight: 900;
+	font-size: 1.5rem;
+}
+
+.total:hover {
+	color: var(--black);
+}
+
+.inputs {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+	font-size: 2rem;
+}
+
+.summary-order {
+	font-weight: 400;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	box-shadow: var(--raisin-black) 2px 12px 57px, var(--jet) -12px -12px 57px;
+	border-radius: 0.56rem;
+	padding: 0.625rem;
+	margin-top: 0.56rem;
+	align-items: center;
+}
+
+.summary-order:hover {
+	background-color: var(--jet);
+	font-weight: 600;
+}
+
+.trash-btn {
+	margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 2.5rem;
+	width: 2.5rem;
+	background-color: var(--buff);
+	font-size: 1.8rem;
+	border-radius: 2.6rem;
 }
