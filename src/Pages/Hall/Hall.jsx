@@ -69,10 +69,10 @@ function Hall() {
     }
   }
 
-  const deleteItem = (e, item) => {
-    e.preventDefault()
-    item.remove()
-  }
+  // const deleteItem = (e, item) => {
+  //   e.preventDefault()
+  //   item.remove()
+  // }
 
   useEffect(() => {
     console.log(summary)
@@ -103,7 +103,6 @@ function Hall() {
           <ButtonMenu 
             onClick={((e) => {
               e.preventDefault();
-              // setBreakfast(menu)
               setTab('breakfast')
             })} src={cafe} 
           />
@@ -111,7 +110,6 @@ function Hall() {
           <ButtonMenu
             onClick={((e) => {
               e.preventDefault();
-              // setBreakfast(hamburguer)
               setTab('hamburguer')
             })} src={lanche} 
           />
@@ -119,7 +117,6 @@ function Hall() {
           <ButtonMenu 
             onClick={((e) => {
               e.preventDefault();
-              // setBreakfast(side);
               setTab('side')
             })} src={extras}  
           />
@@ -127,16 +124,17 @@ function Hall() {
           <ButtonMenu  
             onClick={((e) => {
               e.preventDefault();
-              // setBreakfast(drinks)
               setTab('drinks')
             })} src={bebidas} 
           />
 
-          <button className="btn-menu" onClick={((e) => {
-            e.preventDefault();
-            // setBreakfast(quantity)
-            setTab('summary')
-          })}><img src={cifrao} alt="" className='img-menu' /></button>
+          <ButtonMenu 
+            onClick={((e) => {
+              e.preventDefault();
+              setTab('summary')
+            })} src={cifrao} 
+          />
+
         </div>
           <section className='restaurant-menu'>
               { showMenuTab && menu[tab].map((items) => (       
@@ -190,16 +188,16 @@ function Hall() {
                 <p>Quantidade</p>
               </div>
               {summary.map(item =>
-                <article>
+                <article key={item.id}>
                   <span className="summary-order">
-                    <ol key={item.id}>
+                    <ol >
                     <p>{item.name}</p>
                     <p>{item.flavor}</p>
                     <p>{item.complement}</p>
                     </ol>
                     <p>R$ {item.price},00</p>
                     <p>{item.qtd}</p>
-                    <button className="trash-btn" onClick={() => deleteItem(item.id)}>
+                    <button className="trash-btn" onClick={() => item.id.splice(item, 1)}>
                     x
                     </button>               
                   </span>

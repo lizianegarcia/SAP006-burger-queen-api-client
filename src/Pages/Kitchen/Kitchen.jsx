@@ -1,6 +1,6 @@
 import React from "react";
 import "../../Styles/kitchen.css";
-import HeaderKitchen from "../../components/header/HeaderKitchen";
+import HeaderKitchen from "../../components/header/headerKitchen";
 
 function Kitchen() {
   return (
