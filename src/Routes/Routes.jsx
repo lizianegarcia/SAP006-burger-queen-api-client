@@ -11,6 +11,8 @@ import Register from "../Pages/Register/Register";
 import Hall from "../Pages/Hall/Hall";
 import Kitchen from "../Pages/Kitchen/Kitchen";
 import NotFound from "../Pages/NotFound/NotFound";
+import OrderUp from "../Pages/Hall/OrderUp"
+import Historic from "../Pages/Kitchen/Historic";
 import { authUser } from "../Auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -37,6 +39,10 @@ function App() {
 
         <PrivateRoute path="/Hall" component={Hall}/>
         <PrivateRoute path="/Kitchen" component={Kitchen}/>
+        <PrivateRoute path="/OrderUp" component={OrderUp}/>
+        <PrivateRoute path="/Historic" component={Historic}/>
+
+
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>

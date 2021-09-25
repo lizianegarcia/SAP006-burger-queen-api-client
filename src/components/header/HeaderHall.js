@@ -3,17 +3,40 @@ import './style.css';
 import home from "../../assets/icons/home.png";
 import prontos from "../../assets/icons/prontos.png";
 import logout from "../../assets/icons/logout.png";
+import { useHistory } from "react-router";
 
 const HeaderHall = () => {
+ const history = useHistory();
+
+ const Home = () => {
+  history.push('/Hall')  
+}
+  const OrderUp = () => {
+    history.push('/OrderUp')
+  }
+
+  const Logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    history.push('/');
+  }
   return(
-    <header className="header">
+    <header className="nav-header">
        <ol className="order-menu">
           <div className="buttons-menu">
-            <button className="btn-menu"><img src={home} alt="" className='img-menu'/></button>
+            <button className="nav-btn-menu"><img src={home} alt="" className='img-menu' onClick={Home}/>
+            <label>Home</label>
+            </button>
 
-            <button className="btn-menu"><img src={prontos} alt="" className='img-menu'/></button>
+            <button className="nav-btn-menu"><img src={prontos} alt="" className='img-menu' onClick={OrderUp}/>
+            <label>Pedidos Prontos</label>
+            </button>
 
-            <button className="btn-menu"><img src={logout} alt="" className='img-menu'/></button>
+            <button className="nav-btn-menu"><img src={logout} alt="" className='img-menu' onClick={Logout}/>
+            <label>Sair</label>
+
+            </button>
 
           </div>
        </ol>
