@@ -6,7 +6,7 @@ import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
 import ButtonMenu from "../../components/button/buttonIconsMenu";
-// import HeaderMenu from "../../components/menu/headerBreakfest";
+import HeaderHall from "../../components/header/HeaderHall";
 import HallInput from "../../components/input/HallIput";
 
 
@@ -97,6 +97,7 @@ function Hall() {
   
   return (
     <div className="hall">
+      <HeaderHall />
       <form className="menu-forms" >
         <main className="hall-page-main"> 
          <div className="menu-btn">
@@ -206,14 +207,7 @@ function Hall() {
               <p className="total">Total: R$ {total},00</p>
           </section>
               }
-          
-          
          </section>
-        
-
-        
-          
-        )
         </main>  
       </form>  
     </div>
