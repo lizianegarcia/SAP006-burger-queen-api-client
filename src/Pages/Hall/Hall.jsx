@@ -15,9 +15,14 @@ function Hall() {
   const [menu, setMenu] = useState({}) // menu 
   const [client, setClient] = useState(''); // nome do cliente
   const [table, setTable] = useState(''); // numero da mesa
-  const [summary, setSummary] = useState([]); //quantidade de um determinado item
-  const [tab, setTab] = useState('breakfast');
+  const [summary, setSummary] = useState([]); //array do produto escolhido + qtd
+  const [tab, setTab] = useState('breakfast'); // escolha do menu de breakfast, hamburguer, extras ou bebidas
   const [loading, setLoading] = useState(true);
+  // const [deleteProduct, setdeleteProduct] = useState([]);
+
+  useEffect(() => {
+    console.log(summary)
+  }, [summary])
 
   useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/products', {
@@ -69,16 +74,6 @@ function Hall() {
     }
   }
 
-  // const deleteItem = (e, item) => {
-  //   e.preventDefault()
-  //   item.remove()
-  // }
-
-  useEffect(() => {
-    console.log(summary)
-  }, [summary])
-
-  
  const calculateTotal = (items) => {
    
   const totalPrice = items.reduce((accumulator, array) => {
@@ -91,10 +86,17 @@ function Hall() {
  }
 
  const total = calculateTotal(summary)
-
  const showSummary = tab === 'summary';
  const showMenuTab = !showSummary && !loading;
-  
+
+
+  const deleteItem = (index) => {
+    const list = summary
+    list.splice(index, 1)
+    setSummary([...list])
+  } 
+
+ 
   return (
     <div className="hall">
       <HeaderHall />
@@ -139,8 +141,8 @@ function Hall() {
         </div>
           <section className='restaurant-menu'>
               { showMenuTab && menu[tab].map((items) => (       
-                  <div className="products">
-                    <div key={items.id}>
+                  <div className="products" key={items.id}>
+                    <div>
                       <div className="all-day">
                         <div className='name-products'>
                           <ul>{items.name}</ul>
@@ -188,7 +190,7 @@ function Hall() {
                 <p>Preço</p>
                 <p>Quantidade</p>
               </div>
-              {summary.map(item =>
+              {summary.map((item, index)=>
                 <article key={item.id}>
                   <span className="summary-order">
                     <ol >
@@ -198,7 +200,7 @@ function Hall() {
                     </ol>
                     <p>R$ {item.price},00</p>
                     <p>{item.qtd}</p>
-                    <button className="trash-btn" onClick={() => item.id.splice(item, 1)}>
+                    <button className="trash-btn" onClick={() => deleteItem(index)}>
                     x
                     </button>               
                   </span>
