@@ -1,5 +1,7 @@
 import HeaderHall from "../../components/header/HeaderHall";
 import React, { useEffect, useState } from 'react';
+import "../../Styles/kitchen.css";
+import Button from "../../components/button/button";
 
 
 export const OrderUp = () => {
@@ -49,31 +51,22 @@ export const OrderUp = () => {
   };
 
   return (
-    <main style={{ display: 'block' }} className="page">
+    <main>
       <HeaderHall />
-     <div component="h1" variant="h4" style={{paddingBottom: '20px', paddingRight: '50px', textAlign: 'center', fontWeight: 'bolder', color: '#ce5f18', marginLeft: '0.5rem' }}>
-     Pedidos Prontos
-        </div> 
-      <section style={{  textTransform: 'uppercase',display: 'flex',flexWrap: 'wrap', justifyContent: 'space-around',
-         width: '100%', textAlign: 'center', margin: '0 auto', gap: '3vw 10px' }}>
+      <section className="orders-section">
         
         {PedidosProntos.map((pedido) => {
           return (
-            <section style={{width: '100%', display: 'flex', flexDirection: 'column',
-              alignItems: 'center', gap: '3vw 10px',
-            }} className="container-pending" key={pedido.id}>
-             <div style={{   backgroundColor: '#f5f5f5' , color: '#222', textAlign: 'center',
-    borderRadius: '3px', position: 'relative', width: '29vw',padding: '30px 31px',}}>
+            <div className="orders" key={pedido.id}>
                 <div className="details-client">
-                <p>Pedido nº {pedido.id}</p>
+                <h3>Pedido nº {pedido.id}</h3>
                 <p>Cliente: {pedido.client_name}</p>
                 <p>Mesa: {pedido.table}</p>
-                        </div>
-                <div className="details-status">
-                </div>
-                <section className="container-order scroll">
+            </div>
+      
+                <section>
                   {pedido.Products.map((itens, index) => (
-                    <div className="details-order-pending" key={index}>
+                    <div key={index}>
                       <p>
                         {' '}
                         0{itens.qtd} {itens.name}
@@ -83,16 +76,14 @@ export const OrderUp = () => {
                     </div>
                   ))}
                 </section>
-                <div>
-                  <button content="Servir"
-                    className="btn-finalizar"
-                    onClick={() => handleEntregar(pedido)}
-                  >
-                    SERVIR
-              </button>
+                  <div className="buttons">
+                    <Button variant="quaternary"
+                      onClick={() => handleEntregar(pedido)}>
+                      Servir
+                    </Button>
+                  </div>
                 </div>
-                 </div>
-          </section>
+          
         
           );
         })}
@@ -100,14 +91,5 @@ export const OrderUp = () => {
     </main>
   );
 };
-
-
-//   return (
-//     <div>
-//       <HeaderHall />
-//      <h1>Pedidos Prontos</h1> 
-//     </div>
-//   );
-// };
 
 export default OrderUp;

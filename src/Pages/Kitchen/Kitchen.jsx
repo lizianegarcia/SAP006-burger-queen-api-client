@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import "../../Styles/kitchen.css";
-import {ConvertDate, ConvertTime} from './utils.js';
+import { ConvertDate, ConvertTime } from './utils.js';
 import HeaderKitchen from "../../components/header/HeaderKitchen";
 import Button from "../../components/button/button";
 
@@ -76,11 +76,11 @@ function Kitchen() {
     
     <main >
 <HeaderKitchen />
-      <section className="kitchen">
+      <section className="orders-section">
 
       {PedidosAFazer.map((pedido) => {
         return (
-          <div className="order" key={pedido.id}   >
+          <div className="orders" key={pedido.id}   >
             <div className="details-client">
             <h3>Status: {pedido.status 
                   .replace('pending', 'Pendente')
@@ -89,16 +89,12 @@ function Kitchen() {
               <p>Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
-              
-              <p  className="date">Data: {ConvertDate(pedido.createdAt)} {ConvertTime(pedido.createdAt)}</p>
+              <p>Data: {ConvertDate(pedido.createdAt)} {ConvertTime(pedido.createdAt)}</p>
+            </div>
 
-            </div>
-            <div className="details-status">
-              
-            </div>
             <section className="container-order">
               {pedido.Products.map((itens, index) => (
-                <div className="details-order-pending" key={index}>
+                <div key={index}>
                   <p>
                     
                     {' '}
@@ -131,18 +127,4 @@ function Kitchen() {
   );
 }
 
-
 export default Kitchen;
-
-
-// function Kitchen() {
-//   return (
-//     <div className="kitchen">
-//       <HeaderKitchen />
-//       <main className="kitchen-page-main">
-//       </main>
-//     </div>
-//   )
-// }
-
-// export default Kitchen;

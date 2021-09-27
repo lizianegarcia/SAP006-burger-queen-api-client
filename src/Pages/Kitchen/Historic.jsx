@@ -1,5 +1,6 @@
 import HeaderKitchen from "../../components/header/HeaderKitchen";
 import React, { useEffect, useState } from 'react';
+import "../../Styles/kitchen.css";
 
 export const Historic = () => {
   const [Pedidos, setPedidos] = useState([]);
@@ -44,15 +45,14 @@ export const Historic = () => {
   };
 
   return (
-    <main className="page" style={{display:  'block'}}>
+    <main>
       <HeaderKitchen />
-      <section className="order-history" style={{gap: '2vh', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginInline: '50px',  }}> 
+      <section className="orders-section"> 
       {Pedidos.map((pedido) => {
         return (
-          <div style={{ textTransform: 'uppercase',  backgroundColor: '#f5f5f5' , color: '#222', textAlign: 'center',
-          borderRadius: '3px', position: 'relative', width: '29vw',padding: '30px 31px',}}  key={pedido.id}>
+          <div className="orders"  key={pedido.id}>
             <div className="details-client">
-            <h3 style={{color: '#cf5e18'}}>Status: {pedido.status
+            <h3>Status: {pedido.status
                   .replace('pending', 'Pendente')
                   .replace('ready', 'Pronto')
                   .replace('finished', 'Finalizado')
@@ -62,12 +62,9 @@ export const Historic = () => {
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
             </div>
-            <div className="details-status">
-              
-            </div>
-            <section className="container-order scroll">
+            <section>
               {pedido.Products.map((itens, index) => (
-                <div className="details-order-pending" key={index}>
+                <div key={index}>
                   <p>
                     {' '}
                     {itens.qtd} {itens.name}
@@ -78,7 +75,7 @@ export const Historic = () => {
               ))}
             </section>
             <div>
-              <button className="btn-delete" style={{ color: 'red'}}
+              <button className="btn-delete"
                   onClick={() => handleExcluir(pedido)}> x
               </button>
             </div>
@@ -89,12 +86,5 @@ export const Historic = () => {
     </main>
   );
 }
-  // return (
-  //   <div>
-  //     <HeaderKitchen />
-  //    <h1>Histórico de Pedidos</h1> 
-  //   </div>
-  // );
-// };
 
 export default Historic;

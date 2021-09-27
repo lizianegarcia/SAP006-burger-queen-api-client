@@ -5,7 +5,7 @@ body {
   color: var(--champagne-pink);
 }
 
-.kitchen {
+.orders-section {
   top: 10rem;
   gap: 10vh;
   display: flex;
@@ -13,8 +13,8 @@ body {
   flex-wrap: wrap;
 }
 
-.order {
-  text-transform: 'uppercase';
+.orders {
+  text-transform:uppercase;
   background-color: var(--eerie-black-darker);
   text-align: center;
   border-radius: 1rem;
@@ -42,4 +42,21 @@ h3 {
   display: grid;
   justify-content: center;
   align-items: center;
+}
+
+.btn-delete {
+  text-align: center;
+  margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 2.5rem;
+	width: 2.5rem;
+	background-color: var(--cinnabar);
+	font-size: 1.8rem;
+	border-radius: 2.6rem;
+  border-style: none;
+}
+
+.btn-delete:hover {
+	background-color: var(--fire-opal);
+  color: var(--champagne-pink);
 }
