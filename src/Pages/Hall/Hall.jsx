@@ -23,7 +23,7 @@ function Hall() {
   const [error, setError] = useState({
     client: '',
     table: '',
-    summary: ''
+    summary: '',
   });
 
 
@@ -106,18 +106,18 @@ function Hall() {
     error.table = 'Escolha um numero de 1 à 10'
     error.isFormValid = false
   } 
-  if (summary !== "") {
+  if (summary.length === 0) {
+    
     error.summary = 'Não há itens para realizar o pedido';
     error.isFormValid = false
   }
-  
   return error
 }
 
  
  useEffect(() => {
-    console.log(summary)
-  }, [summary])
+    console.log(summary, table)
+  }, [summary, table])
   
 
   const handleSubmit = (e) => {
@@ -127,7 +127,7 @@ function Hall() {
     if (valid.isFormValid) {
       const pedido =  ({
         "client": client,
-        "table":table,
+        "table": table,
         "products":
         summary.map((item) => (
           {
@@ -233,7 +233,7 @@ function Hall() {
                       onChange={(event) =>
                       setTable(event.target.value)}  
                     /> 
-                    <div className="hidden">{error.table&& <p>{error.table}</p>} </div>
+                    <div className="hidden">{error.table && <p>{error.table}</p>} </div>
                   </section>
               <div className='summary-items'>
                 <p>Item</p>
