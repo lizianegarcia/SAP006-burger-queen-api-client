@@ -2,19 +2,17 @@
 
 .hall-input {
   font-family: "Lato";
-  padding: 1rem;
+  /* padding: 1rem; */
 	width: 14rem;
-	margin-top: 20px;
-	/* justify-content: center; */
+	height: 2.5rem;
+	text-align: center;
 	border-radius: 9px;
-	/* align-items: center; */
 	color: var(--champagne-pink);
 	background-color: var(--eerie-black-darker);
 	border: none;
 	outline: none;
 	text-transform: uppercase;
 	font-weight: 900;
-	/* align-content: center; */
-	margin: 2rem;
+	margin: 0;
 	box-shadow: var(--eerie-black) 11px 11px 57px, var(--jet) -11px -11px 57px;
 }
