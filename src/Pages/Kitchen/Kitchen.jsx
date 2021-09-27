@@ -96,8 +96,6 @@ function Kitchen() {
               {pedido.Products.map((itens, index) => (
                 <div key={index}>
                   <p>
-                    
-                    {' '}
                     {itens.qtd} {itens.name}
                   </p>
                   <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>

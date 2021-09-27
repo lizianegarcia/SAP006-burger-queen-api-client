@@ -62,20 +62,16 @@ export const OrderUp = () => {
                 <h3>Pedido nº {pedido.id}</h3>
                 <p>Cliente: {pedido.client_name}</p>
                 <p>Mesa: {pedido.table}</p>
-            </div>
-      
-                <section>
+            
                   {pedido.Products.map((itens, index) => (
                     <div key={index}>
-                      <p>
-                        {' '}
-                        0{itens.qtd} {itens.name}
+                      <p>{itens.qtd} {itens.name}
                       </p>
                       <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
                       <p>{itens.complement === 'null' ? '' : itens.complement}</p>
                     </div>
                   ))}
-                </section>
+                </div>
                   <div className="buttons">
                     <Button variant="quaternary"
                       onClick={() => handleEntregar(pedido)}>
@@ -83,8 +79,6 @@ export const OrderUp = () => {
                     </Button>
                   </div>
                 </div>
-          
-        
           );
         })}
       </section>

@@ -55,17 +55,12 @@ function Pending() {
             <section className="container-order">
               {pedido.Products.map((itens, index) => (
                 <div key={index}>
-                  <p>
-                    
-                    {' '}
-                    {itens.qtd} {itens.name}
-                  </p>
+                  <p>{itens.qtd} {itens.name}</p>
                   <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
                   <p>{itens.complement === 'null' ? '' : itens.complement}</p>
                 </div>
               ))}
             </section>
-           
           </div>
         );
       })}
