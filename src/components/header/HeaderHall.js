@@ -14,7 +14,7 @@ const HeaderHall = () => {
 }
 
  const Pending = () => {
-  history.push('/Kitchen')  
+  history.push('/Pending')  
 }
   const OrderUp = () => {
     history.push('/OrderUp')
