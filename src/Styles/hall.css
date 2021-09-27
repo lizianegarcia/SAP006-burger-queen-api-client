@@ -180,3 +180,23 @@ h1 {
 	align-items: center;
 }
 
+.tamplete-order {
+	display: flex;
+	margin: 10%;
+	flex-flow: nowrap;
+	width: 50vw;
+	height: 10vh;
+	list-style-type: none
+} 
+
+.individualOrder {
+	display: flex;
+	flex-direction: column;
+	margin:2%;
+	list-style-type: none
+}
+.choice-products{
+	display: flex;
+	flex-direction: column;
+	list-style-type: none
+}
