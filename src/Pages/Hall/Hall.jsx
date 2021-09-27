@@ -99,7 +99,7 @@ function Hall() {
   error.isFormValid = true
 
   if (!client) {
-    error.client = 'Preencha o nomedo cliente corretamente'
+    error.client = 'Preencha o nome do cliente corretamente'
     error.isFormValid = false
   }
   if (!table || table >= 10 ) {
@@ -258,8 +258,9 @@ function Hall() {
               )}
               <p className="total">Total: R$ {total},00</p>
               <div className="hidden">{error.summary && <p>{error.summary}</p>} </div>
+              <div className="send-order-btn">
               <Button variant="primary" onClick={handleSubmit}>Enviar Pedido</Button>
-              
+              </div>
             </section>
               }
          </section>
