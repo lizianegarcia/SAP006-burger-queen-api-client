@@ -1,8 +1,32 @@
 import React from "react";
+import Button from "../../components/button/button";
+import "../../Styles/notfound.css";
+import { useHistory } from "react-router";
+import BackgroundLogo from "../../components/img/BackgroundLogo";
 
-function NotFound() {
+
+const NotFound = () => {
+
+  const history = useHistory();
+  const Login = () => {
+    history.push('/Login')
+  }
+
   return (
-    <p>ERRRRRROU SEU TROUXA</p>
+  <div className="not-found">
+    <BackgroundLogo />
+    <main className="not-found-main">
+      <div className="notfound-404">
+        <h1>4 <span>   </span> 4 </h1>
+      </div>
+      <h2>Oops! A página não foi encontrada...</h2>
+      <Button variant="tertiary" onClick={Login} > 
+        Voltar ao Login 
+      </Button>
+    </main>
+ </div>
+
+
   )
 }
 

@@ -1,26 +1,38 @@
 @import url(../../Styles/global.css);
 
-/* .buttons-menu {
+.nav-header {
+	height: 100%;
+}
+
+.buttons-menu {
 	display: flex;
 	justify-content: center;
 	background-color: var(--raisin-black);
-	border-radius: 9px;
-	width: 47%;
-	margin-left: 23px;
-} */
+	border-radius: 0.562rem;
+}
 
 .btn-menu {
 	border: none;
-	margin: 17px;
-	margin-top: 23px;
-	height: 76px;
-	width: 76px;
+	margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 4.75rem;
+	width: 4.75rem;
 	background-color: var(--jet);
-	border-radius: 9px;
+	border-radius: 0.562rem;
 }
 
 .img-menu {
-	height: 66px;
+	height: 4.125rem;
+}
+
+.btn-menu:focus{
+	height: 5.375rem;
+	width: 5.375rem;
+	background-color: var(--fire-opal);
+}
+
+.img-menu:focus {
+	height: 4.75rem;
 }
 
 .btn-menu:hover {
@@ -29,12 +41,12 @@
 
 .btn-menu-order {
 	border: none;
-	margin: 17px;
-	margin-top: 15px;
-	height: 90px;
-	width: 90px;
+	margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 6.625rem;
+	width: 6.625rem;
 	background-color: var(--jet);
-	border-radius: 9px;
+	border-radius: 0.562rem;
 }
 
 .btn-menu-order:hover {
@@ -42,5 +54,28 @@
 }
 
 .img-menu-order {
-	height: 80px;
+	height: 5rem;
+}
+
+.nav-btn-menu {
+	border: none;
+	margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 6.25rem;
+	width: 6rem;
+	background-color: var(--jet);
+	border-radius: 0.562rem;
+}
+
+.nav-btn-menu:focus {
+	height: 6.875rem;
+	width: 6rem;
+	background-color: var(--eerie-black);
+}
+
+label {
+	color:var(--champagne-pink);
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	font-weight: 600;
 }

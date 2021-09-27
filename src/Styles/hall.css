@@ -1,16 +1,182 @@
 @import url(../Styles/global.css);
 
-body {
+.hall {
   background-color: var(--eerie-black);
-  color:blanchedalmond;
+  color:var(--champagne-pink);
+  min-height: 100vh;
 }
 
-.hall-page-main {
-  display: flex;
-  flex-direction: row;
-	background-color: var(--raisin-black);
-	border-radius: 9px;
-	width: 60vw;
-  height: 25vh;
-	margin-left: 23px;
+.menu-btn {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    margin-top: 5%;
+    background-color: var(--raisin-black);
+    border-radius: 0.56rem;
+    width: 80%;
+    margin-left: 1.44rem;
+    left:8%;
+  }
+
+.restaurant-menu {
+  border-radius: 0.56rem;
+  width: 80%;
+  height: 100%;
+  background-color: var(--eerie-black);
+  position:relative;
+  float: left;
+  margin-top: 13rem;
+  margin-left: 1.38rem;
+  left:8%;
 }
+
+.menu-items {
+	width: 100%;
+	margin: 0.3rem;
+}
+
+.products {	
+	width: 98%;
+}
+
+ul {
+	font-size: 1rem;
+	display: flex;
+  text-transform:uppercase;
+}
+
+.all-day {
+	font-weight: 400;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-left: 3.44rem;
+	margin: 0.56rem;
+	box-shadow: var(--raisin-black) 2px 12px 57px, var(--jet) -12px -12px 57px;
+	border-radius: 0.56rem;
+	padding: 0.625rem;
+	margin-top: 0.56rem;
+	align-items: center;
+}
+
+.all-day:hover {
+	background-color: var(--jet);
+	font-weight: 600;
+}
+
+.btn-add, .btn-less {
+	border: none;
+	margin: 1.25rem;
+	align-items: center;
+	margin-top: 1.44rem;
+	height: 2.8rem;
+	width: 2.8rem;
+	background-color: var(--buff);
+	font-size: 2.18rem;
+	border-radius: 2.6rem;
+}
+
+.btn-add:hover {
+	background-color: var(--vegas-gold);
+  color: var(--spanish-green);
+}
+
+.btn-less:hover, .trash-btn:hover {
+	background-color: var(--vegas-gold);
+  color: var(--rosso-corsa);
+}
+
+.name-products {
+	width: 11rem;
+}
+
+.order {
+	display:inline-block;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	text-transform: uppercase;
+	width: 98%;
+	font-weight: 800;
+}
+
+.summary-items {
+	display: flex;
+	justify-content: space-around; 
+	margin-right: 10rem;
+}
+
+.total {
+	margin: 2rem;
+	display: flex;
+	justify-content: center;
+	font-weight: 900;
+	font-size: 1.5rem;
+}
+
+.total:hover {
+	color: var(--black);
+}
+
+.inputs {
+	display: grid;
+	justify-content: center;
+	width: 100%;
+	height: 10rem;
+}
+
+.hidden {
+	font-size: 0.9rem;
+  color: var(--rosso-corsa);
+  min-height: 1.2rem;
+  position: relative;
+	text-transform: none;
+	font-weight: 500;
+	margin: 0;
+	text-align: center;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.summary-order {
+	font-weight: 400;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	box-shadow: var(--raisin-black) 2px 12px 57px, var(--jet) -12px -12px 57px;
+	border-radius: 0.56rem;
+	padding: 0.625rem;
+	margin-top: 0.56rem;
+	align-items: center;
+}
+
+.summary-order:hover {
+	background-color: var(--jet);
+	font-weight: 600;
+}
+
+.send-order-btn {
+	display: flex;
+	justify-content: center;
+}
+
+.trash-btn {
+	margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 2.5rem;
+	width: 2.5rem;
+	background-color: var(--buff);
+	font-size: 1.8rem;
+	border-radius: 2.6rem;
+}
+
+.btn-order-items {
+	display: flex;
+	align-items: center;
+}
+
