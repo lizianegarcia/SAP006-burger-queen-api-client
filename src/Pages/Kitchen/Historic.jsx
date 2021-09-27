@@ -59,8 +59,8 @@ export const Historic = () => {
                   .replace('preparing', 'Preparando')}
               </h3>
               <p>Pedido nº {pedido.id}</p>
-              <p>Mesa: {pedido.table}</p>
               <p>Cliente: {pedido.client_name}</p>
+              <p>Mesa: {pedido.table}</p>
             </div>
             <div className="details-status">
               

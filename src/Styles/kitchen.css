@@ -2,5 +2,44 @@
 
 body {
   background-color: var(--eerie-black);
-  color: aliceblue;
+  color: var(--champagne-pink);
+}
+
+.kitchen {
+  top: 10rem;
+  gap: 10vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.order {
+  text-transform: 'uppercase';
+  background-color: var(--eerie-black-darker);
+  text-align: center;
+  border-radius: 1rem;
+  position: relative;
+  width: 18vw;
+  padding: 20px 21px;
+  top: 2rem;
+  font-weight: 500;
+}
+
+.details-client {
+  padding: 0.2rem;
+}
+
+h3 {
+  color: var(--fire-opal);
+  margin: 0.3rem;
+}
+
+.container-order {
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }

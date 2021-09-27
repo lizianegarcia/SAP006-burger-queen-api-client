@@ -65,9 +65,9 @@ export const OrderUp = () => {
              <div style={{   backgroundColor: '#f5f5f5' , color: '#222', textAlign: 'center',
     borderRadius: '3px', position: 'relative', width: '29vw',padding: '30px 31px',}}>
                 <div className="details-client">
+                <p>Pedido nº {pedido.id}</p>
                 <p>Cliente: {pedido.client_name}</p>
                 <p>Mesa: {pedido.table}</p>
-                  <p>Pedido nº {pedido.id}</p>
                         </div>
                 <div className="details-status">
                 </div>

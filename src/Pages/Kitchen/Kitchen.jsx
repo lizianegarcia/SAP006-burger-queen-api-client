@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import "../../Styles/kitchen.css";
 import {ConvertDate, ConvertTime} from './utils.js';
 import HeaderKitchen from "../../components/header/HeaderKitchen";
+import Button from "../../components/button/button";
 
 function Kitchen() {
   const tokenUser = localStorage.getItem('token');
@@ -73,27 +74,27 @@ function Kitchen() {
 
   return (
     
-    <main style={{gap: '10vh', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginInline: '50px',  }} className="Cozinha">
-      <HeaderKitchen />
-    
+    <main >
+<HeaderKitchen />
+      <section className="kitchen">
+
       {PedidosAFazer.map((pedido) => {
         return (
-          <div style={{ textTransform: 'uppercase',  backgroundColor: '#f5f5f5' , color: '#222', textAlign: 'center',
-          borderRadius: '3px', position: 'relative', width: '29vw',padding: '30px 31px',}} key={pedido.id}   >
+          <div className="order" key={pedido.id}   >
             <div className="details-client">
-            <h5 style={{color: '#cf5e18'}} >Status: {pedido.status 
+            <h3>Status: {pedido.status 
                   .replace('pending', 'Pendente')
                   .replace('preparing', 'Preparando...')}
-              </h5>
+              </h3>
               <p>Pedido nº {pedido.id}</p>
-              <p>Mesa: {pedido.table}</p>
               <p>Cliente: {pedido.client_name}</p>
+              <p>Mesa: {pedido.table}</p>
+              
               <p  className="date">Data: {ConvertDate(pedido.createdAt)} {ConvertTime(pedido.createdAt)}</p>
 
             </div>
             <div className="details-status">
               
-             
             </div>
             <section className="container-order">
               {pedido.Products.map((itens, index) => (
@@ -108,25 +109,24 @@ function Kitchen() {
                 </div>
               ))}
             </section>
-            <div style={{ paddingLeft: '5px'}}>
-              <button  style={{backgroundColor: '#f5a970', color: '#ffff'}}
-                className="btn-preparar"
+            <div className="buttons">
+              <Button variant="tertiary"
                 onClick={(e) => handlePreparar(pedido, e)}
               >
                 PREPARAR
-              </button>
-              <button style={{backgroundColor: '#cf5e18', color: '#ffff'}}
-                className="btn-finalizar"
+              </Button>
+              <Button variant="quaternary"
                 onClick=
 {() => 
                   handleFinalizar(pedido)}
               >
                 ENTREGAR
-              </button>
+              </Button>
             </div>
           </div>
         );
       })}
+      </section>
     </main>
   );
 }
