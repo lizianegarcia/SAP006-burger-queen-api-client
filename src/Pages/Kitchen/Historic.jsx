@@ -1,6 +1,7 @@
 import HeaderKitchen from "../../components/header/HeaderKitchen";
 import React, { useEffect, useState } from 'react';
 import "../../Styles/kitchen.css";
+import trash from "../../assets/icons/trash.png";
 
 export const Historic = () => {
   const [Pedidos, setPedidos] = useState([]);
@@ -74,8 +75,9 @@ export const Historic = () => {
               ))}
             </section>
             <div>
-              <button className="btn-delete"
-                  onClick={() => handleExcluir(pedido)}> x
+              <button className="delete-btn"
+                  onClick={() => handleExcluir(pedido)}>
+                    <img className="trash-icon" alt="" src={trash} />
               </button>
             </div>
           </div>

@@ -5,6 +5,7 @@ import lanche from "../../assets/icons/lanche.png"
 import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
+import trash from "../../assets/icons/trash.png";
 import ButtonMenu from "../../components/button/buttonIconsMenu";
 import HeaderHall from "../../components/header/HeaderHall";
 import HallInput from "../../components/input/HallIput";
@@ -251,7 +252,7 @@ function Hall() {
                     <p>R$ {item.price},00</p>
                     <p>{item.qtd}</p>
                     <button className="trash-btn" onClick={() => deleteItem(index)}>
-                    x
+                      <img className="icon" alt="" src={trash}/>
                     </button>               
                   </span>
                 </article>
