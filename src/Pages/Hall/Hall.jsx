@@ -8,6 +8,8 @@ import cifrao from "../../assets/icons/cifrao.png";
 import ButtonMenu from "../../components/button/buttonIconsMenu";
 import HeaderHall from "../../components/header/HeaderHall";
 import HallInput from "../../components/input/HallIput";
+import Button from "../../components/button/button";
+import Order from "../../Api/postOrder";
 
 
 function Hall() {
@@ -18,11 +20,12 @@ function Hall() {
   const [summary, setSummary] = useState([]); //array do produto escolhido + qtd
   const [tab, setTab] = useState('breakfast'); // escolha do menu de breakfast, hamburguer, extras ou bebidas
   const [loading, setLoading] = useState(true);
-  // const [deleteProduct, setdeleteProduct] = useState([]);
+  const [error, setError] = useState({
+    client: '',
+    table: '',
+    summary: ''
+  });
 
-  useEffect(() => {
-    console.log(summary)
-  }, [summary])
 
   useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/products', {
@@ -49,6 +52,11 @@ function Hall() {
   }, [token])
 
   
+  const deleteItem = (index) => {
+      const list = summary
+      list.splice(index, 1)
+      setSummary([...list])
+    } 
 
   const addItem = (e, item) => {
     e.preventDefault()
@@ -69,8 +77,9 @@ function Hall() {
     if (quantityElement.qtd !== 0) {
       quantityElement.qtd -= 1
       setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
-    } else {
-      
+    } 
+    if (quantityElement.qtd === 0) {
+      deleteItem()
     }
   }
 
@@ -85,18 +94,56 @@ function Hall() {
   return totalPrice;
  }
 
+ const validationOrder = () => {
+  let error = {}
+  error.isFormValid = true
+
+  if (!client) {
+    error.client = 'Preencha o nomedo cliente corretamente'
+    error.isFormValid = false
+  }
+  if (!table || table >= 10 ) {
+    error.table = 'Escolha um numero de 1 à 10'
+    error.isFormValid = false
+  } 
+  if (summary !== "") {
+    error.summary = 'Não há itens para realizar o pedido';
+    error.isFormValid = false
+  }
+  
+  return error
+}
+
+ 
+ useEffect(() => {
+    console.log(summary)
+  }, [summary])
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const valid = validationOrder()
+    setError(valid)
+    if (valid.isFormValid) {
+      const pedido =  ({
+        "client": client,
+        "table":table,
+        "products":
+        summary.map((item) => (
+          {
+            id: Number(item.id),
+            qtd: Number(item.qtd),
+          }))
+      }) 
+      Order(pedido, "orders", "POST")
+    }
+  }
+  
+ 
  const total = calculateTotal(summary)
  const showSummary = tab === 'summary';
  const showMenuTab = !showSummary && !loading;
 
-
-  const deleteItem = (index) => {
-    const list = summary
-    list.splice(index, 1)
-    setSummary([...list])
-  } 
-
- 
   return (
     <div className="hall">
       <HeaderHall />
@@ -152,8 +199,9 @@ function Hall() {
                           <ul>{items.complement}</ul>
                         </div>
                         <ul > R$ {items.price},00</ul>
-                        <div>
+                        <div className="btn-order-items">
                           <button className="btn-add" onClick={(e) => addItem(e, items)}>+</button>
+                           <div>{items.qtd}</div> 
                           <button className="btn-less" onClick={(e) =>removeItem(e, items)}>-</button>  
                         </div>
                       </div>
@@ -164,7 +212,7 @@ function Hall() {
               {
                 showSummary && <section className='order'>
                   <h1>Resumo do Pedido</h1> 
-                  <div className="inputs">
+                  <section className="inputs">
                     <HallInput
                       name="client" 
                       placeholder="Digite o nome do cliente"
@@ -173,7 +221,8 @@ function Hall() {
                       onChange={(event) =>
                       setClient(event.target.value)}  
                     />  
-                    
+                    <div className="hidden">{error.client && <p>{error.client}</p>} </div>
+
                     <HallInput
                       name="number"   
                       placeholder="Mesa"
@@ -182,9 +231,10 @@ function Hall() {
                       max='20' 
                       value={table} 
                       onChange={(event) =>
-                      setTable(event.target.value)} 
+                      setTable(event.target.value)}  
                     /> 
-                  </div>
+                    <div className="hidden">{error.table&& <p>{error.table}</p>} </div>
+                  </section>
               <div className='summary-items'>
                 <p>Item</p>
                 <p>Preço</p>
@@ -207,7 +257,10 @@ function Hall() {
                 </article>
               )}
               <p className="total">Total: R$ {total},00</p>
-          </section>
+              <div className="hidden">{error.summary && <p>{error.summary}</p>} </div>
+              <Button variant="primary" onClick={handleSubmit}>Enviar Pedido</Button>
+              
+            </section>
               }
          </section>
         </main>  
