@@ -116,8 +116,8 @@ function Hall() {
 
  
  useEffect(() => {
-    console.log(summary, table)
-  }, [summary, table])
+    console.log(summary, menu)
+  }, [summary, menu])
   
 
   const handleSubmit = (e) => {

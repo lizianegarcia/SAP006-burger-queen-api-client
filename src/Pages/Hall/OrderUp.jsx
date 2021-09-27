@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from "react";
+import "../../Styles/hall.css";
 import HeaderHall from "../../components/header/HeaderHall";
 
 export const OrderUp = () => {
-  const [order, setOrder] = useState("")
+  const [order, setOrder] = useState([]);
+  const [products, setProducts] = useState([]);
   const token = localStorage.getItem("token");
+
   useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
         headers: {
@@ -14,49 +17,50 @@ export const OrderUp = () => {
     })
     .then(response => response.json())
     .then((json) => {
-      const order = json.filter(item => item)
-      // const nameClientOrder = json.filter(item => item.name)
-      // const tableOrder = json.filter(item => item.table)
-      // const dataOrder = json.filter(item => item.processedAt)
-      // const productsOrder = json.filter(item => item.products)
-      setOrder(order)
+      const orders = json.filter(item => item)
+      const orderProducts = json.filter(item => item.Products)
+      console.log(orderProducts)
+      setOrder(orders)
+      setProducts(orderProducts)
       // setLoading(false)   
       });
   }, [token])
 
   useEffect(() => {
-    console.log(order)
-  }, [order])
+    console.log(products)
+  }, [products])
 
   return (
     <div>
       <HeaderHall />
      <h1>Pedidos Prontos</h1>
 
-       {/* <section className='restaurant-menu'>
+      <section className='tamplete-order'>
             {order.map((items) => (       
-                  <div className="products" key={items.id}>
-                    <div>
-                      <div className="all-day">
-                        <div className='name-products'>
-                          <ul>{items.name}</ul>
-                        </div>
-                        <div className="options">
-                          <ul>{items.flavor}</ul>
-                          <ul>{items.complement}</ul>
-                        </div>
-                        <ul > R$ {items.price},00</ul>
-                        <div className="btn-order-items">
-                           <button className="btn-add" onClick={(e) => addItem(e, items)}>+</button> 
-                           <div>{items.qtd}</div> 
-                          <button className="btn-less" onClick={(e) =>removeItem(e, items)}>-</button>   
-                        </div>
-                      </div>
-                    </div>
+                  <div className="orders" key={items.id}>
+                      <article className="">
+                        <ul className='individualOrder'>
+                          <li>Nome cliente:{items.client_name}</li>
+                          <li>Mesa:{items.table}</li>
+                          <time>Horário:{items.createdAt.slice(11,16)}</time>
+                        </ul>
+                        <ul className="choice-products">
+                          {items.Products.map((product) => (
+                          <ul className="choice-products">
+                            <li>{product.name}</li>
+                            <li>Qtd:{product.qtd}</li>
+                          </ul>
+                          ))
+                          }
+  
+                        </ul>
+                        <ul >Status:{items.status}</ul>
+                       
+                      </article>
                   </div>
               ))
             }
-      </section>  */}
+      </section>  
     </div>
   );
 };
