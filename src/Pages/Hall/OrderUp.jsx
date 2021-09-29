@@ -59,7 +59,10 @@ export const OrderUp = () => {
           return (
             <div className="orders" key={pedido.id}>
                 <div className="details-client">
-                <h3>Pedido nº {pedido.id}</h3>
+                <h3 className="order-up"> {pedido.status 
+                .replace('ready', 'Pronto  ✔️')}
+                </h3>
+                <p>Pedido nº {pedido.id}</p>
                 <p>Cliente: {pedido.client_name}</p>
                 <p>Mesa: {pedido.table}</p>
             

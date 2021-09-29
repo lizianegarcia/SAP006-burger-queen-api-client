@@ -1,9 +1,9 @@
-import HeaderKitchen from "../../components/header/HeaderKitchen";
+import HeaderHall from "../../components/header/HeaderHall";
 import React, { useEffect, useState } from 'react';
 import "../../Styles/kitchen.css";
 import trash from "../../assets/icons/trash.png";
 
-export const Historic = () => {
+export const HistoricHall = () => {
   const [Pedidos, setPedidos] = useState([]);
   const tokenUser = localStorage.getItem('token');
 
@@ -47,7 +47,7 @@ export const Historic = () => {
 
   return (
     <main>
-      <HeaderKitchen />
+      <HeaderHall />
       <section className="orders-section"> 
       {Pedidos.map((pedido) => {
         return (
@@ -89,4 +89,4 @@ export const Historic = () => {
   );
 }
 
-export default Historic;
+export default HistoricHall;

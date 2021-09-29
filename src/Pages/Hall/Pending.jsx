@@ -42,9 +42,9 @@ function Pending() {
         return (
           <div className="orders" key={pedido.id}   >
             <div className="details-client">
-            <h3>Status: {pedido.status 
-                  .replace('pending', 'Pendente')
-                  .replace('preparing', 'Preparando...')}
+              <h3 className="pending-orders"> {pedido.status 
+                .replace('pending', '⏱️ Pendente')
+                .replace('preparing', '⏳ Preparando')}
               </h3>
               <p>Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
