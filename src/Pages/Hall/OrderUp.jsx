@@ -62,10 +62,11 @@ export const OrderUp = () => {
                 <h3 className="order-up"> {pedido.status 
                 .replace('ready', 'Pronto  ✔️')}
                 </h3>
-                <p>Pedido nº {pedido.id}</p>
-                <p>Cliente: {pedido.client_name}</p>
+                <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
+                <p> Cliente: {pedido.client_name}</p>
                 <p>Mesa: {pedido.table}</p>
-            
+                <hr/> 
+               
                   {pedido.Products.map((itens, index) => (
                     <div key={index}>
                       <p>{itens.qtd} {itens.name}
@@ -75,6 +76,7 @@ export const OrderUp = () => {
                     </div>
                   ))}
                 </div>
+                <hr/>
                   <div className="buttons">
                     <Button variant="quaternary"
                       onClick={() => handleEntregar(pedido)}>

@@ -46,10 +46,11 @@ function Pending() {
                 .replace('pending', '⏱️ Pendente')
                 .replace('preparing', '⏳ Preparando')}
               </h3>
-              <p>Pedido nº {pedido.id}</p>
+              <p className="order-number">📋 Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
               <p>Data: {ConvertDate(pedido.createdAt)} {ConvertTime(pedido.createdAt)}</p>
+              <hr/> 
             </div>
 
             <section className="container-order">
@@ -61,6 +62,7 @@ function Pending() {
                 </div>
               ))}
             </section>
+            <hr/>
           </div>
         );
       })}

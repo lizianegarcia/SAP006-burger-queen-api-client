@@ -26,17 +26,29 @@ body {
   padding: 20px 21px;
   top: 2rem;
   font-weight: 500;
-}
-
-.orders:hover {
-  background-color: var(--jet);
+  border: 3px solid var(--jet);
 }
 
 .details-client {
-  padding: 0.3rem;
   align-items: center;
   text-align: center;
   justify-content: center;
+}
+
+.details-client p {
+  padding: 0.1rem;
+}
+
+.order-number {
+  font-size: 1.2rem;
+  color: var(--jet);
+  font-weight: 800;
+}
+
+hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--jet);
 }
 
 .pending-orders {
@@ -90,8 +102,9 @@ body {
   background-color: var(--eerie-black-darker);
 }
 
-.container-order {
-  margin-bottom: 1rem;
+
+.container-order p {
+  padding: 0.1rem;
 }
 
 .buttons {
@@ -103,8 +116,7 @@ body {
   align-content: center;
 	justify-content: center;
   text-align: center;
-  margin: 1.25rem;
-	margin-top: 1.44rem;
+	margin-top: 0.5rem;
 	height: 2.6rem;
 	width: 2.6rem;
 	background-color: var(--raisin-black);
@@ -126,5 +138,6 @@ body {
 	align-content: center;
 	justify-content: center;
 	text-align: center;
-	margin-top: 0.4rem;
+	margin-top: 0.2rem;
+  margin-left: 0.3rem;
 }

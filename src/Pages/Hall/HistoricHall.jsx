@@ -60,11 +60,12 @@ export const HistoricHall = () => {
                   .replace('preparing', '⏳ Preparando')}
               </h3>
               
-              <p>Pedido nº {pedido.id}</p>
+              <p className="order-number">📋 Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
+              <hr/> 
             </div>
-            <section>
+            <section className="container-order">
               {pedido.Products.map((itens, index) => (
                 <div key={index}>
                   <p>
@@ -75,6 +76,7 @@ export const HistoricHall = () => {
                 </div>
               ))}
             </section>
+            <hr/>
             <div>
               <button className="delete-btn"
                   onClick={() => handleExcluir(pedido)}>

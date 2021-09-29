@@ -86,10 +86,11 @@ function Kitchen() {
                 .replace('pending', '⏱️ Pendente')
                 .replace('preparing', '⏳ Preparando')}
               </h3>
-              <p>Pedido nº {pedido.id}</p>
+              <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
               <p>Data: {ConvertDate(pedido.createdAt)} {ConvertTime(pedido.createdAt)}</p>
+              <hr/> 
             </div>
 
             <section className="container-order">
@@ -103,6 +104,7 @@ function Kitchen() {
                 </div>
               ))}
             </section>
+            <hr/>
             <div className="buttons">
               <Button variant="tertiary"
                 onClick={(e) => handlePreparar(pedido, e)}
