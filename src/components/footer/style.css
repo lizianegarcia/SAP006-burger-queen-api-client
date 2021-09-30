@@ -1,20 +1,26 @@
 @import url(../../Styles/global.css);
 
-.footer { 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 10vh;
+footer { 
+  position: fixed;
+  height: 4vh;
   background: var(--raisin-black);
-  color: white;
+  bottom: 0;
+  width: 100%;
+  color: var(--buff);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+p {
+  text-align: center;
 }
 
 .footer-links {
   text-decoration: none;
-  color: white;
   font-weight: 600;
   transition: all .2s ease;
+  color: var(--buff);
 }
 .footer-links:hover {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--vegas-gold);
 }

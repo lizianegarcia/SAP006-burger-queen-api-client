@@ -11,18 +11,17 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .orders {
-  left: 10rem;
+  left: 6rem;
   text-transform:uppercase;
   font-size: 1rem;
   background-color: var(--eerie-black-darker);
   text-align: center;
   border-radius: 1rem;
   position: relative;
-  width: 30vw;
+  width: 25vw;
   padding: 20px 21px;
   top: 2rem;
   font-weight: 500;
@@ -51,6 +50,11 @@ hr {
   border: 1px solid var(--jet);
 }
 
+.break-line {
+  margin-bottom: 2rem;
+}
+
+
 .pending-orders {
   background-color: var(--fire-opal);
   width: 12rem;
@@ -62,6 +66,7 @@ hr {
   align-items: center;
   text-align: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .pending-orders:hover {
@@ -75,6 +80,7 @@ hr {
   margin: 0.3rem;
   padding-top: 0.5rem;
   border-radius: 1.5rem;
+  margin-bottom: 1rem;
   display:inline-block;
   align-items: center;
   text-align: center;
@@ -86,6 +92,7 @@ hr {
 }
 
 .historic-orders {
+  margin-bottom: 1.5rem;
   background-color: var(--jet);
   width: 12rem;
   height: 2.5rem;
@@ -112,11 +119,16 @@ hr {
   justify-content: center;
 }
 
+.serve-button {
+  position: absolute;
+  left: 30%;
+  bottom: 0.4rem;
+}
+
 .delete-btn {
-  align-content: center;
-	justify-content: center;
-  text-align: center;
-	margin-top: 0.5rem;
+  position: absolute;
+  bottom: 0.5rem;
+  left: 45%;
 	height: 2.6rem;
 	width: 2.6rem;
 	background-color: var(--eerie-black-darker);

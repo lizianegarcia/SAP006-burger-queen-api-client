@@ -73,11 +73,9 @@ function Kitchen() {
 
 
   return (
-    
     <main >
 <HeaderKitchen />
       <section className="orders-section">
-
       {PedidosAFazer.map((pedido) => {
         return (
           <div className="orders" key={pedido.id}   >

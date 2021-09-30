@@ -76,7 +76,7 @@ export const Historic = () => {
                 </div>
               ))}
             </section>
-            <hr/>
+            <hr className="break-line"/>
             <div>
               <button className="delete-btn"
                   onClick={() => handleExcluir(pedido)}>

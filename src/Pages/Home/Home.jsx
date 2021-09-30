@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from "../../components/button/button";
 import Logo from "../../components/img/Logo";
 import "../../Styles/home.css";
+import Footer from "../../components/footer/footer";
 
 const Home = () => {
   
@@ -23,6 +24,7 @@ const Home = () => {
           <Button variant='secundary' onClick={Register}>Cadastro</Button>
         </div>
       </main>
+      <Footer />
     </div>
 
   );

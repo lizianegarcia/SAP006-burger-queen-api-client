@@ -58,15 +58,16 @@ export const OrderUp = () => {
         {PedidosProntos.map((pedido) => {
           return (
             <div className="orders" key={pedido.id}>
-                <div className="details-client">
-                <h3 className="order-up"> {pedido.status 
-                .replace('ready', 'Pronto  ✔️')}
-                </h3>
-                <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
-                <p> Cliente: {pedido.client_name}</p>
-                <p>Mesa: {pedido.table}</p>
-                <hr/> 
-               
+              <div className="details-client">
+                  <h3 className="order-up"> {pedido.status 
+                  .replace('ready', 'Pronto  ✔️')}
+                  </h3>
+                  <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
+                  <p> Cliente: {pedido.client_name}</p>
+                  <p>Mesa: {pedido.table}</p>
+                  <hr/> 
+              </div>
+              <section className="container-order">
                   {pedido.Products.map((itens, index) => (
                     <div key={index}>
                       <p>{itens.qtd} {itens.name}
@@ -75,15 +76,15 @@ export const OrderUp = () => {
                       <p>{itens.complement === 'null' ? '' : itens.complement}</p>
                     </div>
                   ))}
-                </div>
-                <hr/>
-                  <div className="buttons">
+               </section>
+               <hr className="break-line" />
+                <div className="serve-button">
                     <Button variant="quaternary"
                       onClick={() => handleEntregar(pedido)}>
                       Servir
                     </Button>
-                  </div>
                 </div>
+             </div>
           );
         })}
       </section>
