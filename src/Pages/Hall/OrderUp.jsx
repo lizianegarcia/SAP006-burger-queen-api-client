@@ -1,5 +1,6 @@
+import React, {useEffect, useState} from "react";
+import "../../Styles/hall.css";
 import HeaderHall from "../../components/header/HeaderHall";
-import React, { useEffect, useState } from 'react';
 import "../../Styles/kitchen.css";
 import Button from "../../components/button/button";
 
@@ -23,6 +24,7 @@ export const OrderUp = () => {
           itens.status.includes('ready')
         );
         setPedidosProntos(pedidosEntregar);
+        console.log(pedidosEntregar)
       });
   };
 
@@ -56,6 +58,10 @@ export const OrderUp = () => {
       <section className="orders-section">
         
         {PedidosProntos.map((pedido) => {
+           const dataUpdated = new Date(pedido.updatedAt);
+           const dataCreated = new Date(pedido.createdAt);
+           const difference = Math.abs(dataUpdated) - dataCreated;
+           const minutes = Math.floor(difference / 1000 / 60);
           return (
             <div className="orders" key={pedido.id}>
               <div className="details-client">
@@ -65,6 +71,7 @@ export const OrderUp = () => {
                   <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
                   <p> Cliente: {pedido.client_name}</p>
                   <p>Mesa: {pedido.table}</p>
+                  {pedido.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
                   <hr/> 
               </div>
               <section className="container-order">

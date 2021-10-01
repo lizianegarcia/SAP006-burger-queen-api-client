@@ -50,6 +50,10 @@ export const Historic = () => {
       <HeaderKitchen />
       <section className="orders-section"> 
       {Pedidos.map((pedido) => {
+        const dataUpdated = new Date(pedido.updatedAt);
+        const dataCreated = new Date(pedido.createdAt);
+        const difference = Math.abs(dataUpdated) - dataCreated;
+        const minutes = Math.floor(difference / 1000 / 60);
         return (
           <div className="orders"  key={pedido.id}>
             <div className="details-client">
@@ -59,6 +63,7 @@ export const Historic = () => {
                   .replace('finished', '🍽️ Finalizado')
                   .replace('preparing', '⏳ Preparando')}
               </h3>
+              {pedido.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
               
               <p className="order-number">📋 Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
@@ -73,6 +78,7 @@ export const Historic = () => {
                   </p>
                   <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
                   <p>{itens.complement === 'null' ? '' : itens.complement}</p>
+                
                 </div>
               ))}
             </section>

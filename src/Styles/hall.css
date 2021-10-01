@@ -195,3 +195,7 @@ h1 {
 	text-align: center;
 	margin-top: 0.4rem;
 }
+
+.show{
+	display: block !important;
+  }

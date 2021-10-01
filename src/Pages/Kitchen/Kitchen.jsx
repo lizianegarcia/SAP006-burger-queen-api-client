@@ -1,16 +1,17 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import "../../Styles/kitchen.css";
-import { ConvertDate, ConvertTime } from './utils.js';
 import HeaderKitchen from "../../components/header/HeaderKitchen";
 import Button from "../../components/button/button";
 
 function Kitchen() {
   const tokenUser = localStorage.getItem('token');
   const [PedidosAFazer, setPedidosAFazer] = useState([]);
+  // const [tempoDePreparo, setTempoDePreparo] = useState ('')
+  const url = 'https://lab-api-bq.herokuapp.com/orders/';
 
   const listaPedidos = () => {
-    fetch('https://lab-api-bq.herokuapp.com/orders', {
+    fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -34,10 +35,12 @@ function Kitchen() {
 
   
     const handlePreparar = (pedido, e) => {
-    const url = 'https://lab-api-bq.herokuapp.com/orders/';
     const id = pedido.id;
     const status = { status: 'preparing' };
-
+    console.log(pedido.createdAt, "1")
+    console.log(pedido.updatedAt, "2")
+    console.log(pedido.processedAt, "3")
+    
     fetch(url + id, {
       method: 'PUT',
       headers: {
@@ -53,9 +56,11 @@ function Kitchen() {
   };
 
   const handleFinalizar = (pedido) => {
-    const url = 'https://lab-api-bq.herokuapp.com/orders/';
     const id = pedido.id;
     const status = { status: 'ready' };
+    console.log(pedido.createdAt, "4")
+    console.log(pedido.updatedAt, "5")
+    console.log(pedido.processedAt, "6")
 
     fetch(url + id, {
       method: 'PUT',
@@ -70,6 +75,8 @@ function Kitchen() {
       });
     });
   };
+
+  
 
 
   return (
@@ -87,8 +94,14 @@ function Kitchen() {
               <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
-              <p>Data: {ConvertDate(pedido.createdAt)} {ConvertTime(pedido.createdAt)}</p>
-              <hr/> 
+              <span>Data: {`${new Date(pedido.createdAt).toLocaleDateString('pt-br',
+              )} - ${new Date(pedido.createdAt).toLocaleTimeString(
+              'pt-br', {
+               hour: '2-digit',
+               minute: '2-digit',
+              })}h`}</span>
+
+             
             </div>
 
             <section className="container-order">
@@ -111,7 +124,7 @@ function Kitchen() {
               </Button>
               <Button variant="quaternary"
                 onClick=
-{() => 
+                  {() => 
                   handleFinalizar(pedido)}
               >
                 ENTREGAR

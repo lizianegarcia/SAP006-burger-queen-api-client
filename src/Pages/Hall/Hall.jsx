@@ -57,15 +57,17 @@ function Hall() {
       const list = summary
       list.splice(index, 1)
       setSummary([...list])
-    } 
+  } 
 
   const addItem = (e, item) => {
     e.preventDefault()
     const quantityElement = summary.find(element => element === item)
     if (quantityElement) {
       quantityElement.qtd += 1
+      
       setSummary(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === quantityElement.id ? quantityElement : prevElem))
-    } else {
+    } 
+    else {
       item.qtd = 1;
       item.subtotal = item.price;
       setSummary([...summary, item]);
@@ -74,10 +76,13 @@ function Hall() {
 
   const removeItem = (e, item) => {
     e.preventDefault();
+    console.log(summary)
     const quantityElement = summary.find(elemento => elemento === item)
     if (quantityElement.qtd !== 0) {
       quantityElement.qtd -= 1
-      setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
+      // setAddItem(prevLess => prevLess.map(itemProduct => itemProduct.id  === foundItem ? foundItem : itemProduct))
+      // setAddItem(prevLess => prevLess.map(itemProduct => itemProduct.id  === foundItem.id ? foundItem : itemProduct))  
+       setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
     } 
     if (quantityElement.qtd === 0) {
       deleteItem()
@@ -100,7 +105,7 @@ function Hall() {
   error.isFormValid = true
 
   if (!client) {
-    error.client = 'Preencha o nome do cliente corretamente'
+    error.client = 'Preencha o nomedo cliente corretamente'
     error.isFormValid = false
   }
   if (!table || table >= 10 ) {
@@ -117,8 +122,8 @@ function Hall() {
 
  
  useEffect(() => {
-    console.log(summary, menu)
-  }, [summary, menu])
+    console.log(summary, client)
+  }, [summary, client])
   
 
   const handleSubmit = (e) => {
@@ -137,6 +142,10 @@ function Hall() {
           }))
       }) 
       Order(pedido, "orders", "POST")
+      setClient([])
+      setTable([])
+      setSummary([])
+      
     }
   }
   
@@ -152,6 +161,7 @@ function Hall() {
         <main className="hall-page-main"> 
          <div className="menu-btn">
           <ButtonMenu 
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('breakfast')
@@ -159,6 +169,7 @@ function Hall() {
           />
 
           <ButtonMenu
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('hamburguer')
@@ -166,6 +177,7 @@ function Hall() {
           />
           
           <ButtonMenu 
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('side')
@@ -173,13 +185,15 @@ function Hall() {
           />
           
           <ButtonMenu  
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('drinks')
             })} src={bebidas} 
           />
 
-          <ButtonMenu 
+          <ButtonMenu
+            className="btn-menu" 
             onClick={((e) => {
               e.preventDefault();
               setTab('summary')
@@ -251,17 +265,15 @@ function Hall() {
                     </ol>
                     <p>R$ {item.price},00</p>
                     <p>{item.qtd}</p>
-                    <button className="trash-btn" onClick={() => deleteItem(index)}>
-                      <img className="icon" alt="" src={trash}/>
-                    </button>               
+                    <ButtonMenu className="trash-btn" src={trash} onClick={() => deleteItem(index)} />
+                                  
                   </span>
                 </article>
               )}
               <p className="total">Total: R$ {total},00</p>
               <div className="hidden">{error.summary && <p>{error.summary}</p>} </div>
-              <div className="send-order-btn">
               <Button variant="primary" onClick={handleSubmit}>Enviar Pedido</Button>
-              </div>
+              
             </section>
               }
          </section>

@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css'; 
 
+
 const Button = ({variant, children, onClick, type}) => {
     const classes = `button ${variant}`;
 
