@@ -1,67 +1,90 @@
 import React, {useEffect, useState} from "react";
 import "../../Styles/hall.css";
 import HeaderHall from "../../components/header/HeaderHall";
+import "../../Styles/kitchen.css";
+import Button from "../../components/button/button";
+
 
 export const OrderUp = () => {
-  const [order, setOrder] = useState([]);
-  const [products, setProducts] = useState([]);
-  const token = localStorage.getItem("token");
+  const tokenUser = localStorage.getItem('token');
+  const [PedidosProntos, setPedidosProntos] = useState([]);
 
-  useEffect (() => {
+  const listaPedidos = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
-        headers: {
-            accept: 'application/json',
-            Authorization: `${token}`,
-       
-        },
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${tokenUser}`,
+      },
     })
-    .then(response => response.json())
-    .then((json) => {
-      const orders = json.filter(item => item)
-      const orderProducts = json.filter(item => item.Products)
-      console.log(orderProducts)
-      setOrder(orders)
-      setProducts(orderProducts)
-      // setLoading(false)   
+      .then((response) => response.json())
+      .then((data) => {
+        const products = data;
+        const pedidosEntregar = products.filter((itens) =>
+          itens.status.includes('ready')
+        );
+        setPedidosProntos(pedidosEntregar);
+        console.log(pedidosEntregar)
       });
-  }, [token])
+  };
 
+  
   useEffect(() => {
-    console.log(products)
-  }, [products])
+    listaPedidos();
+  }, []);
+
+  const handleEntregar = (pedido) => {
+    const url = 'https://lab-api-bq.herokuapp.com/orders/';
+    const id = pedido.id;
+    const status = { status: 'finished' };
+
+    fetch(url + id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${tokenUser}`,
+      },
+      body: JSON.stringify(status),
+    }).then((response) => {
+      response.json().then(() => {
+        listaPedidos();
+      });
+    });
+  };
 
   return (
-    <div>
+    <main>
       <HeaderHall />
-     <h1>Pedidos Prontos</h1>
-
-      <section className='tamplete-order'>
-            {order.map((items) => (       
-                  <div className="orders" key={items.id}>
-                      <article className="">
-                        <ul className='individualOrder'>
-                          <li>Nome cliente:{items.client_name}</li>
-                          <li>Mesa:{items.table}</li>
-                          <time>Horário:{items.createdAt.slice(11,16)}</time>
-                        </ul>
-                        <ul className="choice-products">
-                          {items.Products.map((product) => (
-                          <ul className="choice-products">
-                            <li>{product.name}</li>
-                            <li>Qtd:{product.qtd}</li>
-                          </ul>
-                          ))
-                          }
-  
-                        </ul>
-                        <ul >Status:{items.status}</ul>
-                       
-                      </article>
+      <section className="orders-section">
+        
+        {PedidosProntos.map((pedido) => {
+          return (
+            <div className="orders" key={pedido.id}>
+                <div className="details-client">
+                <h3>Pedido nº {pedido.id}</h3>
+                <p>Cliente: {pedido.client_name}</p>
+                <p>Mesa: {pedido.table}</p>
+            
+                  {pedido.Products.map((itens, index) => (
+                    <div key={index}>
+                      <p>{itens.qtd} {itens.name}
+                      </p>
+                      <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
+                      <p>{itens.complement === 'null' ? '' : itens.complement}</p>
+                    </div>
+                  ))}
+                </div>
+                  <div className="buttons">
+                    <Button variant="quaternary"
+                      onClick={() => handleEntregar(pedido)}>
+                      Servir
+                    </Button>
                   </div>
-              ))
-            }
-      </section>  
-    </div>
+                </div>
+          );
+        })}
+      </section>
+    </main>
   );
 };
 

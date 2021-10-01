@@ -74,6 +74,7 @@ ul {
 	background-color: var(--buff);
 	font-size: 2.18rem;
 	border-radius: 2.6rem;
+	border-style: none;
 }
 
 .btn-add:hover {
@@ -166,13 +167,20 @@ h1 {
 }
 
 .trash-btn {
-	margin: 1.25rem;
-	margin-top: 1.44rem;
+	display: flex;
+	justify-content: center;
+	margin: 2rem;
+	margin-top: 1.5rem;
 	height: 2.5rem;
 	width: 2.5rem;
-	background-color: var(--buff);
-	font-size: 1.8rem;
+	font-size: 1.8rem; 
 	border-radius: 2.6rem;
+	border-style: none;
+	background-color: var(--eerie-black);
+} 
+
+.trash-btn:hover {
+	background-color: var(--eerie-black);
 }
 
 .btn-order-items {
@@ -180,23 +188,14 @@ h1 {
 	align-items: center;
 }
 
-.tamplete-order {
+.icon {
 	display: flex;
-	margin: 10%;
-	flex-flow: nowrap;
-	width: 50vw;
-	height: 10vh;
-	list-style-type: none
-} 
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 0.4rem;
+}
 
-.individualOrder {
-	display: flex;
-	flex-direction: column;
-	margin:2%;
-	list-style-type: none
-}
-.choice-products{
-	display: flex;
-	flex-direction: column;
-	list-style-type: none
-}
+.show{
+	display: block !important;
+  }

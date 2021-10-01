@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-style: none;
 }
 
 .button.primary {
@@ -38,11 +39,22 @@
 
 .button.tertiary {
     background: var(--rosso-corsa);
-    width: 18rem;
+    width: 8rem;
     height: 2.2rem;
-    margin-left: 6rem;
+    color: var(--champagne-pink);
 }
 
 .button.tertiary:hover{
     background: var(--cinnabar);
+}
+
+.button.quaternary {
+    background: var(--spanish-green);
+    width: 8rem;
+    height: 2.2rem;
+    color: var(--champagne-pink);
+}
+
+.button.quaternary:hover{
+    background: var(--shamrock-green);
 }

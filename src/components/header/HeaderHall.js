@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css';
 import home from "../../assets/icons/home.png";
+import pendentes from "../../assets/icons/pendentes.png";
 import prontos from "../../assets/icons/prontos.png";
 import logout from "../../assets/icons/logout.png";
 import { useHistory } from "react-router";
@@ -10,6 +11,10 @@ const HeaderHall = () => {
 
  const Home = () => {
   history.push('/Hall')  
+}
+
+ const Pending = () => {
+  history.push('/Pending')  
 }
   const OrderUp = () => {
     history.push('/OrderUp')
@@ -25,8 +30,11 @@ const HeaderHall = () => {
     <header className="nav-header">
        <ol className="order-menu">
           <div className="buttons-menu">
-            <button className="nav-btn-menu"><img src={home} alt="" className='img-menu' onClick={Home}/>
+          <button className="nav-btn-menu"><img src={home} alt="" className='img-menu' onClick={Home}/>
             <label>Home</label>
+            </button>
+            <button className="nav-btn-menu"><img src={pendentes} alt="" className='img-menu' onClick={Pending}/>
+            <label>Pedidos Pendentes</label>
             </button>
 
             <button className="nav-btn-menu"><img src={prontos} alt="" className='img-menu' onClick={OrderUp}/>

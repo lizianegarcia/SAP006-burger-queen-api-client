@@ -2,5 +2,79 @@
 
 body {
   background-color: var(--eerie-black);
-  color: aliceblue;
+  color: var(--champagne-pink);
+}
+
+.orders-section {
+  top: 10rem;
+  gap: 10vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.orders {
+  left: 10rem;
+  text-transform:uppercase;
+  font-size: 1rem;
+  background-color: var(--eerie-black-darker);
+  text-align: center;
+  border-radius: 1rem;
+  position: relative;
+  width: 30vw;
+  padding: 20px 21px;
+  top: 2rem;
+  font-weight: 500;
+}
+
+.orders:hover {
+  background-color: var(--jet);
+}
+
+.details-client {
+  padding: 0.3rem;
+}
+
+h3 {
+  color: var(--fire-opal);
+  margin: 0.3rem;
+}
+
+.container-order {
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: grid;
+  justify-content: center;
+}
+
+.delete-btn {
+  align-content: center;
+	justify-content: center;
+  text-align: center;
+  margin: 1.25rem;
+	margin-top: 1.44rem;
+	height: 2.6rem;
+	width: 2.6rem;
+	background-color: var(--raisin-black);
+	font-size: 1.8rem;
+	border-radius: 2.6rem;
+  border-style: none;
+}
+
+.delete-btn:hover {
+	background-color: var(--eerie-black);
+  color: var(--champagne-pink);
+}
+
+.trash-icon {
+  margin: 0.2rem;
+  height: 1.9rem;
+	width: 1.9rem;
+  display: flex;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 0.4rem;
 }
