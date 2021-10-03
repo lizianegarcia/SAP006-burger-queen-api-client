@@ -9,6 +9,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Hall from "../Pages/Hall/Hall";
+import HistoricHall from "../Pages/Hall/HistoricHall";
 import Kitchen from "../Pages/Kitchen/Kitchen";
 import NotFound from "../Pages/NotFound/NotFound";
 import OrderUp from "../Pages/Hall/OrderUp"
@@ -42,6 +43,7 @@ function App() {
         <PrivateRoute path="/Pending" component={Pending}/>
         <PrivateRoute path="/Kitchen" component={Kitchen}/>
         <PrivateRoute path="/OrderUp" component={OrderUp}/>
+        <PrivateRoute path="/HistoricHall" component={HistoricHall}/>
         <PrivateRoute path="/Historic" component={Historic}/>
 
 

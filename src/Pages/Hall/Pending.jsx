@@ -5,9 +5,9 @@ import HeaderHall from "../../components/header/HeaderHall";
 
 function Pending() {
   const tokenUser = localStorage.getItem('token');
-  const [PedidosAFazer, setPedidosAFazer] = useState([]);
+  const [pendingOrder, setPendingOrder] = useState([]);
 
-  const listaPedidos = () => {
+  useEffect(() => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
@@ -22,14 +22,9 @@ function Pending() {
             itens.status.includes('preparing') ||
             itens.status.includes('pending')
         );
-        setPedidosAFazer(pedidosPendentes);
+        setPendingOrder(pedidosPendentes);
       });
-  };
-
-  useEffect(() => {
-    listaPedidos();
-  }, []);
-
+  });
 
   return (
     
@@ -38,15 +33,15 @@ function Pending() {
 <HeaderHall />
       <section className="orders-section">
 
-      {PedidosAFazer.map((pedido) => {
+      {pendingOrder.map((pedido) => {
         return (
           <div className="orders" key={pedido.id}   >
             <div className="details-client">
-            <h3>Status: {pedido.status 
-                  .replace('pending', 'Pendente')
-                  .replace('preparing', 'Preparando...')}
+              <h3 className="pending-orders"> {pedido.status 
+                .replace('pending', '⏱️ Pendente')
+                .replace('preparing', '⏳ Preparando')}
               </h3>
-              <p>Pedido nº {pedido.id}</p>
+              <p className="order-number">📋 Pedido nº {pedido.id}</p>
               <p>Cliente: {pedido.client_name}</p>
               <p>Mesa: {pedido.table}</p>
               <span>Data: {`${new Date(pedido.createdAt).toLocaleDateString('pt-br',
@@ -67,6 +62,7 @@ function Pending() {
                 </div>
               ))}
             </section>
+            <hr/>
           </div>
         );
       })}
