@@ -22,7 +22,7 @@ body {
   border-radius: 1rem;
   position: relative;
   width: 25vw;
-  padding: 20px 21px;
+  padding: 1.25rem 1.25rem;
   top: 2rem;
   font-weight: 500;
   border: 3px solid var(--jet);
@@ -152,4 +152,30 @@ hr {
 	text-align: center;
 	margin-top: 0.2rem;
   margin-left: 0.3rem;
+}
+
+.icon-trash {
+  margin: 0.2rem;
+  height: 1.9rem;
+	width: 1.9rem;
+  display: flex;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 0.2rem;
+  margin-left: 0.3rem;
+}
+
+.btn-delete {
+	height: 2.6rem;
+	width: 2.6rem;
+	background-color: var(--eerie-black);
+	font-size: 1.8rem;
+	border-radius: 2.6rem;
+  border-style: none;
+}
+
+.btn-delete:hover {
+	background-color: var(--eerie-black);
+  color: var(--champagne-pink);
 }

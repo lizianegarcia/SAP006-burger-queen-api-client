@@ -4,62 +4,58 @@ import "../../Styles/kitchen.css";
 import HeaderHall from "../../components/header/HeaderHall";
 
 function Pending() {
-  const tokenUser = localStorage.getItem('token');
-  const [PedidosAFazer, setPedidosAFazer] = useState([]);
+  const token = localStorage.getItem('token');
+  const [ordersToDo, setOrdersToDo] = useState([]);
 
-  const listaPedidos = () => {
+  const ordersList = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
+        accept: 'application/json',
+        Authorization: `${token}`,
       },
     })
       .then((response) => response.json())
-      .then((pedidos) => {
-        const pedidosPendentes = pedidos.filter(
+      .then((orders) => {
+        const ordersPending = orders.filter(
           (itens) =>
             itens.status.includes('preparing') ||
             itens.status.includes('pending')
         );
-        setPedidosAFazer(pedidosPendentes);
+        setOrdersToDo(ordersPending);
       });
   };
 
   useEffect(() => {
-    listaPedidos();
+    ordersList();
   }, []);
 
-
   return (
-    
-    
     <main >
 <HeaderHall />
       <section className="orders-section">
 
-      {PedidosAFazer.map((pedido) => {
+      {ordersToDo.map((order) => {
         return (
-          <div className="orders" key={pedido.id}   >
+          <div className="orders" key={order.id}   >
             <div className="details-client">
-              <h3 className="pending-orders"> {pedido.status 
+              <h3 className="pending-orders"> {order.status 
                 .replace('pending', '⏱️ Pendente')
                 .replace('preparing', '⏳ Preparando')}
               </h3>
-              <p className="order-number">📋 Pedido nº {pedido.id}</p>
-              <p>Cliente: {pedido.client_name}</p>
-              <p>Mesa: {pedido.table}</p>
-              <span>Data: {`${new Date(pedido.createdAt).toLocaleDateString('pt-br',
-              )} - ${new Date(pedido.createdAt).toLocaleTimeString(
+              <p className="order-number">📋 Pedido nº {order.id}</p>
+              <p>Cliente: {order.client_name}</p>
+              <p>Mesa: {order.table}</p>
+              <span>Data: {`${new Date(order.createdAt).toLocaleDateString('pt-br',
+              )} - ${new Date(order.createdAt).toLocaleTimeString(
               'pt-br', {
                hour: '2-digit',
                minute: '2-digit',
               })}h`}</span>
-								
             </div>
-
-            <section className="container-pedido">
-              {pedido.Products.map((itens, index) => (
+            <hr/>
+            <section className="container-order">
+              {order.Products.map((itens, index) => (
                 <div key={index}>
                   <p>{itens.qtd} {itens.name}</p>
                   <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>

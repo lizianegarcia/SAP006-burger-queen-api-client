@@ -4,50 +4,47 @@ import HeaderHall from "../../components/header/HeaderHall";
 import "../../Styles/kitchen.css";
 import Button from "../../components/button/button";
 
-
 export const OrderUp = () => {
-  const tokenUser = localStorage.getItem('token');
-  const [PedidosProntos, setPedidosProntos] = useState([]);
+  const token = localStorage.getItem('token');
+  const [ordersReady, setOrdersReady] = useState([]);
 
-  const listaPedidos = () => {
+  const ordersList = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
+        accept: 'application/json',
+        Authorization: `${token}`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
         const products = data;
-        const pedidosEntregar = products.filter((itens) =>
+        const orderUp = products.filter((itens) =>
           itens.status.includes('ready')
         );
-        setPedidosProntos(pedidosEntregar);
-        console.log(pedidosEntregar)
+        setOrdersReady(orderUp);
       });
   };
 
-  
   useEffect(() => {
-    listaPedidos();
+    ordersList();
   }, []);
 
-  const handleEntregar = (pedido) => {
+  const handleDelivery = (order) => {
     const url = 'https://lab-api-bq.herokuapp.com/orders/';
-    const id = pedido.id;
+    const id = order.id;
     const status = { status: 'finished' };
 
     fetch(url + id, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
+        accept: 'application/json',
+        Authorization: `${token}`,
       },
       body: JSON.stringify(status),
     }).then((response) => {
       response.json().then(() => {
-        listaPedidos();
+        ordersList();
       });
     });
   };
@@ -57,25 +54,25 @@ export const OrderUp = () => {
       <HeaderHall />
       <section className="orders-section">
         
-        {PedidosProntos.map((pedido) => {
-           const dataUpdated = new Date(pedido.updatedAt);
-           const dataCreated = new Date(pedido.createdAt);
+        {ordersReady.map((order) => {
+           const dataUpdated = new Date(order.updatedAt);
+           const dataCreated = new Date(order.createdAt);
            const difference = Math.abs(dataUpdated) - dataCreated;
            const minutes = Math.floor(difference / 1000 / 60);
           return (
-            <div className="orders" key={pedido.id}>
+            <div className="orders" key={order.id}>
               <div className="details-client">
-                  <h3 className="order-up"> {pedido.status 
+                  <h3 className="order-up"> {order.status 
                   .replace('ready', 'Pronto  ✔️')}
                   </h3>
-                  <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
-                  <p> Cliente: {pedido.client_name}</p>
-                  <p>Mesa: {pedido.table}</p>
-                  {pedido.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
+                  <p className="order-number"> 📋 Pedido nº {order.id}</p>
+                  <p> Cliente: {order.client_name}</p>
+                  <p>Mesa: {order.table}</p>
+                  {order.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
                   <hr/> 
               </div>
               <section className="container-order">
-                  {pedido.Products.map((itens, index) => (
+                  {order.Products.map((itens, index) => (
                     <div key={index}>
                       <p>{itens.qtd} {itens.name}
                       </p>
@@ -87,7 +84,7 @@ export const OrderUp = () => {
                <hr className="break-line" />
                 <div className="serve-button">
                     <Button variant="quaternary"
-                      onClick={() => handleEntregar(pedido)}>
+                      onClick={() => handleDelivery(order)}>
                       Servir
                     </Button>
                 </div>

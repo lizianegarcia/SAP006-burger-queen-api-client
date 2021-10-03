@@ -14,12 +14,12 @@ import Order from "../../Api/postOrder";
 
 
 function Hall() {
-  const token = localStorage.getItem("token");
-  const [menu, setMenu] = useState({}) // menu 
-  const [client, setClient] = useState(''); // nome do cliente
-  const [table, setTable] = useState(''); // numero da mesa
-  const [summary, setSummary] = useState([]); //array do produto escolhido + qtd
-  const [tab, setTab] = useState('breakfast'); // escolha do menu de breakfast, hamburguer, extras ou bebidas
+  const token = localStorage.getItem('token');
+  const [menu, setMenu] = useState({});
+  const [client, setClient] = useState(''); 
+  const [table, setTable] = useState(''); 
+  const [summary, setSummary] = useState([]);
+  const [tab, setTab] = useState('breakfast');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     client: '',
@@ -33,7 +33,6 @@ function Hall() {
         headers: {
             accept: 'application/json',
             Authorization: `${token}`,
-       
         },
     })
     .then(response => response.json())
@@ -80,8 +79,6 @@ function Hall() {
     const quantityElement = summary.find(elemento => elemento === item)
     if (quantityElement.qtd !== 0) {
       quantityElement.qtd -= 1
-      // setAddItem(prevLess => prevLess.map(itemProduct => itemProduct.id  === foundItem ? foundItem : itemProduct))
-      // setAddItem(prevLess => prevLess.map(itemProduct => itemProduct.id  === foundItem.id ? foundItem : itemProduct))  
        setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
     } 
     if (quantityElement.qtd === 0) {
@@ -90,7 +87,6 @@ function Hall() {
   }
 
  const calculateTotal = (items) => {
-   
   const totalPrice = items.reduce((accumulator, array) => {
     const { qtd, price } = array;
     accumulator = Number(qtd * price + accumulator)
@@ -120,12 +116,10 @@ function Hall() {
   return error
 }
 
- 
  useEffect(() => {
     console.log(summary, client)
   }, [summary, client])
   
-
   const handleSubmit = (e) => {
     e.preventDefault()
     const valid = validationOrder()
@@ -145,11 +139,9 @@ function Hall() {
       setClient([])
       setTable([])
       setSummary([])
-      
     }
   }
   
- 
  const total = calculateTotal(summary)
  const showSummary = tab === 'summary';
  const showMenuTab = !showSummary && !loading;
@@ -199,8 +191,8 @@ function Hall() {
               setTab('summary')
             })} src={cifrao} 
           />
-
         </div>
+        
           <section className='restaurant-menu'>
               { showMenuTab && menu[tab].map((items) => (       
                   <div className="products" key={items.id}>
@@ -265,15 +257,14 @@ function Hall() {
                     </ol>
                     <p>R$ {item.price},00</p>
                     <p>{item.qtd}</p>
-                    <ButtonMenu className="trash-btn" src={trash} onClick={() => deleteItem(index)} />
-                                  
+                    <button className="btn-delete" onClick={() => deleteItem(index)} > <img className="icon-trash" alt="" src={trash} />
+                    </button>           
                   </span>
                 </article>
               )}
               <p className="total">Total: R$ {total},00</p>
               <div className="hidden">{error.summary && <p>{error.summary}</p>} </div>
-              <Button variant="primary" onClick={handleSubmit}>Enviar Pedido</Button>
-              
+              <Button variant="primary-hall" onClick={handleSubmit}>Enviar Pedido</Button>
             </section>
               }
          </section>

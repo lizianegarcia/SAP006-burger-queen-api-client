@@ -22,10 +22,27 @@
     background: var(--vegas-gold);
     margin-bottom: 1.5rem;
 }
+
 .button.primary:hover{
     background: var(--eerie-black-darker);
     color:var(--buff);
 }
+
+.button.primary-hall {
+    background: var(--vegas-gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button.primary-hall:hover{
+    background: var(--eerie-black-darker);
+    color:var(--buff);
+}
+
 .button.secundary {
     background: var(--vegas-gold);
     width: 12rem;

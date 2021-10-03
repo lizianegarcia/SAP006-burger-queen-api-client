@@ -4,43 +4,42 @@ import "../../Styles/kitchen.css";
 import trash from "../../assets/icons/trash.png";
 
 export const HistoricHall = () => {
-  const [Pedidos, setPedidos] = useState([]);
-  const tokenUser = localStorage.getItem('token');
+  const [orders, setOrders] = useState([]);
+  const token = localStorage.getItem('token');
 
-  const listaPedidos = (tokenUser) => {
+  const ordersList = (token) => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
+        accept: 'application/json',
+        Authorization: `${token}`,
       },
     })
       .then((response) => response.json())
-      .then((pedidos) => {
-        setPedidos(pedidos);
+      .then((order) => {
+        setOrders(order);
       });
   };
 
   useEffect(() => {
-    listaPedidos(tokenUser);
-  }, [tokenUser]);
+    ordersList(token);
+  }, [token]);
 
- 
-  const handleExcluir = (pedido) => {
+  const handleDelete = (order) => {
     const url = 'https://lab-api-bq.herokuapp.com/orders/';
-    const id = pedido.id;
+    const id = order.id;
     const status = { status: 'ready' };
 
     fetch(url + id, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
+        accept: 'application/json',
+        Authorization: `${token}`,
       },
       body: JSON.stringify(status),
     }).then((response) => {
       response.json().then(() => {
-        listaPedidos(tokenUser);
+        ordersList(token);
       });
     });
   };
@@ -49,24 +48,24 @@ export const HistoricHall = () => {
     <main>
       <HeaderHall />
       <section className="orders-section"> 
-      {Pedidos.map((pedido) => {
+      {orders.map((order) => {
         return (
-          <div className="orders"  key={pedido.id}>
+          <div className="orders"  key={order.id}>
             <div className="details-client">
-            <h3 className="historic-orders">{pedido.status
-                  .replace('pending', '⏱️ Pendente')
-                  .replace('ready', '✔️ Pronto')
-                  .replace('finished', '🍽️ Finalizado')
-                  .replace('preparing', '⏳ Preparando')}
-              </h3>
+            <h3 className="historic-orders">{order.status
+                .replace('pending', '⏱️ Pendente')
+                .replace('ready', '✔️ Pronto')
+                .replace('finished', '🍽️ Finalizado')
+                .replace('preparing', '⏳ Preparando')}
+            </h3>
               
-              <p className="order-number">📋 Pedido nº {pedido.id}</p>
-              <p>Cliente: {pedido.client_name}</p>
-              <p>Mesa: {pedido.table}</p>
+              <p className="order-number">📋 Pedido nº {order.id}</p>
+              <p>Cliente: {order.client_name}</p>
+              <p>Mesa: {order.table}</p>
               <hr/> 
             </div>
             <section className="container-order">
-              {pedido.Products.map((itens, index) => (
+              {order.Products.map((itens, index) => (
                 <div key={index}>
                   <p>
                     {itens.qtd} {itens.name}
@@ -79,7 +78,7 @@ export const HistoricHall = () => {
             <hr className="break-line"/>
             <div>
               <button className="delete-btn"
-                  onClick={() => handleExcluir(pedido)}>
+                  onClick={() => handleDelete(order)}>
                     <img className="trash-icon" alt="" src={trash} />
               </button>
             </div>
