@@ -122,19 +122,19 @@ atualizar a lista de pedidos e o total).
 O _Product Owner_ nos apresentou
 este _backlog_ que é o resultado do seu trabalho com o cliente até hoje.
 
-#### 1ª Historia de Usuário :newspaper:
+### 1ª Historia de Usuário :newspaper:
 👨‍💼 👩‍💼 Garçom/Garçonete deve poder entrar no sistema:
 <img src="img/UH1.png" width="90%"/>
 ---
-#### 2ª História de Usuário :newspaper:
+### 2ª História de Usuário :newspaper:
 👨‍💼 👩‍💼 Garçom/Garçonete deve ser capaz de anotar o pedido do cliente:
 <img src="img/UH2.png" width="90%"/>
 ---
-#### 3ª História de Usuário :newspaper:
+### 3ª História de Usuário :newspaper:
 👨‍🍳 👩‍🍳  Chefe de cozinha deve ver os pedidos:
 <img src="img/UH3.png" width="90%"/>
 ---
-#### 4ª Historia de Usuário :newspaper:
+### 4ª Historia de Usuário :newspaper:
 👨‍💼 👩‍💼 Garçom/Garçonete deve ver os pedidos prontos para servir:
 <img src="img/UH4.png" width="90%"/>
 
