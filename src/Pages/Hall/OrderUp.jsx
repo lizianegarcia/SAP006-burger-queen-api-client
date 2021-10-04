@@ -28,7 +28,7 @@ export const OrderUp = () => {
 
   useEffect(() => {
     ordersList();
-  }, []);
+  });
 
   const handleDelivery = (order) => {
     const url = 'https://lab-api-bq.herokuapp.com/orders/';
