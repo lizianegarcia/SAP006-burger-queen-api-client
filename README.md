@@ -1,5 +1,4 @@
-<img src="img/logo.png"/>
-# Burger Queen (API Client)
+<img src="img/logo.png" width="20%"/>
 
 ## :round_pushpin: Índice
 
@@ -45,12 +44,8 @@ Desta vez temos um projeto 100% por demanda. Você sempre pode (e deve) fazer
 sugestões de melhora e mudança, mas muitas vezes trabalhará em um projeto em que
 primeiro deve se assegurar de cumprir os requisitos.
 
-:pushpin: **Informações do cliente:**
-
-
-
-:ledger: :ledger: :ledger: :ledger: IMAGEM CLIENTEEEEEEEEEEEEEEEEEE :ledger: :ledger:
-
+### :pushpin: Informações do cliente: <br>
+<img src="img/cliente.png" width="100%"/>
 
 
 Além disso a cliente nos deu um [link da documentação](https://lab-api-bq.herokuapp.com/api-docs/)
@@ -127,48 +122,21 @@ atualizar a lista de pedidos e o total).
 O _Product Owner_ nos apresentou
 este _backlog_ que é o resultado do seu trabalho com o cliente até hoje.
 
----
-
 #### 1ª Historia de Usuário :newspaper:
 👨‍💼 👩‍💼 Garçom/Garçonete deve poder entrar no sistema:
-
-
-
-IMAGEM 1 HISTORIA
-
-
+<img src="img/UH1.png" width="90%"/>
 ---
-
 #### 2ª História de Usuário :newspaper:
 👨‍💼 👩‍💼 Garçom/Garçonete deve ser capaz de anotar o pedido do cliente:
- 
- 
- 
-IMAGEM 2 HISTORIA
- 
-
+<img src="img/UH2.png" width="90%"/>
 ---
-
 #### 3ª História de Usuário :newspaper:
 👨‍🍳 👩‍🍳  Chefe de cozinha deve ver os pedidos:
-
-
-IMAGEM 3 HISTORIA
-
-
+<img src="img/UH3.png" width="90%"/>
 ---
-
 #### 4ª Historia de Usuário :newspaper:
 👨‍💼 👩‍💼 Garçom/Garçonete deve ver os pedidos prontos para servir:
-
-
-
-IMAGEM 4 HISTORIA
-
-
-
----
-
+<img src="img/UH4.png" width="90%"/>
 
 ## 5. Desenvolvedoras :woman_technologist: <br>
 
