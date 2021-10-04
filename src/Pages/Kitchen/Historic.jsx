@@ -66,7 +66,7 @@ export const Historic = () => {
                 <p className="order-number">📋 Pedido nº {order.id}</p>
                 <p>Cliente: {order.client_name}</p>
                 <p>Mesa: {order.table}</p>
-                {order.status === "ready" ? (<p>Tempo de preparação:{' '}{timePreparing(order.updatedAt, order.createdAt)} min</p>) : ""}
+                {order.status === "ready" || order.status === "finished" ? (<p>Tempo de preparação:{' '}{timePreparing(order.updatedAt, order.createdAt)} min</p>) : ""}
                 <hr/> 
               </section>
 

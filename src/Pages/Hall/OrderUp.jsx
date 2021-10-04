@@ -55,10 +55,6 @@ export const OrderUp = () => {
       <section className="orders-section">
         
         {ordersReady.map((order) => {
-           const dataUpdated = new Date(order.updatedAt);
-           const dataCreated = new Date(order.createdAt);
-           const difference = Math.abs(dataUpdated) - dataCreated;
-           const minutes = Math.floor(difference / 1000 / 60);
           return (
             <div className="orders" key={order.id}>
               <div className="details-client">
@@ -68,7 +64,6 @@ export const OrderUp = () => {
                   <p className="order-number"> 📋 Pedido nº {order.id}</p>
                   <p> Cliente: {order.client_name}</p>
                   <p>Mesa: {order.table}</p>
-                  {order.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
                   <hr/> 
               </div>
               <section className="container-order">

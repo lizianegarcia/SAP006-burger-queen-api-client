@@ -49,6 +49,10 @@ export const HistoricHall = () => {
       <HeaderHall />
       <section className="orders-section"> 
       {orders.map((order) => {
+          const dataUpdated = new Date(order.updatedAt);
+          const dataCreated = new Date(order.createdAt);
+          const difference = Math.abs(dataUpdated) - dataCreated;
+          const minutes = Math.floor(difference / 1000 / 60);
         return (
           <div className="orders"  key={order.id}>
             <div className="details-client">
@@ -62,6 +66,7 @@ export const HistoricHall = () => {
               <p className="order-number">📋 Pedido nº {order.id}</p>
               <p>Cliente: {order.client_name}</p>
               <p>Mesa: {order.table}</p>
+              {order.status === "ready" || order.status === "finished" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
               <hr/> 
             </div>
             <section className="container-order">
