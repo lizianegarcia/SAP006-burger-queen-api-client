@@ -1,72 +1,98 @@
 import React, {useEffect, useState} from "react";
 import "../../Styles/hall.css";
 import HeaderHall from "../../components/header/HeaderHall";
-import "../../Styles/orderup.css";
+import "../../Styles/kitchen.css";
+import Button from "../../components/button/button";
 
 export const OrderUp = () => {
-  const [order, setOrder] = useState([]);
-  const [products, setProducts] = useState([]);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
+  const [ordersReady, setOrdersReady] = useState([]);
 
-  useEffect (() => {
+  const ordersList = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
-        headers: {
-            accept: 'application/json',
-            Authorization: `${token}`,
-       
-        },
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `${token}`,
+      },
     })
-    .then(response => response.json())
-    .then((json) => {
-      const orders = json.filter(item => item)
-      const orderProducts = json.filter(item => item.Products)
-      console.log(orderProducts)
-      setOrder(orders)
-      setProducts(orderProducts)
-      // setLoading(false)   
+      .then((response) => response.json())
+      .then((data) => {
+        const products = data;
+        const orderUp = products.filter((itens) =>
+          itens.status.includes('ready')
+        );
+        setOrdersReady(orderUp);
       });
-  }, [token])
+  };
 
   useEffect(() => {
-    console.log(products)
-  }, [products])
+    ordersList();
+  }, []);
+
+  const handleDelivery = (order) => {
+    const url = 'https://lab-api-bq.herokuapp.com/orders/';
+    const id = order.id;
+    const status = { status: 'finished' };
+
+    fetch(url + id, {
+      method: 'PUT',
+      headers: {
+        accept: 'application/json',
+        Authorization: `${token}`,
+      },
+      body: JSON.stringify(status),
+    }).then((response) => {
+      response.json().then(() => {
+        ordersList();
+      });
+    });
+  };
 
   return (
-    <div>
+    <main>
       <HeaderHall />
-     <h1>Pedidos Prontos</h1>
-
-      <section className='templete-order'>
-            {order.map((items) => (       
-                  <div className="orders" key={items.id}>
-                      <article className="">
-                        <div className='details-client'>
-                        <h3>Status: {items.status.replace('ready', 'Pronto')
-                        .replace('pending', 'Pendente')
-                        .replace('finished', 'Finalizado')
-
-                        }
-                        </h3>
-                          <p>Cliente: {items.client_name}</p>
-                          <p>Mesa: {items.table}</p>
-                          <time>Horário: {items.createdAt.slice(11,16)}</time>
-                        </div>
-                        <div className="choice-products">
-                          {items.Products.map((product) => (
-                            <div>
-                            <p> {product.qtd} {product.name}
-                            </p>
-                            </div>
-                          ))
-                          }
-                          </div>
-                       
-                      </article>
-                  </div>
-              ))
-            }
-      </section>  
-    </div>
+      <section className="orders-section">
+        
+        {ordersReady.map((order) => {
+           const dataUpdated = new Date(order.updatedAt);
+           const dataCreated = new Date(order.createdAt);
+           const difference = Math.abs(dataUpdated) - dataCreated;
+           const minutes = Math.floor(difference / 1000 / 60);
+          return (
+            <div className="orders" key={order.id}>
+              <div className="details-client">
+                  <h3 className="order-up"> {order.status 
+                  .replace('ready', 'Pronto  ✔️')}
+                  </h3>
+                  <p className="order-number"> 📋 Pedido nº {order.id}</p>
+                  <p> Cliente: {order.client_name}</p>
+                  <p>Mesa: {order.table}</p>
+                  {order.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
+                  <hr/> 
+              </div>
+              <section className="container-order">
+                  {order.Products.map((itens, index) => (
+                    <div key={index}>
+                      <p>{itens.qtd} {itens.name}
+                      </p>
+                      <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
+                      <p>{itens.complement === 'null' ? '' : itens.complement}</p>
+                    </div>
+                  ))}
+               </section>
+               <hr className="break-line" />
+                <div className="serve-button">
+                    <Button variant="quaternary"
+                      onClick={() => handleDelivery(order)}>
+                      Servir
+                    </Button>
+                </div>
+             </div>
+          );
+        })}
+      </section>
+    </main>
   );
 };
 

@@ -4,9 +4,7 @@ import "../../Styles/notfound.css";
 import { useHistory } from "react-router";
 import BackgroundLogo from "../../components/img/BackgroundLogo";
 
-
 const NotFound = () => {
-
   const history = useHistory();
   const Login = () => {
     history.push('/Login')
@@ -25,8 +23,6 @@ const NotFound = () => {
       </Button>
     </main>
  </div>
-
-
   )
 }
 

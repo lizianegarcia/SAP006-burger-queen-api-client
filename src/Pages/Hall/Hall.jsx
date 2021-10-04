@@ -5,6 +5,7 @@ import lanche from "../../assets/icons/lanche.png"
 import extras from "../../assets/icons/extras.png";
 import bebidas from "../../assets/icons/bebidas.png";
 import cifrao from "../../assets/icons/cifrao.png";
+import trash from "../../assets/icons/trash.png";
 import ButtonMenu from "../../components/button/buttonIconsMenu";
 import HeaderHall from "../../components/header/HeaderHall";
 import HallInput from "../../components/input/HallIput";
@@ -13,12 +14,12 @@ import Order from "../../Api/postOrder";
 
 
 function Hall() {
-  const token = localStorage.getItem("token");
-  const [menu, setMenu] = useState({}) // menu 
-  const [client, setClient] = useState(''); // nome do cliente
-  const [table, setTable] = useState(''); // numero da mesa
-  const [summary, setSummary] = useState([]); //array do produto escolhido + qtd
-  const [tab, setTab] = useState('breakfast'); // escolha do menu de breakfast, hamburguer, extras ou bebidas
+  const token = localStorage.getItem('token');
+  const [menu, setMenu] = useState({});
+  const [client, setClient] = useState(''); 
+  const [table, setTable] = useState(''); 
+  const [summary, setSummary] = useState([]);
+  const [tab, setTab] = useState('breakfast');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     client: '',
@@ -32,7 +33,6 @@ function Hall() {
         headers: {
             accept: 'application/json',
             Authorization: `${token}`,
-       
         },
     })
     .then(response => response.json())
@@ -56,15 +56,17 @@ function Hall() {
       const list = summary
       list.splice(index, 1)
       setSummary([...list])
-    } 
+  } 
 
   const addItem = (e, item) => {
     e.preventDefault()
     const quantityElement = summary.find(element => element === item)
     if (quantityElement) {
       quantityElement.qtd += 1
+      
       setSummary(prevQuantidade => prevQuantidade.map(prevElem => prevElem.id === quantityElement.id ? quantityElement : prevElem))
-    } else {
+    } 
+    else {
       item.qtd = 1;
       item.subtotal = item.price;
       setSummary([...summary, item]);
@@ -76,7 +78,7 @@ function Hall() {
     const quantityElement = summary.find(elemento => elemento === item)
     if (quantityElement.qtd !== 0) {
       quantityElement.qtd -= 1
-      setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
+       setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
     } 
     if (quantityElement.qtd === 0) {
       deleteItem()
@@ -84,7 +86,6 @@ function Hall() {
   }
 
  const calculateTotal = (items) => {
-   
   const totalPrice = items.reduce((accumulator, array) => {
     const { qtd, price } = array;
     accumulator = Number(qtd * price + accumulator)
@@ -99,7 +100,7 @@ function Hall() {
   error.isFormValid = true
 
   if (!client) {
-    error.client = 'Preencha o nome do cliente corretamente'
+    error.client = 'Preencha o nomedo cliente corretamente'
     error.isFormValid = false
   }
   if (!table || table >= 10 ) {
@@ -114,12 +115,10 @@ function Hall() {
   return error
 }
 
- 
  useEffect(() => {
-    console.log(summary, menu)
-  }, [summary, menu])
+    console.log(summary, client)
+  }, [summary, client])
   
-
   const handleSubmit = (e) => {
     e.preventDefault()
     const valid = validationOrder()
@@ -136,10 +135,12 @@ function Hall() {
           }))
       }) 
       Order(pedido, "orders", "POST")
+      setClient([])
+      setTable([])
+      setSummary([])
     }
   }
   
- 
  const total = calculateTotal(summary)
  const showSummary = tab === 'summary';
  const showMenuTab = !showSummary && !loading;
@@ -151,6 +152,7 @@ function Hall() {
         <main className="hall-page-main"> 
          <div className="menu-btn">
           <ButtonMenu 
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('breakfast')
@@ -158,6 +160,7 @@ function Hall() {
           />
 
           <ButtonMenu
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('hamburguer')
@@ -165,6 +168,7 @@ function Hall() {
           />
           
           <ButtonMenu 
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('side')
@@ -172,20 +176,22 @@ function Hall() {
           />
           
           <ButtonMenu  
+            className="btn-menu"
             onClick={((e) => {
               e.preventDefault();
               setTab('drinks')
             })} src={bebidas} 
           />
 
-          <ButtonMenu 
+          <ButtonMenu
+            className="btn-menu" 
             onClick={((e) => {
               e.preventDefault();
               setTab('summary')
             })} src={cifrao} 
           />
-
         </div>
+        
           <section className='restaurant-menu'>
               { showMenuTab && menu[tab].map((items) => (       
                   <div className="products" key={items.id}>
@@ -250,17 +256,14 @@ function Hall() {
                     </ol>
                     <p>R$ {item.price},00</p>
                     <p>{item.qtd}</p>
-                    <button className="trash-btn" onClick={() => deleteItem(index)}>
-                    x
-                    </button>               
+                    <button className="btn-delete" onClick={() => deleteItem(index)} > <img className="icon-trash" alt="" src={trash} />
+                    </button>           
                   </span>
                 </article>
               )}
               <p className="total">Total: R$ {total},00</p>
               <div className="hidden">{error.summary && <p>{error.summary}</p>} </div>
-              <div className="send-order-btn">
-              <Button variant="primary" onClick={handleSubmit}>Enviar Pedido</Button>
-              </div>
+              <Button variant="primary-hall" onClick={handleSubmit}>Enviar Pedido</Button>
             </section>
               }
          </section>

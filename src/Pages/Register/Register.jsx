@@ -26,6 +26,8 @@ const Register = () => {
     role: '',
     restaurant: 'Burguer Queen',
   }, console.log('entrou'));
+
+  
  
   const [errors, setError] = useState({
     name:'',
@@ -85,10 +87,7 @@ const Register = () => {
   const handleSubmit = e => {
     e.preventDefault()
     const valid = validation()
-    console.log(values)
-
     setError(valid)
-
     if (valid.isFormValid) {
       Login()
       Data(values, 'users', 'POST')

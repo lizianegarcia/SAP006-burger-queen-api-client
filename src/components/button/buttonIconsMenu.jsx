@@ -1,10 +1,10 @@
 import React from "react";
 import './style.css'; 
 
-const ButtonMenu = ({src, onClick}) => {
+const ButtonMenu = ({className, src, onClick}) => {
     
     return (
-        <button className="btn-menu"  onClick={onClick}  >
+        <button className={className}  onClick={onClick}  >
             <img src={src} alt="" className="img-menu" />
         </button>
     )
