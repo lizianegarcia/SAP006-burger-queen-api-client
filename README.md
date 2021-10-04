@@ -1,3 +1,4 @@
+<img src="img/logo.png"/>
 # Burger Queen (API Client)
 
 ## :round_pushpin: Índice
