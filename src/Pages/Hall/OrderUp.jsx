@@ -12,7 +12,7 @@ export const OrderUp = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
-        accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
     })
@@ -38,7 +38,7 @@ export const OrderUp = () => {
     fetch(url + id, {
       method: 'PUT',
       headers: {
-        accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
       body: JSON.stringify(status),

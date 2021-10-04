@@ -31,7 +31,7 @@ function Hall() {
   useEffect (() => {
     fetch('https://lab-api-bq.herokuapp.com/products', {
         headers: {
-            accept: 'application/json',
+          'Content-Type': 'application/json',
             Authorization: `${token}`,
         },
     })

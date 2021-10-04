@@ -11,7 +11,7 @@ export const HistoricHall = () => {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
-        accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
     })
@@ -33,7 +33,7 @@ export const HistoricHall = () => {
     fetch(url + id, {
       method: 'DELETE',
       headers: {
-        accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
       body: JSON.stringify(status),

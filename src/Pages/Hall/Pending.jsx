@@ -11,7 +11,7 @@ function Pending() {
     fetch('https://lab-api-bq.herokuapp.com/orders', {
       method: 'GET',
       headers: {
-        accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
     })
