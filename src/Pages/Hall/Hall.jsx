@@ -75,7 +75,6 @@ function Hall() {
 
   const removeItem = (e, item) => {
     e.preventDefault();
-    console.log(summary)
     const quantityElement = summary.find(elemento => elemento === item)
     if (quantityElement.qtd !== 0) {
       quantityElement.qtd -= 1

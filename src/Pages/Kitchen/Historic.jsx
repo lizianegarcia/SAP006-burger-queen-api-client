@@ -2,13 +2,15 @@ import HeaderKitchen from "../../components/header/HeaderKitchen";
 import React, { useEffect, useState } from 'react';
 import "../../Styles/kitchen.css";
 import trash from "../../assets/icons/trash.png";
+import ButtonMenu from "../../components/button/buttonIconsMenu";
 
 export const Historic = () => {
-  const [Pedidos, setPedidos] = useState([]);
+  const [ordersAll, setOrdersAll] = useState([]);
   const tokenUser = localStorage.getItem('token');
+  const url = 'https://lab-api-bq.herokuapp.com/orders/';
 
-  const listaPedidos = (tokenUser) => {
-    fetch('https://lab-api-bq.herokuapp.com/orders', {
+  useEffect(() => {
+    fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -16,83 +18,85 @@ export const Historic = () => {
       },
     })
       .then((response) => response.json())
-      .then((pedidos) => {
-        setPedidos(pedidos);
+      .then((orders) => {
+        setOrdersAll(orders);
       });
-  };
-
-  useEffect(() => {
-    listaPedidos(tokenUser);
-  }, [tokenUser]);
-
+  });
+  
  
-  const handleExcluir = (pedido) => {
-    const url = 'https://lab-api-bq.herokuapp.com/orders/';
-    const id = pedido.id;
+  const handleDelete = (idOrder) => { 
     const status = { status: 'ready' };
-
-    fetch(url + id, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
-      },
-      body: JSON.stringify(status),
-    }).then((response) => {
-      response.json().then(() => {
-        listaPedidos(tokenUser);
+      fetch(url + idOrder, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${tokenUser}`,
+        },
+        body: JSON.stringify(status),
+      })
+      .then((response) => {response.json()
+      .then(() => {
+        const order = ordersAll;
+        return order;
       });
     });
   };
 
+  const timePreparing = ( dataUpdated, dataCreated) => {
+    const difference = Math.abs(new Date(dataUpdated) - new Date(dataCreated));
+    return Math.floor(difference / 1000 / 60);
+  } 
+  
   return (
     <main>
       <HeaderKitchen />
-      <section className="orders-section"> 
-      {Pedidos.map((pedido) => {
-        const dataUpdated = new Date(pedido.updatedAt);
-        const dataCreated = new Date(pedido.createdAt);
-        const difference = Math.abs(dataUpdated) - dataCreated;
-        const minutes = Math.floor(difference / 1000 / 60);
-        return (
-          <div className="orders"  key={pedido.id}>
-            <div className="details-client">
-            <h3 className="historic-orders">{pedido.status
+      <body className="orders-section"> 
+        {ordersAll.map((order) => {
+          return (
+            <article className="orders"  key={order.id}>
+
+              <section className="details-client">
+              <h3 className="historic-orders">
+                {order.status
                   .replace('pending', '⏱️ Pendente')
                   .replace('ready', '✔️ Pronto')
                   .replace('finished', '🍽️ Finalizado')
-                  .replace('preparing', '⏳ Preparando')}
+                  .replace('preparing', '⏳ Preparando')
+                }
               </h3>
-              {pedido.status === "ready" ? (<p>Tempo de preparação:{' '}{ minutes} min</p>) : ""}
-              
-              <p className="order-number">📋 Pedido nº {pedido.id}</p>
-              <p>Cliente: {pedido.client_name}</p>
-              <p>Mesa: {pedido.table}</p>
-              <hr/> 
-            </div>
-            <section className="container-order">
-              {pedido.Products.map((itens, index) => (
-                <div key={index}>
-                  <p>
-                    {itens.qtd} {itens.name}
-                  </p>
-                  <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
-                  <p>{itens.complement === 'null' ? '' : itens.complement}</p>
-                
-                </div>
-              ))}
-            </section>
-            <hr className="break-line"/>
-            <div>
-              <button className="delete-btn"
-                  onClick={() => handleExcluir(pedido)}>
-                    <img className="trash-icon" alt="" src={trash} />
-              </button>
-            </div>
-          </div>
-        );
-      })}
-   </section>
+                <p className="order-number">📋 Pedido nº {order.id}</p>
+                <p>Cliente: {order.client_name}</p>
+                <p>Mesa: {order.table}</p>
+                {order.status === "ready" ? (<p>Tempo de preparação:{' '}{timePreparing(order.updatedAt, order.createdAt)} min</p>) : ""}
+                <hr/> 
+              </section>
+
+              <section className="container-order">
+                {order.Products.map((items, index) => (
+                  <div key={index}>
+                    <p>
+                      {items.qtd} {items.name}
+                    </p>
+                    <p>{items.flavor === 'null' ? '' : items.flavor}</p>
+                    <p>{items.complement === 'null' ? '' : items.complement}</p>
+                  
+                  </div>
+                ))}
+              </section>
+
+              <hr className="break-line"/>
+
+              <section>
+                <button
+                  className="btndelete"
+                  onClick={() => handleDelete(order.id)} 
+                > <img className="icontrash" src={trash} alt="" /> </button>
+              </section>
+
+            </article>
+          );
+        })}
+      </body>
     </main>
   );
 }

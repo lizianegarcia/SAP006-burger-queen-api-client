@@ -6,11 +6,10 @@ import Button from "../../components/button/button";
 
 function Kitchen() {
   const tokenUser = localStorage.getItem('token');
-  const [PedidosAFazer, setPedidosAFazer] = useState([]);
-  // const [tempoDePreparo, setTempoDePreparo] = useState ('')
+  const [preparerOrder, setPreparerOrder] = useState([]);
   const url = 'https://lab-api-bq.herokuapp.com/orders/';
 
-  const listaPedidos = () => {
+  useEffect(() => {
     fetch(url, {
       method: 'GET',
       headers: {
@@ -19,121 +18,89 @@ function Kitchen() {
       },
     })
       .then((response) => response.json())
-      .then((pedidos) => {
-        const pedidosPendentes = pedidos.filter(
-          (itens) =>
+      .then((orders) => {
+        const ordersPending = orders.filter((itens) => 
             itens.status.includes('preparing') ||
             itens.status.includes('pending')
         );
-        setPedidosAFazer(pedidosPendentes);
+        setPreparerOrder(ordersPending);
       });
-  };
-
-  useEffect(() => {
-    listaPedidos();
-  }, []);
-
-  
-    const handlePreparar = (pedido, e) => {
-    const id = pedido.id;
-    const status = { status: 'preparing' };
-    console.log(pedido.createdAt, "1")
-    console.log(pedido.updatedAt, "2")
-    console.log(pedido.processedAt, "3")
+  })
+ 
+    const handleStatusOrder = (idOrder, changeStatus) => {
+      const status = { status: changeStatus };
     
-    fetch(url + id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
-      },
-      body: JSON.stringify(status),
-    }).then((response) => {
-      response.json().then(() => {
-        listaPedidos();
+      fetch(url + idOrder, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${tokenUser}`,
+        },
+        body: JSON.stringify(status),
+      })
+      .then((response) => {
+        response.json().then(() => {
+          const order = preparerOrder
+          return order
+        });
       });
-    });
-  };
-
-  const handleFinalizar = (pedido) => {
-    const id = pedido.id;
-    const status = { status: 'ready' };
-    console.log(pedido.createdAt, "4")
-    console.log(pedido.updatedAt, "5")
-    console.log(pedido.processedAt, "6")
-
-    fetch(url + id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${tokenUser}`,
-      },
-      body: JSON.stringify(status),
-    }).then((response) => {
-      response.json().then(() => {
-        listaPedidos();
-      });
-    });
-  };
-
-  
-
+    };
 
   return (
     <main >
-<HeaderKitchen />
-      <section className="orders-section">
-      {PedidosAFazer.map((pedido) => {
-        return (
-          <div className="orders" key={pedido.id}   >
-            <div className="details-client">
-            <h3 className="pending-orders"> {pedido.status 
+     <HeaderKitchen />
+      <body className="orders-section">
+       {preparerOrder.map((order) => {
+         return (
+          <section className="orders" key={order.id}>
+
+            <article className="details-client">
+              <h3 className="pending-orders"> {order.status 
                 .replace('pending', '⏱️ Pendente')
                 .replace('preparing', '⏳ Preparando')}
               </h3>
-              <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
-              <p>Cliente: {pedido.client_name}</p>
-              <p>Mesa: {pedido.table}</p>
-              <span>Data: {`${new Date(pedido.createdAt).toLocaleDateString('pt-br',
-              )} - ${new Date(pedido.createdAt).toLocaleTimeString(
-              'pt-br', {
-               hour: '2-digit',
-               minute: '2-digit',
-              })}h`}</span>
+              <p className="order-number"> 📋 Pedido nº {order.id}</p>
+              <p>Cliente: {order.client_name}</p>
+              <p>Mesa: {order.table}</p>
+              <time>Data: 
+                {`${new Date(order.createdAt).toLocaleDateString('pt-br',)} - 
+                  ${new Date(order.createdAt).toLocaleTimeString('pt-br', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })
+                }h`}
+              </time> 
+            </article>
 
-
-            </div>
-
-            <section className="container-order">
-              {pedido.Products.map((itens, index) => (
+            <article className="container-order">
+              {order.Products.map((items, index) => (
                 <div key={index}>
-                  <p>
-                    {itens.qtd} {itens.name}
-                  </p>
-                  <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
-                  <p>{itens.complement === 'null' ? '' : itens.complement}</p>
+                  <p> {items.qtd} {items.name}</p>
+                  <p>{items.flavor === 'null' ? '' : items.flavor}</p>
+                  <p>{items.complement === 'null' ? '' : items.complement}</p>
                 </div>
               ))}
-            </section>
+            </article>
+
             <hr/>
+
             <div className="buttons">
-              <Button variant="tertiary"
-                onClick={(e) => handlePreparar(pedido, e)}
-              >
+              <Button 
+                variant="tertiary"
+                onClick={() => handleStatusOrder(order.id, 'preparing')}>
                 PREPARAR
               </Button>
-              <Button variant="quaternary"
-                onClick=
-                  {() => 
-                  handleFinalizar(pedido)}
-              >
+
+              <Button 
+                variant="quaternary"
+                onClick={() => handleStatusOrder(order.id, 'ready')}>
                 ENTREGAR
               </Button>
             </div>
-          </div>
-        );
-      })}
-      </section>
+          </section>
+         );
+       })}
+      </body>
     </main>
   );
 }

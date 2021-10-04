@@ -179,3 +179,35 @@ hr {
 	background-color: var(--eerie-black);
   color: var(--champagne-pink);
 }
+
+.icontrash {
+  margin: 0.2rem;
+  height: 1.9rem;
+	width: 1.9rem;
+  display: flex;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 0.2rem;
+  margin-left: 0.3rem;
+  position: absolute;
+  bottom: 0.2rem;
+}
+
+.btndelete {
+	height: 2.6rem;
+	width: 2.6rem;
+	background-color: var(--eerie-black);
+	font-size: 1.8rem;
+  left:45%;
+	border-radius: 2.6rem;
+  border-style: none;
+  padding-top: 2rem;
+  position:absolute;
+  bottom: 0.3rem;
+}
+
+.btndelete:hover {
+	background-color: var(--eerie-black);
+  color: var(--champagne-pink);
+}
