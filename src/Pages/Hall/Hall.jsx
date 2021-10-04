@@ -76,12 +76,9 @@ function Hall() {
 
   const removeItem = (e, item) => {
     e.preventDefault();
-    console.log(summary)
     const quantityElement = summary.find(elemento => elemento === item)
     if (quantityElement.qtd !== 0) {
-      quantityElement.qtd -= 1
-      // setAddItem(prevLess => prevLess.map(itemProduct => itemProduct.id  === foundItem ? foundItem : itemProduct))
-      // setAddItem(prevLess => prevLess.map(itemProduct => itemProduct.id  === foundItem.id ? foundItem : itemProduct))  
+      quantityElement.qtd -= 1 
        setSummary(prevLess => prevLess.map(lessPrev => lessPrev.id === quantityElement.id ? quantityElement : lessPrev))
     } 
     if (quantityElement.qtd === 0) {

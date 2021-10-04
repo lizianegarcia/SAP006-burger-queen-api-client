@@ -18,20 +18,19 @@ function Kitchen() {
       },
     })
       .then((response) => response.json())
-      .then((pedidos) => {
-        const pedidosPendentes = pedidos.filter((itens) => 
+      .then((orders) => {
+        const ordersPending = orders.filter((itens) => 
             itens.status.includes('preparing') ||
             itens.status.includes('pending')
         );
-        setPreparerOrder(pedidosPendentes);
+        setPreparerOrder(ordersPending);
       });
   })
  
-    const handleStatusOrder = (pedido, changeStatus) => {
-      const id = pedido.id;
+    const handleStatusOrder = (idOrder, changeStatus) => {
       const status = { status: changeStatus };
     
-      fetch(url + id, {
+      fetch(url + idOrder, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -51,21 +50,21 @@ function Kitchen() {
     <main >
      <HeaderKitchen />
       <body className="orders-section">
-       {preparerOrder.map((pedido) => {
+       {preparerOrder.map((order) => {
          return (
-          <section className="orders" key={pedido.id}>
+          <section className="orders" key={order.id}>
 
             <article className="details-client">
-              <h3 className="pending-orders"> {pedido.status 
+              <h3 className="pending-orders"> {order.status 
                 .replace('pending', '⏱️ Pendente')
                 .replace('preparing', '⏳ Preparando')}
               </h3>
-              <p className="order-number"> 📋 Pedido nº {pedido.id}</p>
-              <p>Cliente: {pedido.client_name}</p>
-              <p>Mesa: {pedido.table}</p>
+              <p className="order-number"> 📋 Pedido nº {order.id}</p>
+              <p>Cliente: {order.client_name}</p>
+              <p>Mesa: {order.table}</p>
               <time>Data: 
-                {`${new Date(pedido.createdAt).toLocaleDateString('pt-br',)} - 
-                  ${new Date(pedido.createdAt).toLocaleTimeString('pt-br', {
+                {`${new Date(order.createdAt).toLocaleDateString('pt-br',)} - 
+                  ${new Date(order.createdAt).toLocaleTimeString('pt-br', {
                     hour: '2-digit',
                     minute: '2-digit',
                   })
@@ -74,28 +73,27 @@ function Kitchen() {
             </article>
 
             <article className="container-order">
-              {pedido.Products.map((itens, index) => (
+              {order.Products.map((items, index) => (
                 <div key={index}>
-                  <p>
-                    {itens.qtd} {itens.name}
-                  </p>
-                  <p>{itens.flavor === 'null' ? '' : itens.flavor}</p>
-                  <p>{itens.complement === 'null' ? '' : itens.complement}</p>
+                  <p> {items.qtd} {items.name}</p>
+                  <p>{items.flavor === 'null' ? '' : items.flavor}</p>
+                  <p>{items.complement === 'null' ? '' : items.complement}</p>
                 </div>
               ))}
             </article>
 
             <hr/>
-            
+
             <div className="buttons">
-              <Button variant="tertiary"
-                onClick={() => handleStatusOrder(pedido, 'preparing')}
-              >
+              <Button 
+                variant="tertiary"
+                onClick={() => handleStatusOrder(order.id, 'preparing')}>
                 PREPARAR
               </Button>
-              <Button variant="quaternary"
-                onClick=
-                  {() => handleStatusOrder(pedido, 'ready')}>
+
+              <Button 
+                variant="quaternary"
+                onClick={() => handleStatusOrder(order.id, 'ready')}>
                 ENTREGAR
               </Button>
             </div>
