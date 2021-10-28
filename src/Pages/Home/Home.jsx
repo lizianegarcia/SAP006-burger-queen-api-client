@@ -6,7 +6,6 @@ import "../../Styles/home.css";
 import Footer from "../../components/footer/footer";
 
 const Home = () => {
-  
   const history = useHistory();
   const Login = () => {
     history.push('/Login')

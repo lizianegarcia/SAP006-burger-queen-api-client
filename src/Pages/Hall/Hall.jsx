@@ -12,7 +12,6 @@ import HallInput from "../../components/input/HallIput";
 import Button from "../../components/button/button";
 import Order from "../../Api/postOrder";
 
-
 function Hall() {
   const token = localStorage.getItem('token');
   const [menu, setMenu] = useState({});
