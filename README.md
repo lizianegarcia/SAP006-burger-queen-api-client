@@ -1,5 +1,16 @@
 <img src="img/logo.png" width="20%"/>
 
+| :cocktail: Demo User Salão  :computer: |
+| --------------------- |
+| :e-mail: Email: client@salao.com |
+| :lock: Password: 123456 |
+
+
+| 🍳 Demo User  Cozinha :computer: |
+| --------------------- |
+| :e-mail: Email: client@cozinha.com |
+| :lock: Password: 123456 |
+
 ## :round_pushpin: Índice
 
 - [1. Sobre o Projeto](#1-sobre-o-projeto)
